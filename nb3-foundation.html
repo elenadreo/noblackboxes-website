@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Foundation — No Black Boxes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#0a0a0a; --bg-2:#111111; --bg-3:#1c1c1c; --bg-card:#0f0f0f;
+  --border:rgba(247,243,237,0.10); --border-2:rgba(247,243,237,0.18);
+  --gold:#c8a04a; --gold-dim:rgba(200,160,74,0.13); --gold-line:rgba(200,160,74,0.40);
+  --text:#f7f3ed;
+  --text-2:rgba(247,243,237,0.78);
+  --text-3:rgba(247,243,237,0.50);
+  --font-serif:'Playfair Display',Georgia,serif;
+  --font-mono:'DM Mono',monospace;
+  --font-sans:'Inter',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:16px;line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(247,243,237,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(247,243,237,0.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 4rem;height:64px;background:rgba(10,10,10,0.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:.6rem;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);text-decoration:none}
+.nav-logo-mark{width:28px;height:28px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:.65rem;color:var(--gold);font-weight:500}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)} .nav-links a.active{color:var(--gold)}
+.nav-cta{background:var(--gold);color:var(--bg);font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;border:none;padding:.6rem 1.5rem;cursor:pointer;text-decoration:none;font-weight:500;transition:opacity .2s}
+.nav-cta:hover{opacity:.85}
+
+/* SHARED */
+section{position:relative;z-index:1}
+.eyebrow{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;font-weight:500}
+.eyebrow::before{content:'';width:2rem;height:1px;background:var(--gold);flex-shrink:0}
+.eyebrow.center{justify-content:center} .eyebrow.center::before{display:none}
+h2{font-family:var(--font-serif);font-size:clamp(2rem,3.2vw,3rem);font-weight:700;line-height:1.1;color:var(--text)}
+h2 em{font-style:italic;color:var(--gold)}
+.lead{font-size:1.05rem;color:var(--text-2);line-height:1.85;max-width:600px;margin-top:1.25rem}
+.btn{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.9rem 2.2rem;text-decoration:none;cursor:pointer;border:none;display:inline-block;transition:all .2s}
+.btn-primary{background:var(--gold);color:var(--bg);font-weight:500} .btn-primary:hover{opacity:.85}
+.btn-ghost{background:transparent;color:var(--text-2);border:1px solid var(--border-2)} .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:64px;overflow:hidden;position:relative}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:5rem 3.5rem 5rem 4rem;z-index:2}
+.hero-eyebrow{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;display:flex;align-items:center;gap:.75rem;font-weight:500}
+.hero-eyebrow::before{content:'';width:2rem;height:1px;background:var(--gold)}
+h1{font-family:var(--font-serif);font-size:clamp(2.8rem,4vw,4.8rem);font-weight:900;line-height:1.04;margin-bottom:1.5rem}
+h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:1.1rem;color:var(--text-2);line-height:1.85;max-width:460px;margin-bottom:2.5rem}
+.hero-cta{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-bottom:3rem}
+.hero-note{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.08em;color:var(--text-3);line-height:1.7;max-width:400px}
+.hero-right{border-left:1px solid var(--border);background:var(--bg-2);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-img-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;padding:3rem;text-align:center}
+.hero-img-text{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);border:1px dashed var(--border-2);padding:1rem 1.5rem;line-height:1.8}
+
+/* NAV PILLS */
+.nav-pills{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0}
+.nav-pills-inner{display:flex;max-width:1200px;margin:0 auto;padding:0 4rem}
+.nav-pill{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);padding:1.1rem 1.5rem;text-decoration:none;border-right:1px solid var(--border);transition:all .2s;border-bottom:2px solid transparent}
+.nav-pill:first-child{border-left:1px solid var(--border)}
+.nav-pill:hover{color:var(--text);background:var(--bg-3)}
+.nav-pill.active{color:var(--gold);border-bottom-color:var(--gold)}
+
+/* PROBLEM SECTION */
+.problem-section{padding:7rem 0;border-bottom:1px solid var(--border)}
+.problem-inner{max-width:1200px;margin:0 auto;padding:0 4rem}
+.problem-header{margin-bottom:5rem}
+.problem-header h2{max-width:700px}
+
+.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.problem-card{background:var(--bg-card);padding:3rem 2.5rem;position:relative}
+.problem-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);opacity:.4}
+.problem-num{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem;display:block;font-weight:500}
+.problem-title{font-family:var(--font-serif);font-size:1.25rem;font-weight:700;color:var(--text);line-height:1.2;margin-bottom:1rem}
+.problem-body{font-size:.9rem;color:var(--text-2);line-height:1.8}
+.problem-body strong{color:var(--text);font-weight:600}
+
+/* IMAGE + PULL QUOTE */
+.pull-section{padding:0}
+.pull-inner{max-width:1200px;margin:0 auto;padding:0 4rem;display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-top:none}
+.pull-image{min-height:360px;background:var(--bg-2);border-right:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+.pull-img-text{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);border:1px dashed var(--border-2);padding:1rem 1.5rem;line-height:1.8;text-align:center;max-width:280px}
+.pull-text{padding:3.5rem;display:flex;flex-direction:column;justify-content:center;background:var(--bg-card)}
+.pull-quote-text{font-family:var(--font-serif);font-size:clamp(1.3rem,2vw,1.9rem);font-weight:700;line-height:1.25;color:var(--text);margin-bottom:1.5rem}
+.pull-quote-text em{font-style:italic;color:var(--gold)}
+.pull-body{font-size:.92rem;color:var(--text-2);line-height:1.8}
+
+/* SOLUTION */
+.solution-section{padding:7rem 0;background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.solution-inner{max-width:1200px;margin:0 auto;padding:0 4rem}
+.solution-header{margin-bottom:4rem}
+
+.solution-rows{display:flex;flex-direction:column;gap:2px}
+.solution-row{display:grid;grid-template-columns:80px 1fr 1fr;gap:0;border:1px solid var(--border);overflow:hidden}
+.solution-num-col{background:var(--gold-dim);border-right:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:2rem 1rem}
+.solution-num-text{font-family:var(--font-mono);font-size:1.8rem;font-weight:500;color:var(--gold);opacity:.5;writing-mode:vertical-rl;letter-spacing:.1em}
+.solution-title-col{padding:2.5rem;background:var(--bg-card);border-right:1px solid var(--border)}
+.solution-title{font-family:var(--font-serif);font-size:1.2rem;font-weight:700;color:var(--text);line-height:1.2;margin-bottom:.5rem}
+.solution-tag{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.solution-body-col{padding:2.5rem;background:var(--bg-2)}
+.solution-body{font-size:.9rem;color:var(--text-2);line-height:1.8}
+.solution-body strong{color:var(--text);font-weight:600}
+
+/* THEORY OF CHANGE */
+.theory-section{padding:7rem 0}
+.theory-inner{max-width:1200px;margin:0 auto;padding:0 4rem}
+.theory-header{text-align:center;margin-bottom:5rem}
+.theory-header h2{max-width:600px;margin:0 auto}
+.theory-header .lead{text-align:center;margin:1.25rem auto 0}
+
+.theory-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.theory-step{background:var(--bg-card);padding:2.5rem 2rem;position:relative;overflow:hidden}
+.theory-step-num{font-family:var(--font-serif);font-size:5rem;font-weight:900;color:var(--gold);opacity:.07;position:absolute;top:-1rem;right:1rem;line-height:1;pointer-events:none}
+.theory-step-tag{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block;font-weight:500}
+.theory-step-title{font-family:var(--font-serif);font-size:1.1rem;font-weight:700;color:var(--text);line-height:1.2;margin-bottom:.75rem}
+.theory-step-body{font-size:.84rem;color:var(--text-2);line-height:1.7}
+
+/* THE RESULT */
+.result-section{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:5rem 0}
+.result-inner{max-width:1200px;margin:0 auto;padding:0 4rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.result-left{}
+.result-big{font-family:var(--font-serif);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:700;line-height:1.15;color:var(--text);margin-top:1.5rem}
+.result-big em{font-style:italic;color:var(--gold)}
+.result-right{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.result-stat{background:var(--bg-card);padding:2rem;display:flex;flex-direction:column;gap:.3rem}
+.result-stat-num{font-family:var(--font-serif);font-size:2.8rem;font-weight:900;color:var(--gold);line-height:1}
+.result-stat-num sup{font-size:1.2rem}
+.result-stat-label{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+
+/* GLOBAL REACH */
+.reach-section{padding:7rem 0}
+.reach-inner{max-width:1200px;margin:0 auto;padding:0 4rem}
+.reach-layout{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;margin-top:4rem}
+.reach-map{min-height:360px;background:var(--bg-2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+.reach-map-text{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);border:1px dashed var(--border-2);padding:1rem 1.5rem;line-height:1.8;text-align:center;max-width:300px}
+.reach-body{font-size:.95rem;color:var(--text-2);line-height:1.85}
+.reach-body strong{color:var(--text);font-weight:600}
+
+/* SUPPORT */
+.support-section{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:7rem 0}
+.support-inner{max-width:1200px;margin:0 auto;padding:0 4rem}
+.support-layout{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;margin-top:4rem}
+.support-left{}
+.support-ways{display:flex;flex-direction:column;gap:0;margin-top:2rem}
+.support-way{display:grid;grid-template-columns:2.5rem 1fr;gap:1rem;padding:1.5rem 0;border-bottom:1px solid var(--border);align-items:start}
+.support-way:first-child{border-top:1px solid var(--border)}
+.support-way-num{font-family:var(--font-mono);font-size:.7rem;color:var(--gold)}
+.support-way-title{font-family:var(--font-serif);font-size:1rem;font-weight:700;margin-bottom:.3rem;color:var(--text)}
+.support-way-body{font-size:.85rem;color:var(--text-2);line-height:1.7}
+.support-way-body strong{color:var(--text);font-weight:600}
+.support-right{}
+.contact-block{border:1px solid var(--gold-line);background:var(--gold-dim);padding:2.5rem;margin-bottom:2px}
+.contact-label{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block;font-weight:500}
+.contact-title{font-family:var(--font-serif);font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:1rem;line-height:1.2}
+.contact-title em{font-style:italic;color:var(--gold)}
+.contact-body{font-size:.9rem;color:var(--text-2);line-height:1.8;margin-bottom:1.5rem}
+.contact-email{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.06em;color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold-line);padding-bottom:2px;display:inline-block;margin-bottom:1.5rem}
+.contact-email:hover{opacity:.75}
+.partners-block{border:1px solid var(--border);background:var(--bg-card);padding:2rem}
+.partners-label{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-3);margin-bottom:1.25rem;display:block}
+.partners-logos{display:flex;flex-wrap:wrap;gap:.5rem}
+.partner-logo{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border-2);color:var(--text-3);padding:.35rem .8rem}
+
+/* CTA */
+.cta-section{padding:8rem 0;text-align:center}
+.cta-inner{max-width:700px;margin:0 auto;padding:0 2rem}
+.cta-section h2{font-size:clamp(2.2rem,4vw,3.8rem);margin-top:.5rem}
+.cta-body{font-size:1.05rem;color:var(--text-2);margin:1.5rem auto 2.5rem;line-height:1.85}
+.cta-acts{display:flex;gap:1rem;justify-content:center;margin-bottom:2rem;flex-wrap:wrap}
+
+footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;color:var(--text-3)}
+footer a{color:inherit;text-decoration:none} footer a:hover{color:var(--text-2)}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.vis{opacity:1;transform:none}
+.rd1{transition-delay:.1s} .rd2{transition-delay:.2s} .rd3{transition-delay:.3s} .rd4{transition-delay:.4s}
+
+@media(max-width:960px){
+  nav{padding:0 1.5rem} .nav-links{display:none}
+  .hero{grid-template-columns:1fr} .hero-left{padding:5rem 2rem 3rem} .hero-right{display:none}
+  .nav-pills-inner{padding:0 1rem;flex-wrap:wrap}
+  .problem-inner,.solution-inner,.theory-inner,.reach-inner,.support-inner{padding:0 1.5rem}
+  .problem-grid{grid-template-columns:1fr}
+  .pull-inner{grid-template-columns:1fr}
+  .pull-image{display:none}
+  .solution-row{grid-template-columns:1fr}
+  .solution-num-col{display:none}
+  .solution-title-col{border-right:none;border-bottom:1px solid var(--border)}
+  .theory-steps{grid-template-columns:1fr 1fr}
+  .result-inner{grid-template-columns:1fr;gap:3rem}
+  .reach-layout{grid-template-columns:1fr}
+  .support-layout{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:1rem;padding:1.5rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo"><div class="nav-logo-mark">NB</div>No Black Boxes</a>
+  <ul class="nav-links">
+    <li><a href="#">Curriculum</a></li>
+    <li><a href="#">The Kit</a></li>
+    <li><a href="#">Our Story</a></li>
+    <li><a href="#" class="active">Foundation</a></li>
+  </ul>
+  <a href="#support" class="nav-cta">Partner with us</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">The No Black Boxes Foundation</div>
+    <h1>Those who understand technology<br>will shape <em>the future.</em></h1>
+    <p class="hero-sub">We're making sure no one is left out. The No Black Boxes Foundation is launching in 2026 — and is now seeking philanthropic partners.</p>
+    <div class="hero-cta">
+      <a href="#support" class="btn btn-primary">Partner with us</a>
+      <a href="#problem" class="btn btn-ghost">The problem ↓</a>
+    </div>
+    <p class="hero-note">Established in memory of Adam Kampff — neuroscientist, educator, and founder of No Black Boxes — the Foundation exists to make high-quality technology education accessible to everyone, without barriers.</p>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-placeholder">
+      <div class="hero-img-text">Photo: students at the London AI Campus — young learners building the NB3 robot.<br>Hands on hardware, engaged, in a classroom setting.</div>
+    </div>
+  </div>
+</section>
+
+<!-- NAV PILLS -->
+<div class="nav-pills">
+  <div class="nav-pills-inner">
+    <a href="#problem" class="nav-pill active">The problem</a>
+    <a href="#solution" class="nav-pill">Our solution</a>
+    <a href="#theory" class="nav-pill">Theory of change</a>
+    <a href="#reach" class="nav-pill">Global reach</a>
+    <a href="#support" class="nav-pill">Partner with us</a>
+  </div>
+</div>
+
+<!-- THE PROBLEM -->
+<section class="problem-section" id="problem">
+  <div class="problem-inner">
+    <div class="problem-header reveal">
+      <div class="eyebrow">The problem</div>
+      <h2>Why we are failing the next<br>generation <em>in technology.</em></h2>
+      <p class="lead">AI and digital systems are accelerating faster than understanding. The gap between those who build technology and those who only use it is widening — and it begins in school.</p>
+    </div>
+
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <span class="problem-num">01</span>
+        <div class="problem-title">A society that uses but doesn't understand</div>
+        <p class="problem-body">Most people are taught to use and trust technology, while only a few learn how it actually works. <strong>We are creating a society that relies on powerful systems it does not understand</strong> — at the exact moment those systems are reshaping power, work, and opportunity.</p>
+      </div>
+      <div class="problem-card reveal rd1">
+        <span class="problem-num">02</span>
+        <div class="problem-title">Exclusion starts in secondary school</div>
+        <p class="problem-body">By secondary school, many <strong>curious and capable students are already excluded from deep understanding</strong> — not because they lack talent or interest, but because education rarely invites them to explore how modern systems actually work.</p>
+      </div>
+      <div class="problem-card reveal rd2">
+        <span class="problem-num">03</span>
+        <div class="problem-title">Understanding stops where it matters most</div>
+        <p class="problem-body">Most available courses focus on a single technology, digital tool, or predefined project. They rarely explain <strong>how hardware, software, and AI are built, connected, and work together</strong>. Without this foundation, students struggle to move beyond surface-level projects.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PULL QUOTE -->
+<div style="border-bottom:1px solid var(--border);position:relative;z-index:1">
+  <div class="pull-inner">
+    <div class="pull-image">
+      <div class="pull-img-text">Photo: student at a No Black Boxes course —<br>focused, building hardware.<br>A moment of real understanding.</div>
+    </div>
+    <div class="pull-text reveal">
+      <div class="pull-quote-text">The No Black Boxes Foundation exists to create hands-on, fully open-source courses that explain how modern technology really works — <em>for everyone, everywhere, with no prior experience required.</em></div>
+      <p class="pull-body">We teach modern technology from first principles — atoms, electrons, circuits — with every layer explained clearly and in detail. Learners build real systems step by step, rather than relying on memorised formulas or abstract definitions. No prior experience is required, so no learner is left behind.</p>
+    </div>
+  </div>
+</div>
+
+<!-- THE SOLUTION -->
+<section class="solution-section" id="solution">
+  <div class="solution-inner">
+    <div class="solution-header reveal">
+      <div class="eyebrow">Our solution</div>
+      <h2>Teaching technology<br><em>deeper and earlier.</em></h2>
+      <p class="lead">Three principles that make No Black Boxes different from every other technology education programme.</p>
+    </div>
+
+    <div class="solution-rows">
+      <div class="solution-row reveal">
+        <div class="solution-num-col"><span class="solution-num-text">01</span></div>
+        <div class="solution-title-col">
+          <span class="solution-tag">First principle</span>
+          <div class="solution-title">Nothing is assumed.<br>Nothing is hidden.</div>
+        </div>
+        <div class="solution-body-col">
+          <p class="solution-body">We teach modern technology from first principles — atoms, electrons, circuits — with every layer explained clearly and in full. Learners build real systems step by step. <strong>No prior experience is required</strong>, so no learner is left behind, and confidence grows quickly. Strong foundations last longer: learners understand how technology works at its core, and can transfer that understanding across fields.</p>
+        </div>
+      </div>
+      <div class="solution-row reveal rd1">
+        <div class="solution-num-col"><span class="solution-num-text">02</span></div>
+        <div class="solution-title-col">
+          <span class="solution-tag">Second principle</span>
+          <div class="solution-title">Technology as a connected system,<br>not tools in isolation.</div>
+        </div>
+        <div class="solution-body-col">
+          <p class="solution-body">Most courses teach one platform or device at a time. No Black Boxes teaches how modern technology works <strong>as a connected system</strong>. Learners work with a range of open-source technologies — from commercially available ones (Arduino, Raspberry Pi) to our custom-built hardware — all integrated into one coherent building journey. They understand how hardware, software, and AI interact, depend on one another, and form real-world technologies.</p>
+        </div>
+      </div>
+      <div class="solution-row reveal rd2">
+        <div class="solution-num-col"><span class="solution-num-text">03</span></div>
+        <div class="solution-title-col">
+          <span class="solution-tag">Third principle</span>
+          <div class="solution-title">Direct access to<br>advanced technology.</div>
+        </div>
+        <div class="solution-body-col">
+          <p class="solution-body">Designed by neuroscientists and technologists, our curriculum translates the latest advances in computing, electronics, and AI into hands-on learning for secondary school students. <strong>Learners work directly with the kinds of technologies used in research labs and emerging industries today.</strong> This kind of early access to state-of-the-art technology is exceptionally rare — and it changes what young people believe is possible for them.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THEORY OF CHANGE -->
+<section class="theory-section" id="theory">
+  <div class="theory-inner">
+    <div class="theory-header reveal">
+      <div class="eyebrow center">Our theory of change</div>
+      <h2>Four steps from<br><em>curiosity to confidence.</em></h2>
+      <p class="lead">We partner with schools, universities, and educational organisations to reach young people with curiosity and potential for technology — and give them a foundation that changes what they believe is possible.</p>
+    </div>
+
+    <div class="theory-steps">
+      <div class="theory-step reveal">
+        <div class="theory-step-num">1</div>
+        <span class="theory-step-tag">Step 01</span>
+        <div class="theory-step-title">Start with foundations</div>
+        <p class="theory-step-body">When learners understand technology from first principles, no prior knowledge is required and confidence grows quickly. Every concept is earned — never assumed.</p>
+      </div>
+      <div class="theory-step reveal rd1">
+        <div class="theory-step-num">2</div>
+        <span class="theory-step-tag">Step 02</span>
+        <div class="theory-step-title">Build real systems</div>
+        <p class="theory-step-body">Hands-on construction turns abstract ideas into intuition, making understanding durable and transferable. You only truly know something when you have built it yourself.</p>
+      </div>
+      <div class="theory-step reveal rd2">
+        <div class="theory-step-num">3</div>
+        <span class="theory-step-tag">Step 03</span>
+        <div class="theory-step-title">Connect everything</div>
+        <p class="theory-step-body">Seeing hardware, software, and AI as one connected system allows learners to move beyond isolated tools — and apply understanding across technologies and fields.</p>
+      </div>
+      <div class="theory-step reveal rd3">
+        <div class="theory-step-num">4</div>
+        <span class="theory-step-tag">Step 04</span>
+        <div class="theory-step-title">Expose early learners</div>
+        <p class="theory-step-body">Introducing frontier technology as early as secondary school keeps pathways open — before educational and career choices narrow. Access to the future should not depend on background.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE RESULT -->
+<section class="result-section">
+  <div class="result-inner">
+    <div class="result-left reveal">
+      <div class="eyebrow">The result</div>
+      <div class="result-big">Learners leave with a deep, transferable understanding of technology. The essential foundation for anyone who wants to go further in hardware, software, or <em>AI.</em></div>
+      <p style="font-size:.92rem;color:var(--text-2);line-height:1.8;margin-top:1.5rem">They gain the confidence to approach all future learning with clarity — not as users of technology, but as people who understand it well enough to build what comes next.</p>
+    </div>
+    <div class="result-right reveal rd2">
+      <div class="result-stat">
+        <div class="result-stat-num">2000<sup>+</sup></div>
+        <div class="result-stat-label">Students trained worldwide</div>
+      </div>
+      <div class="result-stat">
+        <div class="result-stat-num">60<sup>+</sup></div>
+        <div class="result-stat-label">Countries reached</div>
+      </div>
+      <div class="result-stat">
+        <div class="result-stat-num">15<sup>+</sup></div>
+        <div class="result-stat-label">Years of curriculum development</div>
+      </div>
+      <div class="result-stat">
+        <div class="result-stat-num">1000</div>
+        <div class="result-stat-label">Target students per year</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL REACH -->
+<section class="reach-section" id="reach">
+  <div class="reach-inner">
+    <div class="reveal">
+      <div class="eyebrow">Global reach</div>
+      <h2>A proven methodology,<br><em>delivered worldwide.</em></h2>
+      <p class="lead">This map is a record of our proven logistical and educational reach. We have successfully delivered high-level, hands-on training to every location shown — shipping physical hardware kits directly to partners and individuals around the world.</p>
+    </div>
+    <div class="reach-layout">
+      <div class="reach-map reveal rd1">
+        <div class="reach-map-text">Map: world map showing all locations where the No Black Boxes curriculum has been delivered — Cold Spring Harbor, TENSS, CNP, SWC, UCL, MBL, and 60+ countries of individual learners.</div>
+      </div>
+      <div class="reach-body reveal rd2">
+        <p style="font-size:.95rem;color:var(--text-2);line-height:1.85;margin-bottom:1.5rem">Having already demonstrated that our hands-on, digital-physical methodology is <strong>globally scalable</strong> for the scientific community, we are now expanding our mission to secondary school students.</p>
+        <p style="font-size:.95rem;color:var(--text-2);line-height:1.85;margin-bottom:2rem">The same rigour that trained PhD students at Cold Spring Harbor, TENSS, UCL, and the MBL is now being brought — fully and without compromise — to 15-year-olds.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem">
+          <span style="font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border-2);color:var(--text-3);padding:.25rem .7rem">Cold Spring Harbor</span>
+          <span style="font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border-2);color:var(--text-3);padding:.25rem .7rem">TENSS</span>
+          <span style="font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border-2);color:var(--text-3);padding:.25rem .7rem">CNP</span>
+          <span style="font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border-2);color:var(--text-3);padding:.25rem .7rem">SWC</span>
+          <span style="font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border-2);color:var(--text-3);padding:.25rem .7rem">UCL</span>
+          <span style="font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border-2);color:var(--text-3);padding:.25rem .7rem">MBL</span>
+          <span style="font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border-2);color:var(--text-3);padding:.25rem .7rem">Cajal Programme</span>
+          <span style="font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border-2);color:var(--text-3);padding:.25rem .7rem">London AI Campus</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section class="support-section" id="support">
+  <div class="support-inner">
+    <div class="reveal">
+      <div class="eyebrow">Partner with us</div>
+      <h2>Support the launch of<br><em>No Black Boxes Foundation.</em></h2>
+      <p class="lead">We are seeking philanthropic partners, foundations, and aligned supporters who share our belief that understanding technology should not be a privilege — and that early access to foundational knowledge can shape futures.</p>
+    </div>
+
+    <div class="support-layout">
+      <div class="support-left">
+        <p style="font-size:.95rem;color:var(--text-2);line-height:1.85;margin-bottom:2rem">We invite partners to help us launch this work at a moment when it matters most. Your support will help us to:</p>
+        <div class="support-ways">
+          <div class="support-way reveal rd1">
+            <div class="support-way-num">01</div>
+            <div>
+              <div class="support-way-title">Deliver fully funded courses</div>
+              <p class="support-way-body">So students can participate regardless of background. We aim to reach <strong>1,000 students per year</strong>.</p>
+            </div>
+          </div>
+          <div class="support-way reveal rd2">
+            <div class="support-way-num">02</div>
+            <div>
+              <div class="support-way-title">Train educators and mentors</div>
+              <p class="support-way-body">To run No Black Boxes in local schools and communities — building capacity that outlasts any single course.</p>
+            </div>
+          </div>
+          <div class="support-way reveal rd3">
+            <div class="support-way-num">03</div>
+            <div>
+              <div class="support-way-title">Expand the open-source curriculum</div>
+              <p class="support-way-body">Ensuring it remains current, rigorous, and widely accessible — updated as technology evolves.</p>
+            </div>
+          </div>
+          <div class="support-way reveal rd4">
+            <div class="support-way-num">04</div>
+            <div>
+              <div class="support-way-title">Build sustainable pathways</div>
+              <p class="support-way-body">Connecting learners to academia, research, and emerging technology careers — so early understanding translates into opportunity.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="support-right">
+        <div class="contact-block reveal rd1">
+          <span class="contact-label">Get in touch</span>
+          <div class="contact-title">Ready to partner?<br><em>We'd love to hear from you.</em></div>
+          <p class="contact-body">We invite those who share our belief to get in touch. Whether you are a foundation, a company, or an individual supporter — early partners help shape what this becomes.</p>
+          <a href="mailto:info@noblackboxes.org" class="contact-email">info@noblackboxes.org →</a>
+          <a href="#" class="btn btn-primary" style="display:block;text-align:center">Partner with us</a>
+        </div>
+
+        <div class="partners-block reveal rd2" style="margin-top:2px">
+          <span class="partners-label">Early supporters and collaborators</span>
+          <div class="partners-logos">
+            <span class="partner-logo">Cajal Programme</span>
+            <span class="partner-logo">London AI Campus</span>
+            <span class="partner-logo">Virtualkinematics</span>
+            <span class="partner-logo">+ Your organisation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="eyebrow center reveal">Join us</div>
+    <h2 class="reveal rd1">Understanding technology<br>should not be <em>a privilege.</em></h2>
+    <p class="cta-body reveal rd2">Help us make it available to everyone. Partner with the No Black Boxes Foundation — or start learning today with the NB3 kit.</p>
+    <div class="cta-acts reveal rd3">
+      <a href="mailto:info@noblackboxes.org" class="btn btn-ghost">Partner with us →</a>
+      <a href="#" class="btn btn-primary">Explore the curriculum</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© MMXXVI No Black Boxes Foundation</span>
+  <span><a href="#">Home</a> · <a href="#">About</a> · <a href="#">The Kit</a> · <a href="#">Our Story</a></span>
+  <span>info@noblackboxes.org</span>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
+}, {threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
