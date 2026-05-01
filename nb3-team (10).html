@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Team — No Black Boxes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#0a0a0a; --bg-2:#111111; --bg-3:#1c1c1c; --bg-card:#0f0f0f;
+  --border:rgba(247,243,237,0.10); --border-2:rgba(247,243,237,0.18);
+  --gold:#c8a04a; --gold-dim:rgba(200,160,74,0.13); --gold-line:rgba(200,160,74,0.40);
+  --text:#f7f3ed;
+  --text-2:rgba(247,243,237,0.78);
+  --text-3:rgba(247,243,237,0.50);
+  --c-neuro:   #c8a04a;   /* gold — Neuroscience */
+  --c-edu:     #5b8fa8;   /* steel blue — Education */
+  --c-finance: #b06030;   /* amber — Finance & Fundraising */
+  --c-impact:  #7a9e6e;   /* sage — Social Impact */
+  --c-cert:    #9b72b0;   /* violet — Certification & Industry */
+  --font-mono:'DM Mono',monospace;
+  --font-sans:'Inter',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:16px;line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(247,243,237,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(247,243,237,0.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 4rem;height:64px;background:rgba(10,10,10,0.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:.6rem;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);text-decoration:none}
+.nav-logo-mark{width:28px;height:28px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:.65rem;color:var(--gold);font-weight:500}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)} .nav-links a.active{color:var(--gold)}
+.nav-cta{background:var(--gold);color:var(--bg);font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;border:none;padding:.6rem 1.5rem;cursor:pointer;text-decoration:none;font-weight:500;transition:opacity .2s}
+.nav-cta:hover{opacity:.85}
+
+/* SHARED */
+section{position:relative;z-index:1}
+.eyebrow{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;font-weight:500}
+.eyebrow::before{content:'';width:2rem;height:1px;background:var(--gold);flex-shrink:0}
+.eyebrow.center{justify-content:center} .eyebrow.center::before{display:none}
+h2{font-family:var(--font-serif);font-size:clamp(2rem,3.2vw,3rem);font-weight:700;line-height:1.1;color:var(--text)}
+h2 em{font-style:italic;color:var(--gold)}
+.lead{font-size:1.05rem;color:var(--text-2);line-height:1.85;max-width:640px;margin-top:1.25rem}
+.btn{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.9rem 2.2rem;text-decoration:none;cursor:pointer;border:none;display:inline-block;transition:all .2s}
+.btn-primary{background:var(--gold);color:var(--bg);font-weight:500} .btn-primary:hover{opacity:.85}
+.btn-ghost{background:transparent;color:var(--text-2);border:1px solid var(--border-2)} .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── HERO ── */
+.hero{min-height:60vh;display:flex;flex-direction:column;justify-content:center;padding:9rem 4rem 5rem;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.hero-eyebrow{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;display:flex;align-items:center;gap:.75rem;font-weight:500}
+.hero-eyebrow::before{content:'';width:2rem;height:1px;background:var(--gold)}
+h1{font-family:var(--font-serif);font-size:clamp(3rem,5vw,5.5rem);font-weight:900;line-height:1.02;margin-bottom:1.5rem;max-width:800px}
+h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:1.1rem;color:var(--text-2);line-height:1.85;max-width:640px}
+
+/* ── ADAM SECTION ── */
+.adam-section{padding:6rem 0;border-bottom:1px solid var(--border);background:var(--bg-2)}
+.adam-inner{max-width:1200px;margin:0 auto;padding:0 4rem;display:grid;grid-template-columns:300px 1fr;gap:5rem;align-items:start}
+.adam-photo-wrap{display:flex;flex-direction:column;gap:1rem}
+.adam-photo{width:100%;aspect-ratio:3/4;background:var(--bg-3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.adam-photo-placeholder{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);border:1px dashed var(--border-2);padding:.75rem 1rem;line-height:1.8;text-align:center;max-width:180px}
+.adam-dates{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.1em;color:var(--text-3);text-align:center}
+.adam-content{}
+.adam-memorial{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem;font-weight:500}
+.adam-memorial::before{content:'';width:2rem;height:1px;background:var(--gold)}
+.adam-title{font-family:var(--font-serif);font-size:clamp(1.6rem,2.5vw,2.4rem);font-weight:700;line-height:1.1;margin-bottom:1.5rem;color:var(--text)}
+.adam-title em{font-style:italic;color:var(--gold)}
+.adam-body{font-size:1rem;color:var(--text-2);line-height:1.9;margin-bottom:1.5rem}
+.adam-quote{border-left:2px solid var(--gold-line);padding:1.25rem 0 1.25rem 1.75rem;margin-top:2rem}
+.adam-quote p{font-family:var(--font-serif);font-style:italic;font-size:1.1rem;color:var(--text-2);line-height:1.75}
+
+/* ── SECTION WRAPPER — reusable for each team group ── */
+.team-section{padding:6rem 0;border-bottom:1px solid var(--border)}
+.team-section:nth-child(even){background:var(--bg-2)}
+.team-inner{max-width:1200px;margin:0 auto;padding:0 4rem}
+.team-header{margin-bottom:4rem}
+.team-subheading{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3);margin-bottom:2rem;display:block;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)}
+.team-subheading:first-of-type{margin-top:0;padding-top:0;border-top:none}
+
+/* ── PERSON CARD GRID — 4 cols default ── */
+.people-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.people-grid.cols-3{grid-template-columns:repeat(3,1fr)}
+.people-grid.cols-2{grid-template-columns:repeat(2,1fr)}
+
+/* ── PERSON CARD ── */
+.person-card{background:var(--bg-card);padding:2rem;display:flex;flex-direction:column;gap:0;transition:background .2s;position:relative}
+.person-card:hover{background:var(--bg-3)}
+.person-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);opacity:0;transition:opacity .2s}
+.person-card:hover::before{opacity:.5}
+
+.person-photo{width:100%;aspect-ratio:1/1;background:var(--bg-2);border:1px solid var(--border);margin-bottom:1.25rem;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.person-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(20%)}
+.person-photo-placeholder{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);text-align:center;padding:.5rem;line-height:1.6}
+
+.person-name{font-family:var(--font-serif);font-size:1.05rem;font-weight:700;color:var(--text);line-height:1.2;margin-bottom:.25rem}
+.person-role{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;display:block}
+.person-org{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.06em;color:var(--text-3);margin-bottom:.75rem;display:block}
+.person-bio{font-size:.8rem;color:var(--text-2);line-height:1.65}
+
+/* Placeholder card — for "coming soon" slots */
+.person-card.placeholder{opacity:.4;cursor:default}
+.person-card.placeholder:hover{background:var(--bg-card)}
+.person-card.placeholder::before{display:none}
+.person-card.placeholder .person-photo{border-style:dashed}
+
+/* ── ADVISORY BOARD — different treatment: wider cards, more text ── */
+.advisory-grid{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border)}
+.advisory-card{background:var(--bg-card);padding:2rem 2.5rem;display:grid;grid-template-columns:200px 1fr;gap:2rem;align-items:start;transition:background .2s}
+.advisory-card:hover{background:var(--bg-3)}
+.advisory-left{display:flex;flex-direction:column;gap:.5rem}
+.advisory-photo{width:100%;aspect-ratio:1/1;background:var(--bg-2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.advisory-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(20%)}
+.advisory-photo-placeholder{font-family:var(--font-mono);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);text-align:center;padding:.5rem;line-height:1.6}
+.advisory-right{}
+.advisory-name{font-family:var(--font-serif);font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:.25rem}
+.advisory-role{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem;display:block}
+.advisory-org{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.06em;color:var(--text-3);margin-bottom:1rem;display:block}
+.advisory-bio{font-size:.88rem;color:var(--text-2);line-height:1.75}
+
+/* ── ADVISORY BOARDS ── */
+.advisory-section{padding:6rem 0;border-bottom:1px solid var(--border)}
+.advisory-section:nth-child(even){background:var(--bg-2)}
+.advisory-inner{max-width:1200px;margin:0 auto;padding:0 4rem}
+
+.board-header{display:flex;align-items:center;gap:1.25rem;padding:1.1rem 1.5rem;border:1px solid var(--border);margin-bottom:1px;background:var(--bg-card)}
+.board-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.board-name{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;flex:1}
+.board-count{font-family:var(--font-mono);font-size:.62rem;color:var(--text-3)}
+
+/* board card uses same person-card but with coloured accent var */
+.board-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-top:none}
+.board-card{background:var(--bg-card);padding:2rem;display:flex;flex-direction:column;transition:background .2s;position:relative}
+.board-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;transition:opacity .2s}
+.board-card:hover{background:var(--bg-3)}
+.board-card:hover::before{opacity:.7}
+.board-card .person-photo{margin-bottom:1.25rem}
+
+/* ── JOIN BOX ── */
+.join-box{border:1px dashed var(--border-2);padding:2.5rem;display:flex;flex-direction:column;gap:1rem;background:transparent;margin-top:2px}
+.join-box-title{font-family:var(--font-serif);font-size:1.1rem;font-weight:700;color:var(--text);line-height:1.2}
+.join-box-title em{font-style:italic;color:var(--gold)}
+.join-box-body{font-size:.88rem;color:var(--text-2);line-height:1.75}
+.join-link{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold-line);padding-bottom:2px;display:inline-block;transition:opacity .2s}
+.join-link:hover{opacity:.75}
+
+/* ── CTA ── */
+.cta-section{padding:7rem 0;text-align:center;background:var(--bg-2);border-top:1px solid var(--border)}
+.cta-inner{max-width:700px;margin:0 auto;padding:0 2rem}
+.cta-section h2{font-size:clamp(2rem,3.5vw,3.2rem);margin-top:.5rem}
+.cta-body{font-size:1.05rem;color:var(--text-2);margin:1.5rem auto 2.5rem;line-height:1.85}
+.cta-acts{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;color:var(--text-3)}
+footer a{color:inherit;text-decoration:none} footer a:hover{color:var(--text-2)}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.vis{opacity:1;transform:none}
+.rd1{transition-delay:.1s} .rd2{transition-delay:.2s} .rd3{transition-delay:.3s} .rd4{transition-delay:.4s}
+
+@media(max-width:960px){
+  nav{padding:0 1.5rem} .nav-links{display:none}
+  .hero{padding:7rem 2rem 4rem}
+  .adam-inner{grid-template-columns:1fr;gap:3rem;padding:0 2rem}
+  .adam-photo-wrap{max-width:240px}
+  .team-inner{padding:0 2rem}
+  .people-grid,.people-grid.cols-3,.people-grid.cols-2{grid-template-columns:1fr 1fr}
+  .advisory-card{grid-template-columns:1fr;gap:1.5rem}
+  .advisory-photo{max-width:160px}
+  footer{flex-direction:column;gap:1rem;padding:1.5rem;text-align:center}
+}
+@media(max-width:600px){
+  .people-grid,.people-grid.cols-3,.people-grid.cols-2{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo"><div class="nav-logo-mark">NB</div>No Black Boxes</a>
+  <ul class="nav-links">
+    <li><a href="#">Curriculum</a></li>
+    <li><a href="#">The Kit</a></li>
+    <li><a href="#">Our Story</a></li>
+    <li><a href="#" class="active">Our Team</a></li>
+  </ul>
+  <a href="mailto:info@noblackboxes.org" class="nav-cta">Contact us</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Our team</div>
+  <h1>The people behind<br><em>No Black Boxes.</em></h1>
+  <p class="hero-sub">A growing team of neuroscientists, educators, engineers, and researchers — united by a single belief: that understanding technology should not be a privilege.</p>
+</section>
+
+<!-- ── NAV STRIP ── -->
+<div style="background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:sticky;top:64px;z-index:50">
+  <div style="display:flex;max-width:1200px;margin:0 auto;overflow-x:auto">
+    <a href="#governance" style="font-family:var(--font-mono);font-size:1rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);font-weight:600;padding:1.3rem 2rem;text-decoration:none;border-right:1px solid var(--border);border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;flex-shrink:0" onmouseover="this.style.color='var(--text)';this.style.borderBottomColor='var(--gold)'" onmouseout="this.style.color='var(--text-2)';this.style.borderBottomColor='transparent'">Trustees</a>
+    <a href="#education" style="font-family:var(--font-mono);font-size:1rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);font-weight:600;padding:1.3rem 2rem;text-decoration:none;border-right:1px solid var(--border);border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;flex-shrink:0" onmouseover="this.style.color='var(--text)';this.style.borderBottomColor='var(--gold)'" onmouseout="this.style.color='var(--text-2)';this.style.borderBottomColor='transparent'">Teaching Team</a>
+    <a href="#advisory" style="font-family:var(--font-mono);font-size:1rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);font-weight:600;padding:1.3rem 2rem;text-decoration:none;border-right:1px solid var(--border);border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;flex-shrink:0" onmouseover="this.style.color='var(--text)';this.style.borderBottomColor='var(--gold)'" onmouseout="this.style.color='var(--text-2)';this.style.borderBottomColor='transparent'">Advisory Boards</a>
+    <a href="#partners" style="font-family:var(--font-mono);font-size:1rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);font-weight:600;padding:1.3rem 2rem;text-decoration:none;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;flex-shrink:0" onmouseover="this.style.color='var(--text)';this.style.borderBottomColor='var(--gold)'" onmouseout="this.style.color='var(--text-2)';this.style.borderBottomColor='transparent'">Partners &amp; Collaborators</a>
+  </div>
+</div>
+
+<!-- ADAM MEMORIAL — lightweight -->
+<section style="background:var(--bg-2);border-bottom:1px solid var(--border);padding:3rem 0;position:relative;z-index:1">
+  <div style="max-width:1200px;margin:0 auto;padding:0 4rem;display:flex;align-items:center;gap:2.5rem" class="reveal">
+    <div style="width:72px;height:72px;background:var(--bg-3);border:1px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-size:1.4rem;font-weight:700;color:var(--gold);opacity:.35">AK</div>
+    <div>
+      <div style="font-family:var(--font-serif);font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:.2rem">Adam Kampff <span style="font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;color:var(--text-3);font-weight:400;margin-left:.75rem">1979 – 2025</span></div>
+      <div style="font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">Founder</div>
+      <p style="font-size:.88rem;color:var(--text-2);line-height:1.7;max-width:600px">Neuroscientist, educator, and the vision behind No Black Boxes. The Foundation was established in his memory to carry this work forward. <a href="#" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold-line);padding-bottom:1px">Read his story →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ── GOVERNANCE & LEADERSHIP ── -->
+<section class="team-section" id="governance">
+  <div class="team-inner">
+    <div class="team-header reveal">
+      <div class="eyebrow">Governance &amp; leadership</div>
+      <h2>The board of <em>trustees.</em></h2>
+      <p class="lead">The No Black Boxes Foundation is guided by a board of trustees responsible for overseeing its mission, strategy, and long-term impact.</p>
+    </div>
+
+    <span class="team-subheading reveal">Our trustees</span>
+    <div class="people-grid cols-3 reveal rd1">
+
+      <!-- ── TRUSTEE CARD — duplicate this block to add trustees ── -->
+      <div class="person-card">
+        <div class="person-photo">
+          <div class="person-photo-placeholder">Photo:<br>Elena Dreosti</div>
+        </div>
+        <div class="person-name">Elena Dreosti</div>
+        <span class="person-role">Trustee</span>
+        <span class="person-org">Voight-Kampff Ltd.</span>
+        <p class="person-bio">Neuroscientist and educator. Co-founder of No Black Boxes and long-time collaborator of Adam Kampff.</p>
+      </div>
+
+      <div class="person-card">
+        <div class="person-photo">
+          <div class="person-photo-placeholder">Photo:<br>Peter Vincent</div>
+        </div>
+        <div class="person-name">Peter Vincent</div>
+        <span class="person-role">Trustee</span>
+        <span class="person-org">OuterLimit</span>
+        <p class="person-bio">Trustee and advisor bringing expertise in organisational leadership and educational strategy.</p>
+      </div>
+
+      <!-- Placeholder — remove when 3rd trustee is confirmed -->
+      <div class="person-card placeholder">
+        <div class="person-photo">
+          <div class="person-photo-placeholder">Trustee<br>coming soon</div>
+        </div>
+        <div class="person-name">Trustee</div>
+        <span class="person-role">Trustee</span>
+        <span class="person-org">—</span>
+      </div>
+
+    </div><!-- /people-grid -->
+
+  </div>
+</section>
+
+<!-- ── TEACHING TEAM ── -->
+<section class="team-section" id="education">
+  <div class="team-inner">
+    <div class="team-header reveal">
+      <div class="eyebrow">The educational team</div>
+      <h2>The people who <em>teach.</em></h2>
+      <p class="lead">Our teaching team brings together neuroscientists, engineers, and educators from leading research institutions. Every course we deliver reflects their combined expertise — and their shared commitment to teaching technology from first principles.</p>
+    </div>
+
+    <span class="team-subheading reveal">Our teaching team</span>
+    <div class="people-grid reveal rd1">
+
+      <!-- ── TEACHING TEAM CARD — duplicate to add members ── -->
+      <div class="person-card">
+        <div class="person-photo">
+          <div class="person-photo-placeholder">Photo:<br>Elena Dreosti</div>
+        </div>
+        <div class="person-name">Elena Dreosti</div>
+        <span class="person-role">Lead educator</span>
+        <span class="person-org">Voight-Kampff Ltd. · Dept. for AIBE, DE</span>
+        <p class="person-bio">Neuroscientist and co-founder of No Black Boxes. Leads curriculum development and course delivery.</p>
+      </div>
+
+      <div class="person-card">
+        <div class="person-photo">
+          <div class="person-photo-placeholder">Photo:<br>Andreas Kist</div>
+        </div>
+        <div class="person-name">Andreas Kist</div>
+        <span class="person-role">Educator &amp; researcher</span>
+        <span class="person-org">—</span>
+        <p class="person-bio">Researcher and educator contributing to the neuroscience and technology curriculum.</p>
+      </div>
+
+      <div class="person-card">
+        <div class="person-photo">
+          <div class="person-photo-placeholder">Photo:<br>Nicholas Guilbeault</div>
+        </div>
+        <div class="person-name">Nicholas Guilbeault</div>
+        <span class="person-role">Educator &amp; researcher</span>
+        <span class="person-org">SWC</span>
+        <p class="person-bio">Based at the Sainsbury Wellcome Centre, contributing expertise in computational neuroscience.</p>
+      </div>
+
+      <div class="person-card">
+        <div class="person-photo">
+          <div class="person-photo-placeholder">Photo:<br>Viktor Plattner</div>
+        </div>
+        <div class="person-name">Viktor Plattner</div>
+        <span class="person-role">Educator &amp; researcher</span>
+        <span class="person-org">SWC</span>
+        <p class="person-bio">Researcher at the Sainsbury Wellcome Centre contributing to hardware and systems curriculum.</p>
+      </div>
+
+      <div class="person-card">
+        <div class="person-photo">
+          <div class="person-photo-placeholder">Photo:<br>Tom Ryan</div>
+        </div>
+        <div class="person-name">Tom Ryan</div>
+        <span class="person-role">Educator &amp; researcher</span>
+        <span class="person-org">Neurogears Ltd. · SWC</span>
+        <p class="person-bio">Neuroscientist and co-founder of Neurogears, contributing to the neuroscience curriculum.</p>
+      </div>
+
+      <div class="person-card">
+        <div class="person-photo">
+          <div class="person-photo-placeholder">Photo:<br>Quentin Pajot-Moric</div>
+        </div>
+        <div class="person-name">Quentin Pajot-Moric</div>
+        <span class="person-role">Educator</span>
+        <span class="person-org">—</span>
+        <p class="person-bio">Educator contributing to course delivery and curriculum development.</p>
+      </div>
+
+      <!-- Placeholder — remove when next member is confirmed -->
+      <div class="person-card placeholder">
+        <div class="person-photo">
+          <div class="person-photo-placeholder">More team<br>coming soon</div>
+        </div>
+        <div class="person-name">Coming soon</div>
+        <span class="person-role">—</span>
+        <span class="person-org">—</span>
+      </div>
+
+      <!-- Placeholder -->
+      <div class="person-card placeholder">
+        <div class="person-photo">
+          <div class="person-photo-placeholder">More team<br>coming soon</div>
+        </div>
+        <div class="person-name">Coming soon</div>
+        <span class="person-role">—</span>
+        <span class="person-org">—</span>
+      </div>
+
+    </div><!-- /people-grid -->
+
+    <div class="join-box reveal rd2" style="margin-top:2rem">
+      <div class="join-box-title">Interested in teaching with us?<br><em>We are always looking for new collaborators.</em></div>
+      <p class="join-box-body">Our team is growing. If you are a researcher, educator, or technologist who shares our commitment to open, hands-on technology education — we'd love to hear from you.</p>
+      <a href="mailto:info@noblackboxes.org" class="join-link">Get in touch → info@noblackboxes.org</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ── ADVISORY BOARDS ── -->
+<section class="team-section" id="advisory">
+  <div class="team-inner">
+    <div class="team-header reveal">
+      <div class="eyebrow">Advisory boards</div>
+      <h2>Our advisory <em>boards.</em></h2>
+      <p class="lead">Five specialist boards bringing world-class expertise across neuroscience, education, finance, social impact, and industry. We are actively building each board — if you would like to contribute your expertise, we would love to hear from you.</p>
+    </div>
+
+    <span class="team-subheading reveal">Advisory boards</span>
+
+    <!-- ── BOARD 1: NEUROSCIENCE ── colour: gold #c8a04a -->
+    <div class="reveal" id="neuro" style="margin-bottom:2rem">
+      <div class="board-header">
+        <div class="board-dot" style="background:#c8a04a"></div>
+        <span class="board-name" style="color:#c8a04a">Neuroscience</span>
+        <span class="board-count">4 members · seeking</span>
+      </div>
+      <div class="board-grid">
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#c8a04a;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Neuroscientist<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#c8a04a">Neuroscience advisor</span>
+          <span class="person-org">—</span>
+        </div>
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#c8a04a;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Neuroscientist<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#c8a04a">Neuroscience advisor</span>
+          <span class="person-org">—</span>
+        </div>
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#c8a04a;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Neuroscientist<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#c8a04a">Neuroscience advisor</span>
+          <span class="person-org">—</span>
+        </div>
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#c8a04a;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Neuroscientist<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#c8a04a">Neuroscience advisor</span>
+          <span class="person-org">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BOARD 2: EDUCATION ── colour: steel blue #5b8fa8 -->
+    <div class="reveal rd1" id="edu-board" style="margin-bottom:2rem">
+      <div class="board-header">
+        <div class="board-dot" style="background:#5b8fa8"></div>
+        <span class="board-name" style="color:#5b8fa8">Education</span>
+        <span class="board-count">4 members · seeking</span>
+      </div>
+      <div class="board-grid">
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#5b8fa8;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Educator<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#5b8fa8">Education advisor</span>
+          <span class="person-org">—</span>
+        </div>
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#5b8fa8;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Educator<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#5b8fa8">Education advisor</span>
+          <span class="person-org">—</span>
+        </div>
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#5b8fa8;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Educator<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#5b8fa8">Education advisor</span>
+          <span class="person-org">—</span>
+        </div>
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#5b8fa8;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Educator<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#5b8fa8">Education advisor</span>
+          <span class="person-org">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BOARD 3: FINANCE & FUNDRAISING ── colour: amber #b06030 -->
+    <div class="reveal rd2" id="finance" style="margin-bottom:2rem">
+      <div class="board-header">
+        <div class="board-dot" style="background:#b06030"></div>
+        <span class="board-name" style="color:#b06030">Finance &amp; Fundraising</span>
+        <span class="board-count">4 members · seeking</span>
+      </div>
+      <div class="board-grid">
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#b06030;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Finance advisor<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#b06030">Finance advisor</span>
+          <span class="person-org">—</span>
+        </div>
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#b06030;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Finance advisor<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#b06030">Finance advisor</span>
+          <span class="person-org">—</span>
+        </div>
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#b06030;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Finance advisor<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#b06030">Finance advisor</span>
+          <span class="person-org">—</span>
+        </div>
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#b06030;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Finance advisor<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#b06030">Finance advisor</span>
+          <span class="person-org">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BOARD 4: SOCIAL IMPACT ── colour: sage #7a9e6e -->
+    <div class="reveal" id="impact" style="margin-bottom:2rem">
+      <div class="board-header">
+        <div class="board-dot" style="background:#7a9e6e"></div>
+        <span class="board-name" style="color:#7a9e6e">Social Impact</span>
+        <span class="board-count">4 members · seeking</span>
+      </div>
+      <div class="board-grid">
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#7a9e6e;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Impact advisor<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#7a9e6e">Social impact advisor</span>
+          <span class="person-org">—</span>
+        </div>
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#7a9e6e;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Impact advisor<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#7a9e6e">Social impact advisor</span>
+          <span class="person-org">—</span>
+        </div>
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#7a9e6e;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Impact advisor<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#7a9e6e">Social impact advisor</span>
+          <span class="person-org">—</span>
+        </div>
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#7a9e6e;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Impact advisor<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#7a9e6e">Social impact advisor</span>
+          <span class="person-org">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BOARD 5: CERTIFICATION & INDUSTRY ── colour: violet #9b72b0 -->
+    <div class="reveal rd1" id="cert" style="margin-bottom:2rem">
+      <div class="board-header">
+        <div class="board-dot" style="background:#9b72b0"></div>
+        <span class="board-name" style="color:#9b72b0">Certification &amp; Industry</span>
+        <span class="board-count">4 members · seeking</span>
+      </div>
+      <div class="board-grid">
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#9b72b0;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Industry advisor<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#9b72b0">Industry advisor</span>
+          <span class="person-org">—</span>
+        </div>
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#9b72b0;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Industry advisor<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#9b72b0">Industry advisor</span>
+          <span class="person-org">—</span>
+        </div>
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#9b72b0;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Industry advisor<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#9b72b0">Industry advisor</span>
+          <span class="person-org">—</span>
+        </div>
+        <div class="board-card placeholder"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:#9b72b0;opacity:.3"></div>
+          <div class="person-photo"><div class="person-photo-placeholder">Industry advisor<br>coming soon</div></div>
+          <div class="person-name">Coming soon</div>
+          <span class="person-role" style="color:#9b72b0">Industry advisor</span>
+          <span class="person-org">—</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="join-box reveal rd2">
+      <div class="join-box-title">We are building all five advisory boards.<br><em>Could you be part of one?</em></div>
+      <p class="join-box-body">We are assembling world-class advisors across Neuroscience, Education, Finance &amp; Fundraising, Social Impact, and Certification &amp; Industry. If you share our commitment to making technology education accessible and rigorous — we'd love to hear from you.</p>
+      <a href="mailto:info@noblackboxes.org" class="join-link">Express your interest → info@noblackboxes.org</a>
+    </div>
+
+  </div>
+</section>
+
+
+  </div>
+</section>
+
+<!-- ── PARTNERS & COLLABORATORS ── -->
+<section class="team-section" id="partners">
+  <div class="team-inner">
+    <div class="team-header reveal">
+      <div class="eyebrow">Partners &amp; collaborators</div>
+      <h2>The organisations<br><em>behind the work.</em></h2>
+      <p class="lead">No Black Boxes has been built in collaboration with leading research institutions, universities, and educational organisations around the world. These are the partners who have helped shape, deliver, and scale the curriculum.</p>
+    </div>
+
+    <span class="team-subheading reveal">Research &amp; academic institutions</span>
+    <div class="people-grid reveal rd1">
+      <div class="person-card">
+        <div class="person-photo" style="aspect-ratio:3/2;display:flex;align-items:center;justify-content:center">
+          <div class="person-photo-placeholder">Logo:<br>Sainsbury Wellcome Centre</div>
+        </div>
+        <div class="person-name">Sainsbury Wellcome Centre</div>
+        <span class="person-role">Research partner</span>
+        <span class="person-org">SWC · UCL, London</span>
+        <p class="person-bio">Home to several members of the teaching team. Long-standing collaborator in neuroscience curriculum development.</p>
+      </div>
+      <div class="person-card">
+        <div class="person-photo" style="aspect-ratio:3/2;display:flex;align-items:center;justify-content:center">
+          <div class="person-photo-placeholder">Logo:<br>Cold Spring Harbor Laboratory</div>
+        </div>
+        <div class="person-name">Cold Spring Harbor Laboratory</div>
+        <span class="person-role">Course host</span>
+        <span class="person-org">Cold Spring Harbor, USA</span>
+        <p class="person-bio">One of the world's leading biological research institutions. Host of early No Black Boxes intensive courses for PhD and Master's students.</p>
+      </div>
+      <div class="person-card">
+        <div class="person-photo" style="aspect-ratio:3/2;display:flex;align-items:center;justify-content:center">
+          <div class="person-photo-placeholder">Logo:<br>Cajal Programme</div>
+        </div>
+        <div class="person-name">Cajal Programme</div>
+        <span class="person-role">Course partner</span>
+        <span class="person-org">Europe</span>
+        <p class="person-bio">Partner for the first online No Black Boxes course, launched during the COVID-19 pandemic and reaching learners across Europe and beyond.</p>
+      </div>
+      <div class="person-card">
+        <div class="person-photo" style="aspect-ratio:3/2;display:flex;align-items:center;justify-content:center">
+          <div class="person-photo-placeholder">Logo:<br>TENSS</div>
+        </div>
+        <div class="person-name">TENSS</div>
+        <span class="person-role">Course host</span>
+        <span class="person-org">Transylvanian Experimental Neuroscience Summer School</span>
+        <p class="person-bio">International summer school and long-standing partner for advanced neuroscience and technology training.</p>
+      </div>
+    </div>
+
+    <span class="team-subheading reveal">Education &amp; industry partners</span>
+    <div class="people-grid reveal rd1">
+      <div class="person-card">
+        <div class="person-photo" style="aspect-ratio:3/2;display:flex;align-items:center;justify-content:center">
+          <div class="person-photo-placeholder">Logo:<br>London AI Campus</div>
+        </div>
+        <div class="person-name">London AI Campus</div>
+        <span class="person-role">Education partner</span>
+        <span class="person-org">London, UK</span>
+        <p class="person-bio">Home of the Build a Brain course — the first secondary school adaptation of the No Black Boxes curriculum, now open to learners everywhere.</p>
+      </div>
+      <div class="person-card">
+        <div class="person-photo" style="aspect-ratio:3/2;display:flex;align-items:center;justify-content:center">
+          <div class="person-photo-placeholder">Logo:<br>Virtualkinematics</div>
+        </div>
+        <div class="person-name">Virtualkinematics</div>
+        <span class="person-role">Technology partner</span>
+        <span class="person-org">—</span>
+        <p class="person-bio">Technology and hardware partner supporting the design and manufacture of the NB3 platform.</p>
+      </div>
+      <div class="person-card">
+        <div class="person-photo" style="aspect-ratio:3/2;display:flex;align-items:center;justify-content:center">
+          <div class="person-photo-placeholder">Logo:<br>Neurogears</div>
+        </div>
+        <div class="person-name">Neurogears</div>
+        <span class="person-role">Research partner</span>
+        <span class="person-org">London, UK</span>
+        <p class="person-bio">Neuroscience technology company and collaborator, contributing expertise to the hardware and systems curriculum.</p>
+      </div>
+      <!-- Placeholder for new partner -->
+      <div class="person-card placeholder">
+        <div class="person-photo" style="aspect-ratio:3/2;display:flex;align-items:center;justify-content:center">
+          <div class="person-photo-placeholder">Your organisation<br>here</div>
+        </div>
+        <div class="person-name">Partner</div>
+        <span class="person-role">Coming soon</span>
+        <span class="person-org">—</span>
+      </div>
+    </div>
+
+    <div class="join-box reveal rd2" style="margin-top:2rem">
+      <div class="join-box-title">Want to collaborate?<br><em>We are always open to new partnerships.</em></div>
+      <p class="join-box-body">Whether you are a research institution, school, company, or educational organisation — if you share our belief that technology education should be open, deep, and accessible to everyone, we would love to work with you.</p>
+      <a href="mailto:info@noblackboxes.org" class="join-link">Get in touch → info@noblackboxes.org</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="eyebrow center reveal">Work with us</div>
+    <h2 class="reveal rd1">Built by a team that<br><em>believes in this.</em></h2>
+    <p class="cta-body reveal rd2">Whether you want to learn, teach, partner, or support — there is a place for you in No Black Boxes.</p>
+    <div class="cta-acts reveal rd3">
+      <a href="mailto:info@noblackboxes.org" class="btn btn-ghost">Contact us →</a>
+      <a href="#" class="btn btn-primary">Explore the curriculum</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© MMXXVI No Black Boxes</span>
+  <span><a href="#">Home</a> · <a href="#">About</a> · <a href="#">The Kit</a> · <a href="#">Foundation</a></span>
+  <span>info@noblackboxes.org</span>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
+}, {threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
