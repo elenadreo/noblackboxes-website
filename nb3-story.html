@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Story — No Black Boxes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#0a0a0a; --bg-2:#111111; --bg-3:#1c1c1c; --bg-card:#0f0f0f;
+  --border:rgba(247,243,237,0.10); --border-2:rgba(247,243,237,0.18);
+  --gold:#c8a04a; --gold-dim:rgba(200,160,74,0.13); --gold-line:rgba(200,160,74,0.40);
+  --text:#f7f3ed;
+  --text-2:rgba(247,243,237,0.78);
+  --text-3:rgba(247,243,237,0.50);
+  --font-serif:'Playfair Display',Georgia,serif;
+  --font-mono:'DM Mono',monospace;
+  --font-sans:'Inter',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:16px;line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(247,243,237,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(247,243,237,0.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 4rem;height:64px;background:rgba(10,10,10,0.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:.6rem;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);text-decoration:none}
+.nav-logo-mark{width:28px;height:28px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:.65rem;color:var(--gold);font-weight:500}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)} .nav-links a.active{color:var(--gold)}
+.nav-cta{background:var(--gold);color:var(--bg);font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;border:none;padding:.6rem 1.5rem;cursor:pointer;text-decoration:none;font-weight:500;transition:opacity .2s}
+.nav-cta:hover{opacity:.85}
+
+/* SHARED */
+section{position:relative;z-index:1}
+.eyebrow{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;font-weight:500}
+.eyebrow::before{content:'';width:2rem;height:1px;background:var(--gold);flex-shrink:0}
+.eyebrow.center{justify-content:center} .eyebrow.center::before{display:none}
+h2{font-family:var(--font-serif);font-size:clamp(2rem,3.2vw,3rem);font-weight:700;line-height:1.1;color:var(--text)}
+h2 em{font-style:italic;color:var(--gold)}
+.lead{font-size:1.05rem;color:var(--text-2);line-height:1.85;max-width:600px;margin-top:1.25rem}
+.btn{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.9rem 2.2rem;text-decoration:none;cursor:pointer;border:none;display:inline-block;transition:all .2s}
+.btn-primary{background:var(--gold);color:var(--bg);font-weight:500} .btn-primary:hover{opacity:.85}
+.btn-ghost{background:transparent;color:var(--text-2);border:1px solid var(--border-2)} .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 4rem 5rem;position:relative;overflow:hidden;max-width:900px}
+.hero-eyebrow{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;display:flex;align-items:center;gap:.75rem;font-weight:500}
+.hero-eyebrow::before{content:'';width:2rem;height:1px;background:var(--gold)}
+h1{font-family:var(--font-serif);font-size:clamp(3rem,5vw,5.5rem);font-weight:900;line-height:1.02;margin-bottom:1.75rem}
+h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:1.15rem;color:var(--text-2);line-height:1.85;max-width:620px;margin-bottom:3rem}
+.hero-sub strong{color:var(--text);font-weight:600}
+.hero-cta{display:flex;gap:1rem;align-items:center}
+
+/* THREE ORIGIN CARDS */
+.origin-strip{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.origin-inner{display:grid;grid-template-columns:repeat(3,1fr);max-width:1200px;margin:0 auto}
+.origin-card{padding:3.5rem 3rem;border-right:1px solid var(--border)}
+.origin-card:last-child{border-right:none}
+.origin-tag{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem;display:block;font-weight:500}
+.origin-title{font-family:var(--font-serif);font-size:1.6rem;font-weight:700;line-height:1.2;color:var(--text);margin-bottom:1.25rem}
+.origin-title em{font-style:italic;color:var(--gold)}
+.origin-body{font-size:.92rem;color:var(--text-2);line-height:1.8}
+
+/* TIMELINE */
+.timeline-section{padding:7rem 0}
+.timeline-inner{max-width:1200px;margin:0 auto;padding:0 4rem}
+.timeline-header{text-align:center;margin-bottom:6rem}
+.timeline-header h2{max-width:600px;margin:0 auto}
+.timeline-header .lead{margin:1.25rem auto 0;text-align:center}
+
+.tl-row{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);margin-bottom:2px;overflow:hidden}
+.tl-row.rev{direction:rtl}
+.tl-row.rev>*{direction:ltr}
+
+.tl-text{padding:3.5rem 3.5rem;background:var(--bg-card);border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center}
+.tl-row.rev .tl-text{border-right:none;border-left:1px solid var(--border)}
+
+.tl-year{font-family:var(--font-serif);font-size:3.5rem;font-weight:900;color:var(--gold);opacity:0.25;line-height:1;margin-bottom:.75rem;letter-spacing:-.02em}
+.tl-tag{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:1rem;display:block}
+.tl-title{font-family:var(--font-serif);font-size:clamp(1.4rem,2vw,1.9rem);font-weight:700;line-height:1.15;margin-bottom:1.25rem;color:var(--text)}
+.tl-title em{font-style:italic;color:var(--gold)}
+.tl-body{font-size:.95rem;color:var(--text-2);line-height:1.85}
+.tl-body strong{color:var(--text);font-weight:600}
+.tl-institutions{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.25rem}
+.tl-inst{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border-2);color:var(--text-3);padding:.25rem .7rem}
+
+.tl-visual{background:var(--bg-2);display:flex;align-items:center;justify-content:center;min-height:340px;position:relative;overflow:hidden}
+.tl-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;padding:3rem;text-align:center;gap:1rem}
+.tl-placeholder-icon{font-family:var(--font-serif);font-size:3.5rem;color:var(--gold);opacity:.12;line-height:1}
+.tl-placeholder-text{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);line-height:1.8;border:1px dashed var(--border-2);padding:1rem 1.5rem}
+
+/* ADAM SECTION */
+.adam-section{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:7rem 0}
+.adam-inner{max-width:1200px;margin:0 auto;padding:0 4rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.adam-left{}
+.adam-right{display:flex;flex-direction:column;gap:2rem}
+
+.adam-quote{border-left:2px solid var(--gold-line);padding:1.5rem 0 1.5rem 1.75rem;margin-top:2rem}
+.adam-quote-text{font-family:var(--font-serif);font-style:italic;font-size:1.15rem;color:var(--text-2);line-height:1.75}
+
+.foundation-box{border:1px solid var(--gold-line);background:var(--gold-dim);padding:2rem 2rem}
+.foundation-label{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;display:block;font-weight:500}
+.foundation-title{font-family:var(--font-serif);font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:.75rem;line-height:1.25}
+.foundation-body{font-size:.88rem;color:var(--text-2);line-height:1.75}
+.foundation-link{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;border-bottom:1px solid var(--gold-line);padding-bottom:2px;transition:opacity .2s}
+.foundation-link:hover{opacity:.75}
+
+.adam-photo{width:100%;aspect-ratio:4/3;background:var(--bg-3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+
+/* WHAT'S NEXT */
+.next-section{padding:7rem 0}
+.next-inner{max-width:1200px;margin:0 auto;padding:0 4rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.next-left{}
+.next-right{padding-top:.5rem}
+
+.evolving-list{display:flex;flex-direction:column;margin-top:2.5rem}
+.evolving-item{display:grid;grid-template-columns:2.5rem 1fr;gap:1rem;padding:1.5rem 0;border-bottom:1px solid var(--border);align-items:start}
+.evolving-item:first-child{border-top:1px solid var(--border)}
+.evolving-num{font-family:var(--font-mono);font-size:.7rem;color:var(--gold);padding-top:.1rem}
+.evolving-title{font-family:var(--font-serif);font-size:1rem;font-weight:700;margin-bottom:.35rem;color:var(--text)}
+.evolving-body{font-size:.85rem;color:var(--text-2);line-height:1.7}
+
+.contact-box{border:1px solid var(--border);background:var(--bg-2);padding:2.5rem}
+.contact-box-title{font-family:var(--font-serif);font-size:1.35rem;font-weight:700;margin-bottom:.75rem;color:var(--text);line-height:1.2}
+.contact-box-title em{font-style:italic;color:var(--gold)}
+.contact-box-body{font-size:.88rem;color:var(--text-2);line-height:1.75;margin-bottom:1.5rem}
+.contact-email{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.06em;color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold-line);padding-bottom:2px;transition:opacity .2s}
+.contact-email:hover{opacity:.75}
+
+/* CTA */
+.cta-section{padding:8rem 0;background:var(--bg-2);border-top:1px solid var(--border);text-align:center}
+.cta-inner{max-width:700px;margin:0 auto;padding:0 2rem}
+.cta-section h2{font-size:clamp(2.2rem,4vw,3.8rem);margin-top:.5rem}
+.cta-body{font-size:1.05rem;color:var(--text-2);margin:1.5rem auto 2.5rem;line-height:1.85}
+.cta-acts{display:flex;gap:1rem;justify-content:center;margin-bottom:2rem;flex-wrap:wrap}
+.cta-fine{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;color:var(--text-3);line-height:2.2}
+.cta-fine span{margin:0 .6rem}
+
+footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;color:var(--text-3)}
+footer a{color:inherit;text-decoration:none} footer a:hover{color:var(--text-2)}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.vis{opacity:1;transform:none}
+.rd1{transition-delay:.1s} .rd2{transition-delay:.2s} .rd3{transition-delay:.3s} .rd4{transition-delay:.4s}
+
+@media(max-width:960px){
+  nav{padding:0 1.5rem} .nav-links{display:none}
+  .hero{padding:6rem 2rem 4rem}
+  .origin-inner{grid-template-columns:1fr}
+  .origin-card{border-right:none;border-bottom:1px solid var(--border)}
+  .origin-card:last-child{border-bottom:none}
+  .timeline-inner{padding:0 1.5rem}
+  .tl-row,.tl-row.rev{grid-template-columns:1fr;direction:ltr}
+  .tl-text,.tl-row.rev .tl-text{border-right:none;border-left:none;border-bottom:1px solid var(--border);padding:2.5rem 2rem}
+  .tl-visual{min-height:240px}
+  .adam-inner{grid-template-columns:1fr;padding:0 2rem;gap:3rem}
+  .next-inner{grid-template-columns:1fr;padding:0 2rem;gap:3rem}
+  footer{flex-direction:column;gap:1rem;padding:1.5rem 2rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo"><div class="nav-logo-mark">NB</div>No Black Boxes</a>
+  <ul class="nav-links">
+    <li><a href="#">Curriculum</a></li>
+    <li><a href="#">The Kit</a></li>
+    <li><a href="#" class="active">Our Story</a></li>
+    <li><a href="#">Foundation</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Start building free</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Our story</div>
+  <h1>From training<br>neuroscientists to<br>teaching the <em>next generation.</em></h1>
+  <p class="hero-sub">For over 15 years, we taught advanced technologies to scientists and researchers all over the world. Then we realised something: <strong>most people — especially our kids — never get the chance to truly understand how modern technology works.</strong> So we set out to change that.</p>
+  <div class="hero-cta">
+    <a href="#timeline" class="btn btn-primary">Read the story ↓</a>
+    <a href="#" class="btn btn-ghost">Explore the kit</a>
+  </div>
+</section>
+
+<!-- THREE ORIGIN CARDS -->
+<div class="origin-strip">
+  <div class="origin-inner">
+    <div class="origin-card reveal">
+      <span class="origin-tag">Where we started.</span>
+      <div class="origin-title">Teaching the<br><em>world's best scientists.</em></div>
+      <p class="origin-body">For more than a decade we trained Master's and PhD students at leading international institutions. The curriculum was demanding, hands-on, and built on one belief: you only truly understand something when you build it yourself.</p>
+    </div>
+    <div class="origin-card reveal rd1">
+      <span class="origin-tag">What we realised.</span>
+      <div class="origin-title">This shouldn't be<br><em>only for a few.</em></div>
+      <p class="origin-body">Everything we taught to elite researchers — how circuits work, how computers think, how AI sees — is knowledge that everyone deserves. The gap between what experts know and what everyone else is taught is not inevitable. It's a choice. We chose differently.</p>
+    </div>
+    <div class="origin-card reveal rd2">
+      <span class="origin-tag">What we built.</span>
+      <div class="origin-title">A complete system,<br><em>open to anyone.</em></div>
+      <p class="origin-body">We took everything learned over 15 years of training scientists and rebuilt it from the ground up — accessible, hands-on, and connected to real technology. What was once taught only to a few is now available to anyone, anywhere.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<section class="timeline-section" id="timeline">
+  <div class="timeline-inner">
+    <div class="timeline-header reveal">
+      <div class="eyebrow center">How it started — and how it evolved</div>
+      <h2>A curriculum<br><em>twenty years in the making.</em></h2>
+      <p class="lead">Not a startup idea. Not a weekend project. The No Black Boxes curriculum grew from two decades of teaching some of the world's most advanced learners — and asking, every time, how to make it better.</p>
+    </div>
+
+    <!-- 2010–2021 -->
+    <div class="tl-row reveal">
+      <div class="tl-text">
+        <div class="tl-year">2010</div>
+        <span class="tl-tag">2010 — 2021</span>
+        <div class="tl-title">Training scientists<br><em>at the highest level.</em></div>
+        <p class="tl-body">For more than a decade, the No Black Boxes team developed and delivered training materials for Master's and PhD students at leading international institutions. These courses focused on advanced technologies in neuroscience and experimental science — hands-on, from first principles, nothing hidden.</p>
+        <div class="tl-institutions">
+          <span class="tl-inst">Cold Spring Harbor</span>
+          <span class="tl-inst">TENSS</span>
+          <span class="tl-inst">CNP</span>
+          <span class="tl-inst">SWC</span>
+          <span class="tl-inst">UCL</span>
+          <span class="tl-inst">MBL</span>
+        </div>
+      </div>
+      <div class="tl-visual">
+        <div class="tl-placeholder">
+          <div class="tl-placeholder-icon">◈</div>
+          <div class="tl-placeholder-text">Photo: researchers or students at one of the early<br>intensive courses — Cold Spring Harbor, TENSS, or similar.<br>Hands on hardware. Lab setting.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2020–2024 -->
+    <div class="tl-row rev reveal rd1">
+      <div class="tl-text">
+        <div class="tl-year">2020</div>
+        <span class="tl-tag">2020 — 2024</span>
+        <div class="tl-title">Scaling beyond<br><em>elite training.</em></div>
+        <p class="tl-body">We began developing a new curriculum to offer courses to anyone, anywhere — curious learners who want to understand how the technology they use actually works. The first online course launched during the COVID-19 pandemic together with the <strong>Cajal Programme</strong>. Since then, we have trained over <strong>2,000 students from more than 60 countries</strong> worldwide.</p>
+      </div>
+      <div class="tl-visual">
+        <div class="tl-placeholder">
+          <div class="tl-placeholder-icon">◎</div>
+          <div class="tl-placeholder-text">Photo: online course screenshot, or students<br>learning remotely — laptops, hardware at home.<br>Or a world map showing the 60+ countries.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2025 -->
+    <div class="tl-row reveal">
+      <div class="tl-text">
+        <div class="tl-year">2025</div>
+        <span class="tl-tag">2025</span>
+        <div class="tl-title">Becoming part of the<br><em>future of education.</em></div>
+        <p class="tl-body">We began adapting the curriculum to create engaging material for secondary-school students. This became the <strong>Build a Brain</strong> course at the new London AI Campus — first taught in London schools, and now available to anyone. The NB3 robot was designed specifically for this course: a complete, hands-on system that takes learners from a single circuit to a working AI.</p>
+      </div>
+      <div class="tl-visual">
+        <div class="tl-placeholder">
+          <div class="tl-placeholder-icon">▲</div>
+          <div class="tl-placeholder-text">Photo: students in a secondary school classroom<br>building the NB3 robot. London AI Campus.<br>Young learners, hands on hardware.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2026 -->
+    <div class="tl-row rev reveal rd1">
+      <div class="tl-text">
+        <div class="tl-year">2026</div>
+        <span class="tl-tag">2026</span>
+        <div class="tl-title">Expanding access<br><em>through a new Foundation.</em></div>
+        <p class="tl-body">We established a Foundation in memory of our founder, Adam Kampff, with the goal of making high-quality technology education accessible to everyone — without barriers. The Foundation preserves and develops Adam's vision, guided by a board of trustees and a growing team of educators, researchers, and collaborators.</p>
+      </div>
+      <div class="tl-visual">
+        <div class="tl-placeholder">
+          <div class="tl-placeholder-icon">◇</div>
+          <div class="tl-placeholder-text">Photo: the NB3 kit, the boxes, or a group photo<br>of the current team and collaborators.<br>Or the Foundation launch event.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ADAM SECTION -->
+<section class="adam-section">
+  <div class="adam-inner">
+    <div class="adam-left">
+      <div class="adam-photo reveal">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:2rem;text-align:center">
+          <div style="font-family:var(--font-serif);font-size:2.5rem;color:var(--gold);opacity:.15">AK</div>
+          <div style="font-family:var(--font-mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);border:1px dashed var(--border-2);padding:.75rem 1.25rem">Portrait of Adam Kampff —<br>neuroscientist, educator, founder</div>
+        </div>
+      </div>
+    </div>
+    <div class="adam-right">
+      <div class="reveal">
+        <div class="eyebrow">The founder</div>
+        <h2>Adam Kampff.<br><em>The vision behind it all.</em></h2>
+        <p class="lead" style="margin-top:1.25rem">Over more than two decades, Adam Kampff — a neuroscientist — developed a new educational approach combining neuroscience, electronics, computing, and hands-on learning to teach how modern technology really works.</p>
+        <p style="font-size:.95rem;color:var(--text-2);line-height:1.85;margin-top:1.25rem">Over the years, this approach was shaped, expanded, and refined through collaboration with students, educators, and researchers who worked with him and were influenced by his ideas. The parallel he drew between understanding the brain and understanding technology became the foundation of everything No Black Boxes teaches.</p>
+        <div class="adam-quote">
+          <p class="adam-quote-text">"You only truly understand something when you can build it yourself — and when you can see, clearly, every layer beneath it."</p>
+        </div>
+      </div>
+      <div class="foundation-box reveal rd2">
+        <span class="foundation-label">The No Black Boxes Foundation</span>
+        <div class="foundation-title">Carrying the vision forward.</div>
+        <p class="foundation-body">Following Adam's death, the No Black Boxes Foundation was established to preserve, develop, and scale his approach — so it can reach future generations of learners. Guided by a board of trustees and a growing team of educators, researchers, and collaborators, the Foundation ensures that high-quality technology education remains accessible to everyone, without barriers.</p>
+        <a href="#" class="foundation-link">Learn more about the Foundation →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S NEXT -->
+<section class="next-section">
+  <div class="next-inner">
+    <div class="next-left">
+      <div class="eyebrow reveal">Always evolving</div>
+      <h2 class="reveal rd1">This is not a<br><em>fixed curriculum.</em></h2>
+      <p class="lead reveal rd2">Technology evolves — and so do we. We continuously update and expand what we teach, so students stay connected to real, modern technology.</p>
+
+      <div class="evolving-list">
+        <div class="evolving-item reveal rd1">
+          <div class="evolving-num">01</div>
+          <div>
+            <div class="evolving-title">New black boxes, always opening</div>
+            <p class="evolving-body">As new technologies emerge, we add new modules. What is a black box today becomes a lesson tomorrow. The curriculum grows because the world grows.</p>
+          </div>
+        </div>
+        <div class="evolving-item reveal rd2">
+          <div class="evolving-num">02</div>
+          <div>
+            <div class="evolving-title">Neuroscience at the core</div>
+            <p class="evolving-body">Every new module is developed alongside its neuroscience parallel — the biological equivalent that makes the technology feel not just understandable, but inevitable.</p>
+          </div>
+        </div>
+        <div class="evolving-item reveal rd3">
+          <div class="evolving-num">03</div>
+          <div>
+            <div class="evolving-title">Built with educators and researchers</div>
+            <p class="evolving-body">The curriculum has always been shaped by the people who use it. Students, teachers, and researchers contribute — and the best ideas make it into the next version.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="next-right">
+      <div class="contact-box reveal rd2">
+        <div class="contact-box-title">If something isn't here yet,<br><em>it may be what we build next.</em></div>
+        <p class="contact-box-body">Tell us what you'd like to learn. Every version of this curriculum started with a question someone was brave enough to ask. Yours might shape the next one.</p>
+        <a href="mailto:hello@noblackboxes.org" class="contact-email">hello@noblackboxes.org →</a>
+      </div>
+
+      <div style="margin-top:2px;border:1px solid var(--border);background:var(--bg-2);padding:2.5rem" class="reveal rd3">
+        <div class="tl-placeholder-text" style="border:none;padding:0;text-align:left">
+          Photo: the kit boxes arranged together — the black cubes with module names. Or an early prototype of the NB3 alongside the current version, showing evolution.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="eyebrow center reveal">Start learning</div>
+    <h2 class="reveal rd1">This is not just a course.<br><em>It's a new way to understand technology.</em></h2>
+    <p class="cta-body reveal rd2">See what you can build. Two decades of expertise, distilled into 28 lectures and one robot — built by you, understood by you, yours to keep.</p>
+    <div class="cta-acts reveal rd3">
+      <a href="#" class="btn btn-ghost">Explore the curriculum →</a>
+      <a href="#" class="btn btn-primary">Order the NB3 kit — £650</a>
+    </div>
+    <div class="cta-fine reveal rd4">
+      <span>28 lectures</span>·<span>Open source</span>·<span>Ages 15+</span>·<span>Ships worldwide</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© MMXXVI No Black Boxes</span>
+  <span><a href="#">Home</a> · <a href="#">About</a> · <a href="#">The Kit</a> · <a href="#">Curriculum</a></span>
+  <span>contact · foundation · faq · returns</span>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
+}, {threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
