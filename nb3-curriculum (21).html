@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Curriculum — No Black Boxes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#0a0a0a; --bg-2:#111111; --bg-3:#1c1c1c; --bg-card:#0f0f0f;
+  --border:rgba(247,243,237,0.1); --border-2:rgba(247,243,237,0.18);
+  --gold:#c8a04a; --gold-dim:rgba(200,160,74,0.13); --gold-line:rgba(200,160,74,0.4);
+  --text:#f7f3ed;
+  --text-2:rgba(247,243,237,0.78);   /* was 0.58 — much more readable */
+  --text-3:rgba(247,243,237,0.50);   /* was 0.32 — was near-invisible */
+  --text-4:rgba(247,243,237,0.35);   /* new dim level for truly secondary info */
+  --font-serif:'Playfair Display',Georgia,serif;
+  --font-mono:'DM Mono',monospace;
+  --font-sans:'Inter',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:16px;line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(247,243,237,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(247,243,237,0.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 4rem;height:64px;background:rgba(10,10,10,0.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:.6rem;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);text-decoration:none}
+.nav-logo-mark{width:28px;height:28px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:.65rem;color:var(--gold);font-weight:500}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)} .nav-links a.active{color:var(--gold)}
+.nav-cta{background:var(--gold);color:var(--bg);font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;border:none;padding:.6rem 1.5rem;cursor:pointer;text-decoration:none;font-weight:500;transition:opacity .2s}
+.nav-cta:hover{opacity:.85}
+
+section{position:relative;z-index:1}
+.eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.75rem;margin-bottom:1.75rem;font-weight:500}
+.eyebrow::before{content:'';width:2rem;height:1px;background:var(--gold);flex-shrink:0}
+.eyebrow.center{justify-content:center} .eyebrow.center::before{display:none}
+h2{font-family:var(--font-serif);font-size:clamp(2rem,3.2vw,3rem);font-weight:700;line-height:1.1;color:var(--text)}
+h2 em{font-style:italic;color:var(--gold)}
+.lead{font-size:1.05rem;color:var(--text-2);line-height:1.85;max-width:580px;margin-top:1.25rem}
+.btn{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.9rem 2.2rem;text-decoration:none;cursor:pointer;border:none;display:inline-block;transition:all .2s}
+.btn-primary{background:var(--gold);color:var(--bg);font-weight:500} .btn-primary:hover{opacity:.85}
+.btn-ghost{background:transparent;color:var(--text-2);border:1px solid var(--border-2)} .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:64px;position:relative;overflow:hidden}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:5rem 3.5rem 5rem 4rem;position:relative;z-index:2}
+.hero-eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.8rem;display:flex;align-items:center;gap:.75rem;font-weight:500}
+.hero-eyebrow::before{content:'';width:2rem;height:1px;background:var(--gold)}
+h1{font-family:var(--font-serif);font-size:clamp(3rem,4.2vw,5rem);font-weight:900;line-height:1.02;margin-bottom:1.5rem}
+h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:1.05rem;color:var(--text-2);line-height:1.8;margin-bottom:2.5rem;max-width:460px}
+.hero-cta{display:flex;gap:1rem;align-items:center}
+.hero-right{border-left:1px solid var(--border);background:var(--bg-2);display:flex;flex-direction:column;justify-content:center;padding:3rem 2.5rem;position:relative;overflow:hidden}
+.toc-label{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3);margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border)}
+.toc-box{background:var(--bg-card);padding:.75rem 1rem;display:flex;align-items:center;gap:.7rem;cursor:default;transition:background .15s;position:relative;overflow:hidden}
+.toc-box::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px}
+.toc-box:hover{background:var(--bg-3)}
+.toc-num{font-family:var(--font-mono);font-size:.92rem;letter-spacing:.06em;flex-shrink:0;width:1.8rem;text-align:right;font-weight:500;opacity:0.7}
+.toc-name{font-family:var(--font-serif);font-size:.95rem;font-weight:700;color:var(--text);transition:color .15s;line-height:1.2}
+.toc-box:hover .toc-name{color:var(--gold)}
+.toc-box[data-arc="1"]::before{background:#c8a04a} .toc-box[data-arc="1"] .toc-num{color:#c8a04a}
+.toc-box[data-arc="2"]::before{background:#b06030} .toc-box[data-arc="2"] .toc-num{color:#b06030}
+.toc-box[data-arc="3"]::before{background:#7a9e6e} .toc-box[data-arc="3"] .toc-num{color:#7a9e6e}
+.toc-box[data-arc="4"]::before{background:#5b8fa8} .toc-box[data-arc="4"] .toc-num{color:#5b8fa8}
+.toc-box[data-arc="5"]::before{background:#9b72b0} .toc-box[data-arc="5"] .toc-num{color:#9b72b0}
+
+/* THREE HOOKS */
+.hook-section{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.hook-inner{display:grid;grid-template-columns:repeat(3,1fr);max-width:1200px;margin:0 auto}
+.hook-card{padding:4rem 3rem;border-right:1px solid var(--border)}
+.hook-card:last-child{border-right:none}
+.hook-tag{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem;display:block;font-weight:500}
+.hook-quote{font-family:var(--font-serif);font-size:1.65rem;font-weight:700;line-height:1.2;color:var(--text);margin-bottom:1.25rem}
+.hook-quote em{font-style:italic;color:var(--gold)}
+.hook-quote em{font-style:italic;color:var(--gold)}
+.hook-body{font-size:.92rem;color:var(--text-2);line-height:1.8}
+
+/* LECTURE PREVIEWS */
+.lectures-section{padding:7rem 0}
+.lectures-inner{max-width:1200px;margin:0 auto;padding:0 4rem}
+.lectures-header{margin-bottom:5rem}
+.lectures-header h2{max-width:620px}
+
+.module-feature{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);margin-bottom:2px;position:relative;overflow:hidden}
+.module-feature.rev{direction:rtl}
+.module-feature.rev>*{direction:ltr}
+.mf-left{padding:3.5rem 3rem;background:var(--bg-card);border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:space-between}
+.module-feature.rev .mf-left{border-right:none;border-left:1px solid var(--border)}
+.mf-arc{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem;display:block}
+.mf-num{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.12em;color:var(--text-3);margin-bottom:1.5rem;display:block}
+.mf-title{font-family:var(--font-serif);font-size:clamp(1.6rem,2.5vw,2.4rem);font-weight:900;line-height:1.05;margin-bottom:1.25rem}
+.mf-premise{font-size:1rem;color:var(--text-2);line-height:1.82;margin-bottom:2rem;flex:1}
+.mf-learns{border-top:1px solid var(--border);padding-top:1.5rem}
+.mf-learns-label{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-3);margin-bottom:.85rem;display:block}
+.mf-learn{font-size:.88rem;color:var(--text-2);line-height:1.55;display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.5rem}
+.mf-learn::before{content:'→';color:var(--gold);font-family:var(--font-mono);font-size:.7rem;margin-top:.18rem;flex-shrink:0}
+
+.mf-right{padding:3.5rem 3rem;background:var(--bg-2);display:flex;flex-direction:column;gap:2rem}
+.mf-pair{display:grid;grid-template-columns:1fr 36px 1fr;gap:0;align-items:stretch}
+.mf-col{padding:1.5rem;border:1px solid var(--border);background:var(--bg-card)}
+.mf-col-label{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-3);margin-bottom:.75rem;display:block}
+.mf-col-title{font-family:var(--font-serif);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.4rem;line-height:1.2}
+.mf-col-body{font-size:.84rem;color:var(--text-2);line-height:1.65}
+.mf-bridge{display:flex;align-items:center;justify-content:center;background:var(--gold-dim);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.mf-bridge span{font-family:var(--font-mono);font-size:.7rem;color:var(--gold);writing-mode:vertical-rl;letter-spacing:.15em}
+.mf-task{border:1px solid var(--gold-line);background:var(--gold-dim);padding:1.5rem}
+.mf-task-label{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;display:block}
+.mf-task-title{font-family:var(--font-serif);font-size:1.08rem;font-weight:700;color:var(--text);margin-bottom:.4rem}
+.mf-task-body{font-size:.86rem;color:var(--text-2);line-height:1.65}
+.mf-insight{border-left:2px solid var(--gold-line);padding:0 0 0 1.25rem}
+.mf-insight p{font-family:var(--font-serif);font-style:italic;font-size:1rem;color:var(--text-2);line-height:1.75}
+
+/* ALL MODULES */
+.index-section{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:7rem 0}
+.index-inner{max-width:1200px;margin:0 auto;padding:0 4rem}
+.index-header{margin-bottom:4rem}
+.arc-group{margin-bottom:0;margin-top:3rem}
+.arc-group:first-child{margin-top:0}
+.arc-head{display:flex;align-items:center;gap:1.25rem;padding:1.1rem 1.5rem;background:var(--bg-card);border:1px solid var(--border);margin-bottom:1px}
+.arc-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.arc-head-name{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);flex:1}
+.arc-head-count{font-family:var(--font-mono);font-size:.65rem;color:var(--text-3)}
+.mod-grid{display:flex;flex-wrap:wrap;gap:0;border-left:1px solid var(--border);border-top:1px solid var(--border)}
+.mod-card{background:var(--bg-card);padding:1.5rem 1.5rem 1.25rem;transition:background .2s;cursor:default;position:relative;width:25%;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.mod-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px}
+.mod-card:hover{background:var(--bg-3)}
+.mod-num{font-family:var(--font-sans);font-size:1.15rem;letter-spacing:.01em;font-weight:700;margin-bottom:.35rem;display:block;line-height:1}
+.mod-name{font-family:var(--font-sans);font-size:.9rem;font-weight:600;color:var(--text-2);margin-bottom:.6rem;line-height:1.3;letter-spacing:.01em}
+.mod-hook{font-size:.8rem;color:var(--text-2);line-height:1.6;margin-bottom:0}
+.mod-neuro{margin-top:.65rem;padding-top:.55rem;border-top:1px solid var(--border);font-size:.75rem;color:var(--text-3);font-style:italic;line-height:1.45}
+
+/* CTA */
+.cta-section{padding:8rem 0;background:var(--bg-2);border-top:1px solid var(--border);text-align:center}
+.cta-inner{max-width:700px;margin:0 auto;padding:0 2rem}
+.cta-section h2{font-size:clamp(2.5rem,4vw,4rem);margin-top:.5rem}
+.cta-body{font-size:1.05rem;color:var(--text-2);margin:1.5rem auto 2.5rem;line-height:1.85}
+.cta-acts{display:flex;gap:1rem;justify-content:center;margin-bottom:2rem;flex-wrap:wrap}
+.cta-fine{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;color:var(--text-2);line-height:2.5}
+.cta-fine span{margin:0 .6rem}
+
+footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;color:var(--text-3)}
+footer a{color:inherit;text-decoration:none} footer a:hover{color:var(--text-2)}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.vis{opacity:1;transform:none}
+.rd1{transition-delay:.1s} .rd2{transition-delay:.2s} .rd3{transition-delay:.3s} .rd4{transition-delay:.4s}
+
+@media(max-width:960px){
+  nav{padding:0 1.5rem} .nav-links{display:none}
+  .hero{grid-template-columns:1fr} .hero-left{padding:4rem 2rem 3rem} .hero-right{display:none}
+  .hook-inner{grid-template-columns:1fr} .hook-card{border-right:none;border-bottom:1px solid var(--border)}
+  .lectures-inner{padding:0 1.5rem}
+  .module-feature,.module-feature.rev{grid-template-columns:1fr;direction:ltr}
+  .mf-left,.module-feature.rev .mf-left{border-right:none;border-left:none;border-bottom:1px solid var(--border)}
+  .mf-pair{grid-template-columns:1fr 24px 1fr}
+  .index-inner{padding:0 1.5rem} .mod-grid{grid-template-columns:1fr 1fr}
+  footer{flex-direction:column;gap:1rem;padding:1.5rem 2rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo"><div class="nav-logo-mark">NB</div>No Black Boxes</a>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Curriculum</a></li>
+    <li><a href="#">The Kit</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Foundation</a></li>
+  </ul>
+  <a href="#enrol" class="nav-cta">Start building free</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">The curriculum</div>
+    <h1>From atoms to AI.<br><em>Nothing left out.</em></h1>
+    <p class="hero-sub">Most courses skip the hard parts. Not this one.<br>28 lectures that change how you see technology forever — not what buttons to press, but why everything works the way it does, from the physics up.</p>
+    <div class="hero-cta">
+      <a href="#all" class="btn btn-primary">Explore the curriculum</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="toc-label">Contents · 28 lectures</div>
+    <div class="toc-grid">
+      <div class="toc-box" data-arc="1"><span class="toc-num">01</span><span class="toc-name">Atoms</span></div>
+      <div class="toc-box" data-arc="1"><span class="toc-num">02</span><span class="toc-name">Electrons</span></div>
+      <div class="toc-box" data-arc="1"><span class="toc-num">03</span><span class="toc-name">Magnets</span></div>
+      <div class="toc-box" data-arc="1"><span class="toc-num">04</span><span class="toc-name">Light</span></div>
+      <div class="toc-box" data-arc="1"><span class="toc-num">05</span><span class="toc-name">Sensors</span></div>
+      <div class="toc-box" data-arc="1"><span class="toc-num">06</span><span class="toc-name">Motors</span></div>
+      <div class="toc-box" data-arc="1"><span class="toc-num">07</span><span class="toc-name">Transistors</span></div>
+      <div class="toc-box" data-arc="1"><span class="toc-num">08</span><span class="toc-name">Amplifiers</span></div>
+      <div class="toc-box" data-arc="2"><span class="toc-num">09</span><span class="toc-name">Circuits</span></div>
+      <div class="toc-box" data-arc="2"><span class="toc-num">10</span><span class="toc-name">Power</span></div>
+      <div class="toc-box" data-arc="2"><span class="toc-num">11</span><span class="toc-name">Data</span></div>
+      <div class="toc-box" data-arc="2"><span class="toc-num">12</span><span class="toc-name">Logic</span></div>
+      <div class="toc-box" data-arc="2"><span class="toc-num">13</span><span class="toc-name">Memory</span></div>
+      <div class="toc-box" data-arc="3"><span class="toc-num">14</span><span class="toc-name">FPGAs</span></div>
+      <div class="toc-box" data-arc="3"><span class="toc-num">15</span><span class="toc-name">Computers</span></div>
+      <div class="toc-box" data-arc="3"><span class="toc-num">16</span><span class="toc-name">Control</span></div>
+      <div class="toc-box" data-arc="3"><span class="toc-num">17</span><span class="toc-name">Robotics</span></div>
+      <div class="toc-box" data-arc="4"><span class="toc-num">18</span><span class="toc-name">Systems</span></div>
+      <div class="toc-box" data-arc="4"><span class="toc-num">19</span><span class="toc-name">Linux</span></div>
+      <div class="toc-box" data-arc="4"><span class="toc-num">20</span><span class="toc-name">Python</span></div>
+      <div class="toc-box" data-arc="4"><span class="toc-num">21</span><span class="toc-name">Networks</span></div>
+      <div class="toc-box" data-arc="4"><span class="toc-num">22</span><span class="toc-name">Websites</span></div>
+      <div class="toc-box" data-arc="4"><span class="toc-num">23</span><span class="toc-name">Servers</span></div>
+      <div class="toc-box" data-arc="4"><span class="toc-num">24</span><span class="toc-name">Security</span></div>
+      <div class="toc-box" data-arc="5"><span class="toc-num">25</span><span class="toc-name">Audio</span></div>
+      <div class="toc-box" data-arc="5"><span class="toc-num">26</span><span class="toc-name">Vision</span></div>
+      <div class="toc-box" data-arc="5"><span class="toc-num">27</span><span class="toc-name">Learning</span></div>
+      <div class="toc-box" data-arc="5"><span class="toc-num">28</span><span class="toc-name">Intelligence</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE HOOKS -->
+<div class="hook-section">
+  <div class="hook-inner">
+    <div class="hook-card reveal">
+      <span class="hook-tag">The parallel.</span>
+      <div class="hook-quote">One journey.<br><em>Two discoveries.</em></div>
+      <p class="hook-body">As you build the robot, you discover how your own brain works. Every component has a biological twin. Every circuit has a neural equivalent. By the end, you understand two of the most complex systems ever built — and why they look so much alike.</p>
+    </div>
+    <div class="hook-card reveal rd1">
+      <span class="hook-tag">The connection.</span>
+      <div class="hook-quote">One system.<br><em>Not ten subjects.</em></div>
+      <p class="hook-body">Physics, electronics, computing, software, networks, and AI are not separate subjects — they are layers of the same thing. This course teaches them as they actually are: connected, dependent on each other, and only fully understood together.</p>
+    </div>
+    <div class="hook-card reveal rd2">
+      <span class="hook-tag">The foundation.</span>
+      <div class="hook-quote">Learn once.<br><em>Understand everything after.</em></div>
+      <p class="hook-body">This isn't a course about today's technology. It's a way of thinking about all technology — past, present, and future. Once you have the foundations, every new tool, language, or system you encounter has a place in the framework you built from scratch.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ALL 28 MODULES -->
+<section class="index-section" id="all">
+  <div class="index-inner">
+    <div class="index-header reveal">
+      <div class="eyebrow">All 28 lectures</div>
+      <h2>The complete <em>curriculum.</em></h2>
+      <p class="lead">Each lecture. The technology. The neuroscience.</p>
+    </div>
+
+    <div class="arc-group reveal">
+      <div class="arc-head"><div class="arc-dot" style="background:#c8a04a"></div><span class="arc-head-name">Part 1 — Physics &amp; Electronics</span><span class="arc-head-count">8 lectures</span></div>
+      <div class="mod-grid">
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#c8a04a"></div><span class="mod-num" style="color:#c8a04a">01 · Atoms</span><div class="mod-name">The physical substrate</div><div class="mod-hook">Sub-atomic particles, forces, and the matter everything is made of.</div><div class="mod-neuro">↔ From physics to chemistry to biology to brains</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#c8a04a"></div><span class="mod-num" style="color:#c8a04a">02 · Electrons</span><div class="mod-name">Voltage, current, resistance</div><div class="mod-hook">Ohm's Law, voltage dividers, power. The language of electronics.</div><div class="mod-neuro">↔ Neurons at rest — resting potential and passive membrane properties</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#c8a04a"></div><span class="mod-num" style="color:#c8a04a">03 · Magnets</span><div class="mod-name">Fields and forces</div><div class="mod-hook">Electromagnetism — moving charges create force at a distance.</div><div class="mod-neuro">↔ The physics governing both wires and ion channels</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#c8a04a"></div><span class="mod-num" style="color:#c8a04a">04 · Light</span><div class="mod-name">Electromagnetic spectrum</div><div class="mod-hook">EM radiation — the same spectrum that powers WiFi and human vision.</div><div class="mod-neuro">↔ Why the retina evolved to detect this specific slice</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#c8a04a"></div><span class="mod-num" style="color:#c8a04a">05 · Sensors</span><div class="mod-name">Transduction</div><div class="mod-hook">Heat, light, pressure, sound → electrical signal. The world becomes data.</div><div class="mod-neuro">↔ Photoreceptors, hair cells, and mechanosensors</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#c8a04a"></div><span class="mod-num" style="color:#c8a04a">06 · Motors</span><div class="mod-name">Electromagnetism as motion</div><div class="mod-hook">Turning electrical signals into physical force. Coils, piezos, actuators.</div><div class="mod-neuro">↔ Muscles and motor neurons — chemical synapses as actuators</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#c8a04a"></div><span class="mod-num" style="color:#c8a04a">07 · Transistors</span><div class="mod-name">The universal switch</div><div class="mod-hook">Voltage controls current. The fundamental building block of digital logic.</div><div class="mod-neuro">↔ Action potentials — neurons as biological switches</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#c8a04a"></div><span class="mod-num" style="color:#c8a04a">08 · Amplifiers</span><div class="mod-name">Gain and feedback</div><div class="mod-hook">Op-amps — the chip that amplifies anything. The building block of almost every analog circuit.</div><div class="mod-neuro">↔ Why a whisper from your nervous system can move your whole body</div></div>
+      </div>
+    </div>
+
+    <div class="arc-group reveal rd1">
+      <div class="arc-head"><div class="arc-dot" style="background:#b06030"></div><span class="arc-head-name">Part 2 — Circuits &amp; Digital Logic</span><span class="arc-head-count">5 lectures</span></div>
+      <div class="mod-grid">
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#b06030"></div><span class="mod-num" style="color:#b06030">09 · Circuits</span><div class="mod-name">Integrated circuits</div><div class="mod-hook">How ICs are made and the Braitenberg vehicle — a robot with no code.</div><div class="mod-neuro">↔ Simple sensorimotor loops — reflex arcs</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#b06030"></div><span class="mod-num" style="color:#b06030">10 · Power</span><div class="mod-name">Regulated supply</div><div class="mod-hook">Voltage regulators and stable power for complex mixed systems.</div><div class="mod-neuro">↔ Cellular energy efficiency and metabolic homeostasis</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#b06030"></div><span class="mod-num" style="color:#b06030">11 · Data</span><div class="mod-name">Analog to digital</div><div class="mod-hook">Why 0s and 1s are sufficient. The moment the world becomes information.</div><div class="mod-neuro">↔ Rate coding vs. timing coding — how neurons encode information</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#b06030"></div><span class="mod-num" style="color:#b06030">12 · Logic</span><div class="mod-name">Digital computation</div><div class="mod-hook">Five logic gates from which any computation can be built. Arithmetic from switches.</div><div class="mod-neuro">↔ Excitatory and inhibitory neurons as biological logic gates</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#b06030"></div><span class="mod-num" style="color:#b06030">13 · Memory</span><div class="mod-name">Persistent state</div><div class="mod-hook">How information persists. Flip-flops, flash, and why memory shapes everything above.</div><div class="mod-neuro">↔ LTP and NMDA channels — the molecular basis of memory</div></div>
+      </div>
+    </div>
+
+    <div class="arc-group reveal rd2">
+      <div class="arc-head"><div class="arc-dot" style="background:#7a9e6e"></div><span class="arc-head-name">Part 3 — Computing &amp; Control</span><span class="arc-head-count">4 lectures</span></div>
+      <div class="mod-grid">
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#7a9e6e"></div><span class="mod-num" style="color:#7a9e6e">14 · FPGAs</span><div class="mod-name">Programmable logic</div><div class="mod-hook">Hardware you can rewrite. Verilog, HDL, and the NB3 Hindbrain board.</div><div class="mod-neuro">↔ Neural plasticity — adaptive circuits for computation</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#7a9e6e"></div><span class="mod-num" style="color:#7a9e6e">15 · Computers</span><div class="mod-name">From gates to programs</div><div class="mod-hook">ALU, microcontrollers, assembly, C. The gap between hardware and software, closed.</div><div class="mod-neuro">↔ Is your brain really like a computer? The answer is more interesting than yes or no</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#7a9e6e"></div><span class="mod-num" style="color:#7a9e6e">16 · Control</span><div class="mod-name">Feedback and PID</div><div class="mod-hook">Negative feedback, H-bridge, servos. How systems maintain targets under disturbance.</div><div class="mod-neuro">↔ Motor control — the cerebellum and proprioceptive feedback</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#7a9e6e"></div><span class="mod-num" style="color:#7a9e6e">17 · Robotics</span><div class="mod-name">Autonomous systems</div><div class="mod-hook">Sensors, motors, microcontroller, behaviour. The NB3 drives and reacts.</div><div class="mod-neuro">↔ The architecture of behavioural complexity in nervous systems</div></div>
+      </div>
+    </div>
+
+    <div class="arc-group reveal rd3">
+      <div class="arc-head"><div class="arc-dot" style="background:#5b8fa8"></div><span class="arc-head-name">Part 4 — Systems &amp; Networks</span><span class="arc-head-count">7 lectures</span></div>
+      <div class="mod-grid">
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#5b8fa8"></div><span class="mod-num" style="color:#5b8fa8">18 · Systems</span><div class="mod-name">Operating systems</div><div class="mod-hook">What actually happens when a computer turns on — and how software and hardware communicate.</div><div class="mod-neuro">↔ Brain systems — sensory, motor, memory, learning</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#5b8fa8"></div><span class="mod-num" style="color:#5b8fa8">19 · Linux</span><div class="mod-name">Open interfaces</div><div class="mod-hook">The kernel, the terminal, the file system. The OS that runs the world.</div><div class="mod-neuro">↔ Your nervous system runs most of its processes without your knowledge — just like an OS</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#5b8fa8"></div><span class="mod-num" style="color:#5b8fa8">20 · Python</span><div class="mod-name">Thinking programmatically</div><div class="mod-hook">Python, packages, virtual environments. Software that controls hardware.</div><div class="mod-neuro">↔ Abstraction and decomposition — computational thinking</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#5b8fa8"></div><span class="mod-num" style="color:#5b8fa8">21 · Networks</span><div class="mod-name">Internet protocols</div><div class="mod-hook">TCP/IP, WiFi, SSH. How packets travel and your robot talks to the world.</div><div class="mod-neuro">↔ Neural protocols — signal propagation in biological networks</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#5b8fa8"></div><span class="mod-num" style="color:#5b8fa8">22 · Websites</span><div class="mod-name">HTML and CSS</div><div class="mod-hook">Structure and style. How the visual layer of the internet is built from text.</div><div class="mod-neuro">↔ How the brain structures and presents visual information</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#5b8fa8"></div><span class="mod-num" style="color:#5b8fa8">23 · Servers</span><div class="mod-name">HTTP and the web</div><div class="mod-hook">Requests, responses, hosting. Your robot becomes a web server.</div><div class="mod-neuro">↔ Your neurons communicate the same way — one sends, one responds</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#5b8fa8"></div><span class="mod-num" style="color:#5b8fa8">24 · Security</span><div class="mod-name">Encryption</div><div class="mod-hook">Hash functions, public keys, proof-of-work. Security as a physical constraint.</div><div class="mod-neuro">↔ Pattern recognition and secure signalling in biology</div></div>
+      </div>
+    </div>
+
+    <div class="arc-group reveal rd4">
+      <div class="arc-head"><div class="arc-dot" style="background:#9b72b0"></div><span class="arc-head-name">Part 5 — Perception &amp; Intelligence</span><span class="arc-head-count">4 lectures</span></div>
+      <div class="mod-grid">
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#9b72b0"></div><span class="mod-num" style="color:#9b72b0">25 · Audio</span><div class="mod-name">Sound to understanding</div><div class="mod-hook">Microphones, signal processing, frequency analysis. Meaning from 1D data.</div><div class="mod-neuro">↔ Hair cells, sound localisation, auditory scene analysis</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#9b72b0"></div><span class="mod-num" style="color:#9b72b0">26 · Vision</span><div class="mod-name">Pixels to perception</div><div class="mod-hook">Image processing, feature detection, the gap between data and seeing.</div><div class="mod-neuro">↔ How your brain processes what your eyes send — and how remarkably similar it is to a camera</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#9b72b0"></div><span class="mod-num" style="color:#9b72b0">27 · Learning</span><div class="mod-name">Reinforcement learning</div><div class="mod-hook">How systems improve through interaction. Reward signals and clicker training.</div><div class="mod-neuro">↔ Dopamine as reward signal — the neuroscience of habit</div></div>
+        <div class="mod-card"><div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#9b72b0"></div><span class="mod-num" style="color:#9b72b0">28 · Intelligence</span><div class="mod-name">Neural networks and AI</div><div class="mod-hook">NPUs, TensorFlow, LLMs — and what remains genuinely mysterious.</div><div class="mod-neuro">↔ A worm has 302 neurons. You have 86 billion. What does the difference buy?</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LECTURE PREVIEWS -->
+<section class="lectures-section" id="lectures">
+  <div class="lectures-inner">
+    <div class="lectures-header reveal">
+      <div class="eyebrow">Inside the lectures</div>
+      <h2>A taste of what<br><em>each lecture opens.</em></h2>
+      <p class="lead">Two lectures, shown in depth. The technology concept, the biological parallel, the hands-on task — and the insight that connects them.</p>
+    </div>
+
+    <!-- L1: TRANSISTORS -->
+    <div class="module-feature reveal">
+      <div class="mf-left">
+        <div>
+          <span class="mf-arc" style="color:#c8a04a">Part 1 — Physics &amp; Electronics</span>
+          <span class="mf-num">Lecture 07</span>
+          <div class="mf-title" style="color:#f7f3ed">Transistors</div>
+          <p class="mf-premise">Everything in your phone, your laptop, and every piece of modern electronics is built from one idea: a switch you control with electricity. This lecture explains what a transistor is physically, how it works, and why its invention changed the world more than almost anything else in the last century.</p>
+        </div>
+        <div class="mf-learns">
+          <span class="mf-learns-label">What you learn to think</span>
+          <div class="mf-learn">Why vacuum tubes worked — and why silicon replaced them</div>
+          <div class="mf-learn">How a tiny voltage controls a large current (amplification)</div>
+          <div class="mf-learn">Why billions of switches fit on a fingernail</div>
+          <div class="mf-learn">How switching speed became the measure of computational power</div>
+        </div>
+      </div>
+      <div class="mf-right">
+        <div class="mf-pair">
+          <div class="mf-col">
+            <span class="mf-col-label">Technology</span>
+            <div class="mf-col-title">The MOSFET</div>
+            <p class="mf-col-body">A gate voltage controls current through a channel. Off or on. Zero or one. The physical implementation of binary logic in silicon.</p>
+          </div>
+          <div class="mf-bridge"><span>↔</span></div>
+          <div class="mf-col">
+            <span class="mf-col-label">Neuroscience</span>
+            <div class="mf-col-title">The Action Potential</div>
+            <p class="mf-col-body">Your neurons are biological switches. On or off, fire or don't fire — the same binary principle as a transistor, just implemented in biology instead of silicon.</p>
+          </div>
+        </div>
+        <div class="mf-task">
+          <span class="mf-task-label">Hands-on task</span>
+          <div class="mf-task-title">Switch a motor with your sensor</div>
+          <p class="mf-task-body">Wire the photoresistor from Lecture 05 through a MOSFET to your motor. For the first time, your robot responds to the world. Sense → switch → action. Every computer ever made is a variation on this loop.</p>
+        </div>
+        <div class="mf-insight">
+          <p>"There are more transistors on a modern CPU than there are neurons in a human brain. Both are switches. The difference is 50 years of miniaturisation — and we still don't fully understand either one."</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- L2: LOGIC -->
+    <div class="module-feature rev reveal rd1">
+      <div class="mf-left">
+        <div>
+          <span class="mf-arc" style="color:#b06030">Part 2 — Circuits &amp; Digital</span>
+          <span class="mf-num">Lecture 12</span>
+          <div class="mf-title" style="color:#f7f3ed">Logic</div>
+          <p class="mf-premise">This lecture answers one of the most surprising questions in all of computing: why are two numbers enough? How did we get from voltage — a continuous physical quantity — to AND, OR, NOT, and ultimately to every calculation a computer has ever performed? The answer is both simpler and more profound than most people expect.</p>
+        </div>
+        <div class="mf-learns">
+          <span class="mf-learns-label">What you learn to think</span>
+          <div class="mf-learn">Why binary representation is sufficient for any calculation</div>
+          <div class="mf-learn">How NAND gates alone can implement any logic function</div>
+          <div class="mf-learn">How addition emerges from switches — no mathematics required</div>
+          <div class="mf-learn">Why all software ultimately reduces to gate operations</div>
+        </div>
+      </div>
+      <div class="mf-right">
+        <div class="mf-pair">
+          <div class="mf-col">
+            <span class="mf-col-label">Technology</span>
+            <div class="mf-col-title">Logic gates</div>
+            <p class="mf-col-body">AND, OR, NAND, NOR, XOR — five gates from which every digital circuit can be constructed. The complete vocabulary of computation.</p>
+          </div>
+          <div class="mf-bridge"><span>↔</span></div>
+          <div class="mf-col">
+            <span class="mf-col-label">Neuroscience</span>
+            <div class="mf-col-title">E and I circuits</div>
+            <p class="mf-col-body">Excitatory and inhibitory neurons implement biological logic. Your brain decides by combining signals through AND/OR/NOT operations — in wetware.</p>
+          </div>
+        </div>
+        <div class="mf-task">
+          <span class="mf-task-label">Hands-on task</span>
+          <div class="mf-task-title">Build a circuit that adds two numbers</div>
+          <p class="mf-task-body">Using physical AND, XOR, and OR chips, construct a circuit that adds two numbers and shows the result as light. No processor, no code — just gates. Arithmetic from first principles.</p>
+        </div>
+        <div class="mf-insight">
+          <p>"Every calculation your phone has ever done — every photo processed, every message encrypted, every game rendered — reduced, at the bottom, to gates switching. This lecture is the moment that becomes real."</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- L3: MEMORY removed -->
+    <!-- L4: LINUX removed -->
+    <!-- L5: VISION removed -->
+
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="enrol">
+  <div class="cta-inner">
+    <div class="eyebrow center reveal">Start learning</div>
+    <h2 class="reveal rd1">Open every box.<br><em>Starting now.</em></h2>
+    <p class="cta-body reveal rd2">28 lectures. All materials open source and freely available. The NB3 kit gives you the hardware to build every concept with your hands — from electrons to AI, nothing hidden.</p>
+    <div class="cta-acts reveal rd3">
+      <a href="#" class="btn btn-primary">Order the NB3 kit — £650</a>
+    </div>
+    <div class="cta-fine reveal rd4">
+      <span>28 lectures</span>·<span>Open source curriculum</span>·<span>Ages 15+</span>·<span>No prior knowledge</span>·<span>~120 hours</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© MMXXVI No Black Boxes</span>
+  <span><a href="#">Home</a> · <a href="#">About</a> · <a href="#">The Kit</a> · <a href="#">Technology</a></span>
+  <span>contact · curriculum · faq · returns</span>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
