@@ -960,11 +960,11 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
 
 
 <!-- FOOTER -->
-<footer style="background:var(--bg);border-top:1px solid var(--border);padding:2rem 4rem;display:flex;align-items:center;justify-content:space-between;gap:2rem">
+<footer style="background:var(--bg);border-top:1px solid var(--border);padding:2rem 4rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;position:relative">
   <a href="index.html" style="flex-shrink:0;text-decoration:none">
     <img src="image/logo_NBB_No_Text_v1.svg" alt="No Black Boxes" style="height:36px">
   </a>
-  <div style="display:flex;flex-direction:column;align-items:center;gap:.6rem;flex:1;justify-content:center">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:.6rem;position:absolute;left:50%;transform:translateX(-50%)">
   <span style="font-family:var(--font-serif);font-size:1.3rem;font-weight:700;color:var(--text)">Join our newsletter!</span>
   <div style="display:flex;align-items:center;gap:.5rem;width:100%;max-width:480px">
     <input type="text" placeholder="Full name" style="flex:1;background:var(--bg-2);border:1px solid var(--border);color:var(--text);font-family:var(--font-sans);font-size:.8rem;padding:.55rem 1rem;outline:none;min-width:0">
