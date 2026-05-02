@@ -584,18 +584,6 @@ h2 em { font-style: italic; color: var(--gold); }
 }
 .cta-fine span { margin: 0 0.75rem; }
 
-/* NEWSLETTER */
-.newsletter-section{padding:5rem 2rem;background:var(--bg-2);border-top:1px solid var(--border);text-align:center}
-.newsletter-inner{max-width:700px;margin:0 auto}
-.newsletter-inner h2{font-family:var(--font-serif);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:700;color:var(--text);margin-bottom:2rem;line-height:1.2}
-.newsletter-inner h2 em{font-style:italic;color:var(--gold)}
-.newsletter-form{display:flex;gap:.5rem;max-width:600px;margin:0 auto}
-.newsletter-input{flex:1;background:var(--bg);border:1px solid var(--border-2);color:var(--text);font-family:var(--font-sans);font-size:.9rem;padding:.9rem 1.25rem;outline:none;transition:border-color .2s}
-.newsletter-input::placeholder{color:var(--text-3)}
-.newsletter-input:focus{border-color:var(--gold)}
-.newsletter-btn{background:var(--gold);color:var(--bg);font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;border:none;padding:.9rem 1.75rem;cursor:pointer;font-weight:500;white-space:nowrap;transition:opacity .2s}
-.newsletter-btn:hover{opacity:.85}
-
   
 /* FOOTER */
 footer{background:var(--bg);border-top:1px solid var(--border);padding:1.5rem 4rem;display:flex;align-items:center;justify-content:space-between;gap:2rem}
@@ -969,17 +957,7 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
   </div>
 </section>
 
-<!-- NEWSLETTER -->
-<section class="newsletter-section">
-  <div class="newsletter-inner">
-    <h2>Be the first to know.<br><em>Join our newsletter.</em></h2>
-    <div class="newsletter-form">
-      <input class="newsletter-input" type="text" placeholder="Full name">
-      <input class="newsletter-input" type="email" placeholder="Email address">
-      <button class="newsletter-btn">Subscribe</button>
-    </div>
-  </div>
-</section>
+
 
 <!-- FOOTER -->
 <footer style="background:var(--bg);border-top:1px solid var(--border);padding:1.25rem 4rem;display:flex;align-items:center;justify-content:space-between;gap:2rem">
@@ -987,7 +965,7 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
     <img src="image/logo_NBB_No_Text_v1.svg" alt="No Black Boxes" style="height:36px">
   </a>
   <div style="display:flex;flex-direction:column;align-items:center;gap:.6rem;flex:1;justify-content:center">
-  <span style="font-family:var(--font-serif);font-size:1rem;font-weight:700;color:var(--text)">Join our newsletter.</span>
+  <span style="font-family:var(--font-serif);font-size:1.3rem;font-weight:700;color:var(--text)">Join our newsletter!</span>
   <div style="display:flex;align-items:center;gap:.5rem;width:100%;max-width:480px">
     <input type="text" placeholder="Full name" style="flex:1;background:var(--bg-2);border:1px solid var(--border);color:var(--text);font-family:var(--font-sans);font-size:.8rem;padding:.55rem 1rem;outline:none;min-width:0">
     <input type="email" placeholder="Email address" style="flex:1.4;background:var(--bg-2);border:1px solid var(--border);color:var(--text);font-family:var(--font-sans);font-size:.8rem;padding:.55rem 1rem;outline:none;min-width:0">
