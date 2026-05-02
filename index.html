@@ -80,7 +80,7 @@ h1 em{font-style:italic;color:var(--gold)}
 
 
 /* FORK */
-.fork-section{padding:5rem 0;border-bottom:1px solid var(--border)}
+.fork-section{padding:4rem 0 2rem;border-bottom:1px solid var(--border)}
 .fork-inner{max-width:1200px;margin:0 auto;padding:0 4rem}
 .fork-header{text-align:center;margin-bottom:3rem}
 .fork-cards{display:grid;grid-template-columns:1fr auto 1fr;gap:0;border:1px solid var(--border);align-items:stretch}
@@ -128,7 +128,7 @@ h1 em{font-style:italic;color:var(--gold)}
 .how-inner{max-width:1200px;margin:0 auto;padding:0 4rem}
 .how-header{text-align:center;margin-bottom:5rem}
 .how-header h2{max-width:500px;margin:0 auto}
-.how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.how-steps{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:1px;background:var(--border);border:1px solid var(--border)}
 .how-step{background:var(--bg-card);padding:3rem 2.5rem;position:relative;overflow:hidden}
 .how-step-bg-num{font-family:var(--font-serif);font-size:8rem;font-weight:900;color:var(--gold);opacity:.05;position:absolute;top:-1rem;right:1rem;line-height:1;pointer-events:none}
 .how-step-num{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block;font-weight:500}
@@ -443,42 +443,46 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
 <section class="how-section" id="how">
   <div class="how-inner">
     <div class="how-header reveal">
-      <div class="eyebrow center">How it works</div>
-      <h2>Three steps.<br><em>One complete journey.</em></h2>
+      <div class="eyebrow center">More than a course</div>
+      <h2>Learn it. Build it.<br><em>Get hired for it.</em></h2>
     </div>
     <div class="how-steps">
       <div class="how-step reveal">
         <div class="how-step-bg-num">1</div>
         <span class="how-step-num">Step 01</span>
-        <div class="how-step-title">Choose your level</div>
+        <div class="how-step-title">Receive your kit</div>
         <ul class="how-step-list">
-          <li>Ages 15–18 · secondary school</li>
-          <li>18+ · anyone re/upskilling</li>
-          <li>Scientists and researchers</li>
+          <li>Everything you need in one box</li>
+          <li>Hardware, guides, and full curriculum access</li>
+          <li>Start building on day one</li>
         </ul>
-        <div style="margin-top:1.75rem">
-          <a href="#audience" class="btn btn-ghost" style="font-size:.65rem;padding:.7rem 1.5rem">See all levels →</a>
-        </div>
       </div>
       <div class="how-step reveal rd1">
         <div class="how-step-bg-num">2</div>
         <span class="how-step-num">Step 02</span>
         <div class="how-step-title">Build with real technology</div>
         <ul class="how-step-list">
-          <li>28 lecture videos</li>
-          <li>Hands-on build sessions</li>
-          <li>Practical projects at every stage</li>
+          <li>28 lectures from atoms to AI</li>
+          <li>Hands-on builds at every stage</li>
+          <li>Self-paced or guided by our team</li>
         </ul>
       </div>
-      <div class="how-step reveal rd2">
-        <div class="how-step-bg-num">3</div>
-        <span class="how-step-num">Step 03</span>
-        <div class="how-step-title">Earn skills people recognise</div>
-        <ul class="how-step-list">
-          <li>Submit your final project</li>
-          <li>Earn a certificate that proves your skills</li>
-          <li>Access academia and industry pathways</li>
-        </ul>
+      <div class="how-step reveal rd2" style="grid-column:1/-1;background:#141414;border-top:3px solid #8ab87a;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center">
+        <div>
+          <div class="how-step-bg-num" style="font-size:12rem;opacity:.04">3</div>
+          <span class="how-step-num">Step 03</span>
+          <div class="how-step-title" style="font-size:2rem;margin-bottom:1.25rem">Get <em style="font-style:italic;color:#8ab87a">noticed.</em></div>
+          <p style="font-family:var(--font-serif);font-style:italic;font-size:1.1rem;color:var(--text-2);line-height:1.75;margin-bottom:1.5rem">"Every cohort, the best projects are featured on our Skills Recognition page and shared with our global network of research institutes, labs and companies. Outstanding work gets noticed."</p>
+          <a href="nb3-recognition.html" class="btn btn-primary" style="font-size:.65rem;padding:.7rem 1.5rem;background:#8ab87a;color:#0a0a0a">Learn about recognition →</a>
+        </div>
+        <div>
+          <ul class="how-step-list" style="gap:.85rem">
+            <li style="font-size:.95rem">Submit your final project for review by the No Black Boxes team</li>
+            <li style="font-size:.95rem">Outstanding work is featured on our public Skills Recognition page</li>
+            <li style="font-size:.95rem">We connect the best students directly to labs, companies and research institutes worldwide</li>
+            <li style="font-size:.95rem">Past students have gone on to internships, lab placements and industry positions</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
