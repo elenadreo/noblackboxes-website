@@ -208,15 +208,55 @@ footer a{color:inherit;text-decoration:none} footer a:hover{color:var(--text-2)}
 <body>
 
 <nav>
-  <a href="#" class="nav-logo"><div class="nav-logo-mark">NB</div>No Black Boxes</a>
+  <a href="index.html" class="nav-logo"><img src="image/logo_NBB_No_Text_v1.svg" alt="No Black Boxes" style="height:58px"></a>
   <ul class="nav-links">
-    <li><a href="#">Curriculum</a></li>
-    <li><a href="#">The Kit</a></li>
-    <li><a href="#">Our Story</a></li>
-    <li><a href="#" class="active">Foundation</a></li>
+    <li class="nav-item">
+      <button class="nav-top">Learn</button>
+      <div class="nav-dropdown">
+        <a href="nb3-curriculum.html#self-paced">Self-paced</a>
+        <a href="nb3-curriculum.html#upcoming">Upcoming courses</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-top">The Kit</button>
+      <div class="nav-dropdown">
+        <a href="nb3-hardware-v2.html">The hardware</a>
+        <a href="nb3-curriculum.html">The curriculum</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-top">About</button>
+      <div class="nav-dropdown">
+        <a href="nb3-story.html">Our story</a>
+        <a href="nb3-team.html">Our team</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-top">Foundation</button>
+      <div class="nav-dropdown">
+        <a href="nb3-foundation.html">Our mission</a>
+        <a href="nb3-foundation.html#support">Partner with us</a>
+      </div>
+    </li>
   </ul>
-  <a href="#support" class="nav-cta">Partner with us</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-section-label">Learn</span>
+  <a href="nb3-curriculum.html#self-paced">Self-paced</a>
+  <a href="nb3-curriculum.html#upcoming">Upcoming courses</a>
+  <a href="nb3-curriculum.html">The curriculum</a>
+  <a href="nb3-hardware-v2.html">The hardware</a>
+  <span class="mobile-section-label">About</span>
+  <a href="nb3-story.html">Our story</a>
+  <a href="nb3-team.html">Our team</a>
+  <span class="mobile-section-label">Foundation</span>
+  <a href="nb3-foundation.html">Our mission</a>
+  <a href="nb3-foundation.html#support">Partner with us</a>
+  <a href="nb3-hardware-v2.html" class="mobile
+    
 
 <!-- HERO -->
 <section class="hero">
@@ -499,14 +539,16 @@ footer a{color:inherit;text-decoration:none} footer a:hover{color:var(--text-2)}
 </section>
 
 <!-- CTA -->
-<section class="cta-section">
-  <div class="cta-inner">
-    <div class="eyebrow center reveal">Join us</div>
-    <h2 class="reveal rd1">Understanding technology<br>should not be <em>a privilege.</em></h2>
-    <p class="cta-body reveal rd2">Help us make it available to everyone. Partner with the No Black Boxes Foundation — or start learning today with the NB3 kit.</p>
-    <div class="cta-acts reveal rd3">
-      <a href="mailto:info@noblackboxes.org" class="btn btn-ghost">Partner with us →</a>
-      <a href="#" class="btn btn-primary">Explore the curriculum</a>
+<section style="padding:4rem 0 3.5rem;text-align:center;border-top:3px solid var(--gold);background:var(--bg-card)">
+  <div style="max-width:700px;margin:0 auto;padding:0 2rem">
+    <div style="font-family:var(--font-mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem">Ready to start?</div>
+    <h2 style="font-family:var(--font-serif);font-size:clamp(1.6rem,2.5vw,2.4rem);font-weight:900;line-height:1.05;color:var(--text);margin-bottom:2rem">Order the kit.<br><em style="font-style:italic;color:var(--gold)">Start building today.</em></h2>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.75rem">
+      <a href="nb3-hardware-v2.html" class="btn btn-primary" style="background:#6ba8c4;color:#0a0a0a">Order the Kit — £650</a>
+      <a href="nb3-courses.html" class="btn btn-primary" style="background:#c86828;color:#0a0a0a">Apply for a course →</a>
+    </div>
+    <div style="font-family:var(--font-mono);font-size:.65rem;letter-spacing:.08em;color:var(--text-3)">
+      28 lectures · Ages 15+ · Ships worldwide · No prior knowledge
     </div>
   </div>
 </section>
