@@ -225,11 +225,13 @@ footer a{text-decoration:none}
 .mobile-menu a{font-family:var(--font-mono);font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2);text-decoration:none;padding:1rem 0;border-bottom:1px solid var(--border);transition:color .2s;font-weight:500}
 .mobile-menu a:hover{color:var(--gold)}
 .mobile-menu .mobile-cta{background:var(--gold);color:var(--bg);text-align:center;padding:1rem;margin-top:2rem;font-weight:500}
+
 @media(max-width:960px){
-  .hamburger{display:flex}
-  
-  .nav-cta{display:none}
+  .hamburger{display:flex!important}
+  .nav-links{display:none!important}
+  .nav-cta{display:none!important}
 }
+  
 </style>
 </head>
 <body>
