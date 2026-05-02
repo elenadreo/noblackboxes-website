@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="logo_NBB_white_text" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 283.5 283.5">
+  <!-- Generator: Adobe Illustrator 30.3.0, SVG Export Plug-In . SVG Version: 2.1.3 Build 182)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #fff;
+      }
+
+      .st0, .st1 {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-miterlimit: 11.3;
+        stroke-width: 1.4px;
+      }
+    </style>
+  </defs>
+  <g id="Atoms">
+    <rect id="box_Atoms" class="st0" x="83.4" y="138.5" width="36.9" height="36.9"/>
+  </g>
+  <g id="Electrons">
+    <rect id="box_Electrons" class="st0" x="120.1" y="146.3" width="36.9" height="36.9"/>
+  </g>
+  <g id="Magnets">
+    <rect id="box_Magnets" class="st0" x="125" y="120.7" width="36.9" height="36.9"/>
+  </g>
+  <g id="Light">
+    <rect id="box_Light" class="st0" x="158" y="135.8" width="36.9" height="36.9"/>
+  </g>
+  <g id="Sensors">
+    <rect id="box_Sensors" class="st0" x="144.4" y="113.4" width="36.9" height="36.9"/>
+  </g>
+  <g id="Motors">
+    <rect id="box_Motors" class="st1" x="170.2" y="122.6" width="36.9" height="36.9"/>
+  </g>
+  <g id="Transistors">
+    <rect id="box_Transistors" class="st0" x="191.2" y="145.3" width="36.9" height="36.9"/>
+  </g>
+  <g id="Amplifiers">
+    <rect id="box_Amplifiers" class="st0" x="200.1" y="114.6" width="36.9" height="36.9"/>
+  </g>
+  <g id="Circuits">
+    <rect id="box_Circuits" class="st0" x="189.9" y="93" width="36.9" height="36.9"/>
+  </g>
+  <g id="Data">
+    <rect id="box_Data" class="st0" x="175.1" y="80.4" width="36.9" height="36.9"/>
+  </g>
+  <g id="Logic">
+    <rect id="box_Logic" class="st0" x="161.2" y="69.2" width="36.9" height="36.9"/>
+  </g>
+  <g id="Memory">
+    <rect id="box_Memory" class="st0" x="136.8" y="63.9" width="36.9" height="36.9"/>
+  </g>
+  <g id="FPGAs">
+    <rect id="box_FPGAs" class="st0" x="153" y="99.1" width="36.9" height="36.9"/>
+  </g>
+  <g id="Computers">
+    <rect id="box_Computers" class="st1" x="123.6" y="88.9" width="36.9" height="36.9"/>
+  </g>
+  <g id="Control">
+    <rect id="box_Control" class="st0" x="109.9" y="61.2" width="36.9" height="36.9"/>
+  </g>
+  <g id="Robotics">
+    <rect id="box_Robotics" class="st0" x="81.5" y="66.9" width="36.9" height="36.9"/>
+  </g>
+  <g id="Power">
+    <rect id="box_Power" class="st0" x="95.4" y="93.5" width="36.9" height="36.9"/>
+  </g>
+  <g id="Systems">
+    <rect id="box_Systems" class="st0" x="79" y="105.5" width="36.9" height="36.9"/>
+  </g>
+  <g id="Linux">
+    <rect id="box_Linux" class="st0" x="59.1" y="74.5" width="36.9" height="36.9"/>
+  </g>
+  <g id="Python">
+    <rect id="box_Python" class="st1" x="42.9" y="88.5" width="36.9" height="36.9"/>
+  </g>
+  <g id="Networks">
+    <rect id="box_Networks" class="st0" x="34.2" y="104" width="36.9" height="36.9"/>
+  </g>
+  <g id="Websites">
+    <rect id="box_Websites" class="st0" x="42.9" y="122.6" width="36.9" height="36.9"/>
+  </g>
+  <g id="Servers">
+    <rect id="box_Servers" class="st0" x="135.7" y="166.2" width="36.9" height="36.9"/>
+  </g>
+  <g id="Security">
+    <rect id="box_Security" class="st0" x="181.7" y="159.3" width="36.9" height="36.9"/>
+  </g>
+  <g id="Audio">
+    <rect id="box_Audio" class="st1" x="155" y="173.3" width="36.9" height="36.9"/>
+  </g>
+  <g id="Vision">
+    <rect id="box_Vision" class="st0" x="168.4" y="189.8" width="36.9" height="36.9"/>
+  </g>
+  <g id="Learning">
+    <rect id="box_Learning" class="st0" x="60.6" y="130.6" width="36.9" height="36.9"/>
+  </g>
+  <g id="Intelligence">
+    <rect id="box_Intelligence" class="st1" x="88.2" y="120.7" width="36.9" height="36.9"/>
+  </g>
+</svg>
