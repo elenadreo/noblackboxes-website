@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Courses — No Black Boxes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#0a0a0a; --bg-2:#111111; --bg-3:#1c1c1c; --bg-card:#0f0f0f;
+  --border:rgba(247,243,237,0.09); --border-2:rgba(247,243,237,0.16);
+  --gold:#c8a04a; --gold-dim:rgba(200,160,74,0.13); --gold-line:rgba(200,160,74,0.35);
+  --text:#f7f3ed; --text-2:rgba(247,243,237,0.78); --text-3:rgba(247,243,237,0.50);
+  --orange:#c86828;
+  --font-serif:'Playfair Display',Georgia,serif;
+  --font-mono:'DM Mono',monospace;
+  --font-sans:'Inter',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:16px;line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(247,243,237,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(247,243,237,0.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 4rem;height:64px;background:rgba(10,10,10,0.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;text-decoration:none}
+.nav-links{display:flex;gap:0;list-style:none;height:64px;justify-content:center}
+.nav-item{position:relative;display:flex;align-items:center}
+.nav-item>a,.nav-top{font-family:var(--font-mono);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text);text-decoration:none;transition:color .2s;padding:0 1.25rem;height:64px;display:flex;align-items:center;gap:.4rem;cursor:pointer;background:none;border:none;white-space:nowrap}
+.nav-top:focus{outline:none}
+.nav-top::after{content:'▾';font-size:.55rem;opacity:.5;transition:transform .2s}
+.nav-item:hover .nav-top::after{transform:rotate(180deg)}
+.nav-dropdown{position:absolute;top:64px;left:0;background:rgba(10,10,10,0.98);backdrop-filter:blur(16px);border:1px solid var(--border);border-top:2px solid var(--gold);min-width:220px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:all .2s;z-index:200}
+.nav-item:hover .nav-dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-dropdown a{display:block;font-family:var(--font-mono);font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-2);text-decoration:none;padding:.9rem 1.5rem;border-bottom:1px solid var(--border);transition:all .2s}
+.nav-dropdown a:last-child{border-bottom:none}
+.nav-dropdown a:hover{color:var(--gold);padding-left:1.75rem;background:var(--gold-dim)}
+
+section{position:relative;z-index:1}
+.eyebrow{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;font-weight:500}
+.eyebrow::before{content:'';width:2rem;height:1px;background:var(--orange);flex-shrink:0}
+h2{font-family:var(--font-serif);font-size:clamp(2rem,3.2vw,3rem);font-weight:700;line-height:1.1;color:var(--text)}
+h2 em{font-style:italic;color:var(--gold)}
+
+/* HERO */
+.hero{min-height:auto;display:flex;flex-direction:column;justify-content:center;padding:7rem 4rem 2.5rem;border-bottom:1px solid var(--border)}
+.hero-eyebrow{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:1.25rem;display:flex;align-items:center;gap:.75rem;font-weight:500}
+.hero-eyebrow::before{content:'';width:2rem;height:1px;background:var(--orange)}
+h1{font-family:var(--font-serif);font-size:clamp(3rem,4.5vw,5rem);font-weight:900;line-height:1.02;margin-bottom:1.5rem;max-width:800px}
+h1 em{font-style:italic;color:var(--orange)}
+.hero-sub{font-size:1.05rem;color:var(--text-2);line-height:1.85;max-width:560px}
+
+/* CARDS */
+.cards-section{padding:4rem 0 4rem}
+.cards-inner{max-width:1200px;margin:0 auto;padding:0 4rem}
+.cards-header{text-align:center;margin-bottom:3rem}
+.cards-header h2{max-width:560px;margin:0 auto}
+.cards-header p{font-size:.95rem;color:var(--text-2);font-family:var(--font-sans);margin-top:1.25rem;line-height:1.85}
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;align-items:stretch}
+
+.card{background:var(--bg-card);border:1px solid var(--border);border-top:3px solid var(--orange);display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.25,.46,.45,.94),box-shadow .3s,border-color .3s}
+.card:hover{transform:translateY(-10px);box-shadow:0 28px 60px rgba(0,0,0,0.6);border-color:rgba(200,104,40,0.6)}
+
+.card-img{width:100%;aspect-ratio:16/7;overflow:hidden;flex-shrink:0;background:var(--bg-2)}
+.card-img img{width:100%;height:100%;object-fit:cover;display:block}
+.card-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.card-img-placeholder span{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);border:1px dashed var(--border-2);padding:.5rem .9rem;text-align:center;line-height:1.7}
+
+.card-body{padding:1.75rem;display:flex;flex-direction:column;align-items:center;text-align:center}
+
+/* 1 — who: big serif, orange */
+.card-age{font-family:var(--font-serif);font-size:2.4rem;font-weight:900;color:var(--orange);line-height:1;margin-bottom:.15rem}
+/* 2 — category: quiet mono beneath age */
+.card-category{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3);display:block;margin-bottom:.85rem}
+/* 3 — title: white serif, fixed min-height keeps cards aligned */
+.card-name{font-family:var(--font-serif);font-size:1.45rem;font-weight:700;color:var(--text);line-height:1.3;min-height:3.4rem;margin-bottom:.85rem;width:100%;display:flex;align-items:center;justify-content:center}
+/* thin rule separates identity from info */
+.card-rule{border:none;border-top:1px solid var(--border);margin-bottom:.85rem;width:100%}
+/* 4 — date: mono bold, most prominent info line */
+.card-date{font-family:var(--font-mono);font-size:.82rem;font-weight:500;color:var(--text);display:block;margin-bottom:1.5rem}
+/* 5 — details link: quiet, above button */
+.card-link{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.04em;color:var(--text-3);display:inline-block;margin-top:.65rem;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--border-2);transition:color .2s}
+.card-link:not(.disabled){color:var(--text-2)}
+.card-link:not(.disabled):hover{color:var(--gold)}
+.card-link.disabled{cursor:default;pointer-events:none;text-decoration:none}
+/* 6 — button: black with orange text */
+.card-btn{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;padding:.6rem .75rem;text-decoration:none;text-align:center;display:block;width:100%;background:var(--orange);color:#0a0a0a;font-weight:500;transition:all .2s;border:1px solid var(--orange)}
+.card-btn:hover{background:#0a0a0a;color:var(--orange)}
+
+/* ACCORDION */
+.faq-section{padding:4rem 0 7rem;background:var(--bg-2);border-top:1px solid var(--border)}
+.faq-inner{max-width:900px;margin:0 auto;padding:0 4rem}
+.faq-header{margin-bottom:3rem}
+.accordion{border:1px solid var(--border)}
+.acc-item{border-bottom:1px solid var(--border)}
+.acc-item:last-child{border-bottom:none}
+.acc-trigger{width:100%;background:none;border:none;padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:background .2s;text-align:left}
+.acc-trigger:hover{background:var(--bg-3)}
+.acc-title{font-family:var(--font-serif);font-size:1rem;font-weight:700;color:var(--text-2);letter-spacing:.01em}
+.acc-icon{font-family:var(--font-mono);font-size:.9rem;color:var(--orange);transition:transform .3s;flex-shrink:0;margin-left:1rem}
+.acc-item.open .acc-icon{transform:rotate(45deg)}
+.acc-item.open .acc-trigger{background:var(--bg-3)}
+.acc-item.open .acc-title{color:var(--text);font-weight:600}
+.acc-body{display:none;padding:0 2rem 1.75rem;font-size:.9rem;color:var(--text-2);line-height:1.9}
+.acc-item.open .acc-body{display:block}
+.acc-body p{margin-bottom:.85rem}
+.acc-body p:last-child{margin-bottom:0}
+.acc-body ul{margin:.5rem 0 .85rem;display:flex;flex-direction:column;gap:.35rem}
+.acc-body ul li{display:flex;align-items:flex-start;gap:.6rem}
+.acc-body ul li::before{content:'→';color:var(--orange);font-family:var(--font-mono);font-size:.68rem;margin-top:.18rem;flex-shrink:0}
+
+/* MOBILE */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.5rem;background:none;border:none;z-index:200;justify-self:end}
+.hamburger span{display:block;width:24px;height:2px;background:var(--text-2);transition:all .3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(10,10,10,0.98);z-index:99;padding:2rem;overflow-y:auto;flex-direction:column;gap:0}
+.mobile-menu.open{display:flex}
+.mobile-section-label{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-3);padding:.75rem 0;border-bottom:1px solid var(--border);margin-top:1.5rem}
+.mobile-menu a{font-family:var(--font-mono);font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2);text-decoration:none;padding:1rem 0;border-bottom:1px solid var(--border);transition:color .2s;font-weight:500}
+.mobile-menu a:hover{color:var(--gold)}
+.mobile-menu .mobile-cta{background:var(--gold);color:var(--bg);text-align:center;padding:1rem;margin-top:2rem;font-weight:500}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.vis{opacity:1;transform:none}
+.rd1{transition-delay:.1s}.rd2{transition-delay:.2s}
+
+@media(max-width:960px){
+  nav{padding:0 1.5rem}
+  .hero{padding:7rem 2rem 4rem}
+  .cards-inner,.faq-inner{padding:0 2rem}
+  .cards-grid{grid-template-columns:1fr}
+  .hamburger{display:flex!important}
+  .nav-links{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="image/logo_NBB_No_Text_v1.svg" alt="No Black Boxes" style="height:58px"></a>
+  <ul class="nav-links">
+    <li class="nav-item">
+      <button class="nav-top">Learn</button>
+      <div class="nav-dropdown">
+        <a href="nb3-curriculum.html#self-paced">Self-paced</a>
+        <a href="nb3-courses.html">Upcoming courses</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-top">The Kit</button>
+      <div class="nav-dropdown">
+        <a href="nb3-hardware-v2.html">The hardware</a>
+        <a href="nb3-curriculum.html">The curriculum</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-top">About</button>
+      <div class="nav-dropdown">
+        <a href="nb3-story.html">Our story</a>
+        <a href="nb3-teaching-team.html">Our team</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-top">Foundation</button>
+      <div class="nav-dropdown">
+        <a href="nb3-foundation.html">Our mission</a>
+        <a href="nb3-foundation.html#support">Partner with us</a>
+      </div>
+    </li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-section-label">Learn</span>
+  <a href="nb3-curriculum.html">The curriculum</a>
+  <a href="nb3-courses.html">Upcoming courses</a>
+  <a href="nb3-hardware-v2.html">The hardware</a>
+  <span class="mobile-section-label">About</span>
+  <a href="nb3-story.html">Our story</a>
+  <a href="nb3-teaching-team.html">Our team</a>
+  <span class="mobile-section-label">Foundation</span>
+  <a href="nb3-foundation.html">Our mission</a>
+  <a href="nb3-foundation.html#support">Partner with us</a>
+  <a href="nb3-hardware-v2.html" class="mobile-cta">Order the kit — £650</a>
+</div>
+<script>
+function toggleMenu(){
+  const btn=document.querySelector('.hamburger');
+  const menu=document.getElementById('mobileMenu');
+  btn.classList.toggle('open');
+  menu.classList.toggle('open');
+  document.body.style.overflow=menu.classList.contains('open')?'hidden':'';
+}
+document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click',()=>{
+    document.querySelector('.hamburger').classList.remove('open');
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.body.style.overflow='';
+  });
+});
+document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click',()=>{
+    document.querySelector('.hamburger').classList.remove('open');
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.body.style.overflow='';
+  });
+});
+</script>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Upcoming courses</div>
+  <h1>Learn with the <em>team.</em></h1>
+  <p class="hero-sub">Five intensive days. Three tracks — one for every audience.</p>
+</section>
+
+<!-- CARDS -->
+<section class="cards-section">
+  <div class="cards-inner">
+    <div class="cards-grid">
+
+      <!-- 15–18 -->
+      <div class="card reveal">
+        <div class="card-img">
+          <img src="image/courses/15-18.png" alt="Secondary school student building NB3">
+        </div>
+        <div class="card-body">
+          <div class="card-age">15 – 18</div>
+          <span class="card-category">Secondary school</span>
+          <div class="card-name">"Build a Brain"</div>
+          <hr class="card-rule">
+          <span class="card-date">2026 — dates TBC</span>
+          <a href="mailto:info@noblackboxes.org?subject=Interest%20Build%20a%20Brain%202026" class="card-btn">Express your interest →</a>
+          <span class="card-link disabled">Full course details</span>
+        </div>
+      </div>
+
+      <!-- 18+ -->
+      <div class="card reveal rd1">
+        <div class="card-img">
+          <img src="image/courses/18.png" alt="Student building NB3">
+        </div>
+        <div class="card-body">
+          <div class="card-age">18+</div>
+          <span class="card-category">Open to all</span>
+          <div class="card-name">"No Black Boxes Intensive"</div>
+          <hr class="card-rule">
+          <span class="card-date">November 2025 — dates TBC</span>
+          <a href="mailto:info@noblackboxes.org?subject=Interest%20NB3%20Intensive%20November%202025" class="card-btn">Express your interest →</a>
+          <span class="card-link disabled">Full course details</span>
+        </div>
+      </div>
+
+      <!-- Scientists -->
+      <div class="card reveal rd2">
+        <div class="card-img">
+          <img src="image/courses/ENB.png" alt="Researcher with NB3 robot">
+        </div>
+        <div class="card-body">
+          <div class="card-age">Scientists</div>
+          <span class="card-category">Researchers &amp; PhD students</span>
+          <div class="card-name">"Experimental Neuroscience Bootcamp"</div>
+          <hr class="card-rule">
+          <span class="card-date">7 – 11 September 2025</span>
+          <a href="mailto:info@noblackboxes.org?subject=Application%20ENB%202025" class="card-btn">Apply now →</a>
+          <a href="https://www.noblackboxes.org/enb2025" target="_blank" class="card-link">Full course details</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="faq-header reveal">
+      <div class="eyebrow" style="color:var(--orange)">Before you apply</div>
+      <h2>Everything you<br><em style="color:var(--orange)">need to know.</em></h2>
+    </div>
+    <div class="accordion reveal rd1">
+
+      <div class="acc-item open">
+        <button class="acc-trigger" onclick="toggleAcc(this)">
+          <span class="acc-title">How do I apply?</span>
+          <span class="acc-icon">+</span>
+        </button>
+        <div class="acc-body">
+          <p>For September 2025 — applications are now open. Email us to introduce yourself and we will send you the full application details. A new application form is coming soon.</p>
+          <p>For November 2025 and 2026 — express your interest and we will contact you when applications open.</p>
+          <ul>
+            <li>Email <a href="mailto:info@noblackboxes.org" style="color:var(--gold);text-decoration:none">info@noblackboxes.org</a> with your name and which course you are interested in</li>
+            <li>We will send you the application form and all details</li>
+            <li>Selected applicants will be notified by email</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)">
+          <span class="acc-title">Who gets selected?</span>
+          <span class="acc-icon">+</span>
+        </button>
+        <div class="acc-body">
+          <p>Places are limited. We select based on motivation and curiosity — not prior technical experience. No background in electronics, programming, or neuroscience is required.</p>
+          <ul>
+            <li>We look for genuine curiosity and desire to understand</li>
+            <li>We aim for a diverse group by background, career stage, and geography</li>
+            <li>All applicants are treated equally regardless of institution</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)">
+          <span class="acc-title">What does it cost?</span>
+          <span class="acc-icon">+</span>
+        </button>
+        <div class="acc-body">
+          <p>£650 per person. Includes kit shipping worldwide, pre-recorded and live lectures, full attendance, Discord support, and certificate on completion.</p>
+          <p><strong style="color:var(--text)">Group rate:</strong> £650 for one person + kit, £350 per additional participant sharing the same kit. Maximum 3 per kit.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)">
+          <span class="acc-title">Can I get a bursary?</span>
+          <span class="acc-icon">+</span>
+        </button>
+        <div class="acc-body">
+          <p>Through the No Black Boxes Foundation we are committed to making this accessible to everyone. If the fee is a barrier, get in touch.</p>
+          <ul>
+            <li>A limited number of bursary places are available per course</li>
+            <li>Priority given to applicants from under-resourced institutions and lower-income countries</li>
+            <li>Include a brief note with your application explaining your circumstances</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)">
+          <span class="acc-title">What happens after the course?</span>
+          <span class="acc-icon">+</span>
+        </button>
+        <div class="acc-body">
+          <ul>
+            <li>Submit a short video and written summary of your final project</li>
+            <li>Outstanding projects are featured on our Recognitions page and shared with our network of labs and companies</li>
+            <li>You receive a certificate confirming you built a complete intelligent system from first principles</li>
+            <li>Your NB3 kit is yours to keep and continue building with</li>
+            <li>Past students have gone on to internships, lab placements, and research positions</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)">
+          <span class="acc-title">Who are the teaching assistants?</span>
+          <span class="acc-icon">+</span>
+        </button>
+        <div class="acc-body">
+          <p>Every course is supported by TAs — researchers from leading institutions available throughout the five days via Discord. Past TAs have come from the Champalimaud Foundation, Sainsbury Wellcome Centre, Neurogears, and more.</p>
+          <p>Interested in becoming a TA? Email <a href="mailto:info@noblackboxes.org" style="color:var(--gold);text-decoration:none">info@noblackboxes.org</a></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section style="padding:5rem 2rem;background:var(--bg-2);border-top:1px solid var(--border);text-align:center;position:relative;z-index:1">
+  <h2 style="font-family:var(--font-serif);font-size:clamp(2rem,3.5vw,3.2rem);font-weight:700;line-height:1.15;color:var(--text);margin-bottom:.5rem">Be the first to know.</h2>
+  <h2 style="font-family:var(--font-serif);font-size:clamp(2rem,3.5vw,3.2rem);font-weight:700;line-height:1.15;font-style:italic;color:var(--gold);margin-bottom:2.5rem">Join our newsletter.</h2>
+  <div style="display:flex;align-items:center;gap:.75rem;max-width:580px;margin:0 auto">
+    <input type="text" placeholder="Full name" style="flex:1;background:var(--bg);border:1px solid var(--border-2);color:var(--text);font-family:var(--font-sans);font-size:.9rem;padding:.75rem 1.25rem;outline:none;min-width:0">
+    <input type="email" placeholder="Email address" style="flex:1.4;background:var(--bg);border:1px solid var(--border-2);color:var(--text);font-family:var(--font-sans);font-size:.9rem;padding:.75rem 1.25rem;outline:none;min-width:0">
+    <button style="background:var(--gold);color:var(--bg);font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;border:none;padding:.75rem 1.5rem;cursor:pointer;font-weight:500;white-space:nowrap">Subscribe</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--bg);border-top:1px solid var(--border);padding:1.5rem 4rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;position:relative;z-index:1">
+  <a href="index.html" style="flex-shrink:0;text-decoration:none">
+    <img src="image/logo_NBB_No_Text_v1.svg" alt="No Black Boxes" style="height:36px">
+  </a>
+  <ul style="display:flex;gap:2rem;list-style:none">
+    <li><a href="nb3-curriculum.html" style="font-family:var(--font-mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);text-decoration:none">Learn</a></li>
+    <li><a href="nb3-hardware-v2.html" style="font-family:var(--font-mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);text-decoration:none">The Kit</a></li>
+    <li><a href="nb3-story.html" style="font-family:var(--font-mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);text-decoration:none">About</a></li>
+    <li><a href="nb3-foundation.html" style="font-family:var(--font-mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);text-decoration:none">Foundation</a></li>
+  </ul>
+  <div style="display:flex;gap:.5rem;flex-shrink:0">
+    <a href="#" aria-label="LinkedIn" style="width:30px;height:30px;border-radius:50%;background:var(--bg-2);display:flex;align-items:center;justify-content:center;color:var(--text-3);text-decoration:none"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+    <a href="#" aria-label="Instagram" style="width:30px;height:30px;border-radius:50%;background:var(--bg-2);display:flex;align-items:center;justify-content:center;color:var(--text-3);text-decoration:none"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+    <a href="#" aria-label="Facebook" style="width:30px;height:30px;border-radius:50%;background:var(--bg-2);display:flex;align-items:center;justify-content:center;color:var(--text-3);text-decoration:none"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+    <a href="#" aria-label="YouTube" style="width:30px;height:30px;border-radius:50%;background:var(--bg-2);display:flex;align-items:center;justify-content:center;color:var(--text-3);text-decoration:none"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+    <a href="#" aria-label="Bluesky" style="width:30px;height:30px;border-radius:50%;background:var(--bg-2);display:flex;align-items:center;justify-content:center;color:var(--text-3);text-decoration:none"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 01-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.204-.659-.299-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg></a>
+  </div>
+</footer>
+<div style="border-top:1px solid var(--border);padding:.75rem 4rem;display:flex;justify-content:center;font-family:var(--font-mono);font-size:.55rem;letter-spacing:.08em;color:var(--text-3);position:relative;z-index:1">
+  © MMXXVI No Black Boxes · info@noblackboxes.org
+</div>
+
+<script>
+function toggleAcc(trigger){
+  const item=trigger.closest('.acc-item');
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.acc-item').forEach(i=>i.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
