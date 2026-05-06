@@ -75,6 +75,11 @@ h1 em{font-style:italic;color:var(--gold)}
 .project-card:hover::before{opacity:1}
 
 .project-video{background:var(--bg-2);border-right:1px solid var(--border);aspect-ratio:9/16;max-height:520px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+
+@media(max-width:960px){
+  .project-video{aspect-ratio:16/9!important;max-height:250px!important;border-right:none!important;border-bottom:1px solid var(--border);width:100%!important}
+}
+  
 .project-video-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;width:100%;height:100%;padding:2rem}
 .project-video-placeholder-icon{width:56px;height:56px;border-radius:50%;border:1.5px solid var(--gold-line);display:flex;align-items:center;justify-content:center}
 .project-video-placeholder-icon::after{content:'▶';color:var(--gold);font-size:.9rem;margin-left:3px}
