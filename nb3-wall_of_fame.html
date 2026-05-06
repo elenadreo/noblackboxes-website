@@ -150,8 +150,9 @@ h1 em{font-style:italic;color:var(--gold)}
   .stat{border-right:none;border-bottom:1px solid var(--border);padding-bottom:1.5rem}
   .stat:last-child{border-bottom:none}
   .projects-inner{padding:0 1.5rem}
-  .project-card{grid-template-columns:1fr}
-  .project-video{border-right:none;border-bottom:1px solid var(--border);max-height:300px}
+  .project-card{grid-template-columns:1fr!important}
+  .project-video{border-right:none!important;border-bottom:1px solid var(--border);height:300px;max-height:300px;position:relative}
+  .project-video iframe{position:absolute;top:0;left:0;width:100%!important;height:100%!important}
   .project-content{padding:2rem}
   .submit-inner{grid-template-columns:1fr;gap:3rem;padding:0 1.5rem}
   .badges-inner{padding:0 1.5rem}
