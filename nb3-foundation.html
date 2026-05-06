@@ -187,7 +187,8 @@ footer a{color:inherit;text-decoration:none} footer a:hover{color:var(--text-2)}
 .rd1{transition-delay:.1s} .rd2{transition-delay:.2s} .rd3{transition-delay:.3s} .rd4{transition-delay:.4s}
 
 @media(max-width:960px){
-  nav{padding:0 1.5rem} .nav-links{display:none}
+  nav{padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
+  .nav-links{display:none}
   .hero{grid-template-columns:1fr} .hero-left{padding:5rem 2rem 3rem} .hero-right{display:none}
   .nav-pills-inner{padding:0 1rem;flex-wrap:wrap}
   .problem-inner,.solution-inner,.theory-inner,.reach-inner,.support-inner{padding:0 1.5rem}
