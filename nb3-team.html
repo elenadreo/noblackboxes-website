@@ -753,9 +753,14 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
   <div style="display:flex;flex-direction:column;align-items:center;gap:.6rem;position:absolute;left:50%;transform:translateX(-50%)">
     <span style="font-family:var(--font-serif);font-size:1rem;font-weight:700;color:var(--text)">Join our newsletter.</span>
     <div style="display:flex;align-items:center;gap:.5rem;width:100%;max-width:480px">
-      <input type="text" placeholder="Full name" style="flex:1;background:var(--bg-2);border:1px solid var(--border);color:var(--text);font-family:var(--font-sans);font-size:.8rem;padding:.55rem 1rem;outline:none;min-width:0">
-      <input type="email" placeholder="Email address" style="flex:1.4;background:var(--bg-2);border:1px solid var(--border);color:var(--text);font-family:var(--font-sans);font-size:.8rem;padding:.55rem 1rem;outline:none;min-width:0">
-      <button style="background:var(--gold);color:var(--bg);font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;border:none;padding:.55rem 1.25rem;cursor:pointer;font-weight:500;white-space:nowrap">Subscribe</button>
+   
+      <form action="https://eu-submit.jotform.com/submit/241096255305352" method="POST" target="_blank" style="display:flex;align-items:center;gap:.5rem;width:100%;max-width:480px">
+        <input type="hidden" name="formID" value="241096255305352">
+        <input type="text" name="q4_name[first]" placeholder="First name" style="flex:1;background:var(--bg-2);border:1px solid var(--border);color:var(--text);font-family:var(--font-sans);font-size:.8rem;padding:.55rem 1rem;outline:none;min-width:0">
+        <input type="email" name="q5_email" placeholder="Email address" style="flex:1.4;background:var(--bg-2);border:1px solid var(--border);color:var(--text);font-family:var(--font-sans);font-size:.8rem;padding:.55rem 1rem;outline:none;min-width:0">
+        <button type="submit" style="background:var(--gold);color:var(--bg);font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;border:none;padding:.55rem 1.25rem;cursor:pointer;font-weight:500;white-space:nowrap">Subscribe</button>
+      </form>
+      
     </div>
   </div>
   <div style="display:flex;gap:.5rem;flex-shrink:0">
