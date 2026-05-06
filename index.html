@@ -650,14 +650,14 @@ dots.forEach((dot, i) => dot.addEventListener('click', () => {
 let timer = setInterval(() => {
   currentPair = (currentPair + 1) % testimonialPairs.length;
   renderPair(currentPair);
-}, 5000);
+}, 8000);
 
 function resetTimer() {
   clearInterval(timer);
   timer = setInterval(() => {
     currentPair = (currentPair + 1) % testimonialPairs.length;
     renderPair(currentPair);
-  }, 5000);
+  }, 8000);
 }
 </script>
   
