@@ -1071,7 +1071,19 @@ function toggleMuteSensor(btn) {
   });
 }
 </script>
+<script>
+function toggleMuteMotors(btn) {
+  const iframe = document.getElementById('motors-video');
+  const player = new Vimeo.Player(iframe);
+  player.getMuted().then(muted => {
+    player.setMuted(!muted);
+    btn.textContent = muted ? '🔊 Mute' : '🔇 Unmute';
+  });
+}
+</script>
 
+</body>
+</html>
   
 </body>
 </html>
