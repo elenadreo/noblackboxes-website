@@ -864,8 +864,9 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
       </div>
 
       
-      <div class="inside-visual">
-        <iframe src="https://player.vimeo.com/video/1189576018?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none" title="Servo Motors"></iframe>
+      <div class="inside-visual" style="position:relative;min-height:320px;overflow:hidden">
+        <iframe id="motors-video" src="https://player.vimeo.com/video/1189576018?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1&muted=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none" title="Servo Motors"></iframe>
+        <button onclick="toggleMuteMotors(this)" style="position:absolute;bottom:1rem;right:1rem;z-index:10;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.2);color:#fff;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.4rem .8rem;cursor:pointer">🔇 Unmute</button>
       </div>
 
       
@@ -1044,6 +1045,17 @@ const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+<script>
+function toggleMuteMotors(btn) {
+  const iframe = document.getElementById('motors-video');
+  const player = new Vimeo.Player(iframe);
+  player.getMuted().then(muted => {
+    player.setMuted(!muted);
+    btn.textContent = muted ? '🔊 Mute' : '🔇 Unmute';
+  });
+}
+  
 </script>
 
 <script src="https://player.vimeo.com/api/player.js"></script>
