@@ -148,14 +148,9 @@ footer a{color:inherit;text-decoration:none} footer a:hover{color:var(--text-2)}
 .mobile-menu .mobile-cta{background:var(--gold);color:var(--bg);text-align:center;padding:1rem;margin-top:2rem;font-weight:500}
 
 @media(max-width:960px){
-  nav{padding:0 1.5rem} 
   nav{padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
-  .nav-links{display:none}
-
-
-  
-@media(max-width:960px){
-  nav{padding:0 1.5rem} .nav-links{display:none}
+  .nav-links{display:none!important}
+  .hamburger{display:flex!important}
   .hero{padding:6rem 2rem 4rem}
   .origin-inner{grid-template-columns:1fr}
   .origin-card{border-right:none;border-bottom:1px solid var(--border)}
@@ -168,6 +163,7 @@ footer a{color:inherit;text-decoration:none} footer a:hover{color:var(--text-2)}
   .next-inner{grid-template-columns:1fr;padding:0 2rem;gap:3rem}
   footer{flex-direction:column;gap:1rem;padding:1.5rem 2rem;text-align:center}
 }
+
 </style>
 </head>
 <body>
