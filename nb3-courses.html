@@ -117,7 +117,7 @@ h1 em{font-style:italic;color:var(--orange)}
 .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(10,10,10,0.98);z-index:99;padding:2rem;overflow-y:auto;flex-direction:column;gap:0}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:#0a0a0a;z-index:99;padding:2rem;overflow-y:auto;flex-direction:column;gap:0}
 .mobile-menu.open{display:flex}
 .mobile-section-label{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-3);padding:.75rem 0;border-bottom:1px solid var(--border);margin-top:1.5rem}
 .mobile-menu a{font-family:var(--font-mono);font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2);text-decoration:none;padding:1rem 0;border-bottom:1px solid var(--border);transition:color .2s;font-weight:500}
@@ -135,6 +135,9 @@ h1 em{font-style:italic;color:var(--orange)}
   .cards-grid{grid-template-columns:1fr}
   .hamburger{display:flex!important}
   .nav-links{display:none!important}
+  .faq-inner{padding:0 2rem}
+  form>div{flex-direction:column!important}
+  form>div input, form>div button{width:100%!important;min-width:0!important}
 }
 </style>
 </head>
@@ -188,12 +191,22 @@ h1 em{font-style:italic;color:var(--orange)}
     <span></span><span></span><span></span>
   </button>
 </nav>
+  
 <div class="mobile-menu" id="mobileMenu">
   <span class="mobile-section-label">Learn</span>
-  <a href="nb3-curriculum.html">The curriculum</a>
-  <a href="nb3-courses.html">Upcoming courses</a>
+  <a href="https://www.noblackboxes.org/store/p/nb3-kit" style="color:#6ba8c4">Order the Kit</a>
+  <a href="nb3-courses.html" style="color:#c86828">Apply for a course</a>
+  <span class="mobile-section-label">The Kit</span>
   <a href="nb3-hardware-v2.html">The hardware</a>
+  <a href="nb3-curriculum.html">The curriculum</a>
+  <span class="mobile-section-label">Get Noticed</span>
+  <a href="nb3-wall_of_fame.html">Wall of Fame</a>
+  <a href="nb3-certification.html">Certification & Badges</a>
+  <a href="nb3-pathways.html">Partners & Pathways</a>
   <span class="mobile-section-label">About</span>
+
+  
+  
   <a href="nb3-story.html">Our story</a>
   <a href="nb3-teaching-team.html">Our team</a>
   <span class="mobile-section-label">Foundation</span>
