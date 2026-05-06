@@ -895,9 +895,9 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
         <p class="inside-body">Two I²S MEMS microphones — the same digital microphone technology inside your phone — give your robot stereo hearing. You process the audio in real time and build a sound localiser that tells the robot which direction a sound came from. Hearing, understood from first principles.</p>
       </div>
       
-          <div class="inside-visual">
-        <iframe src="https://player.vimeo.com/video/1189576018?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none" title="Servo Motors"></iframe>
-      
+      <div class="inside-visual" style="position:relative;min-height:320px;overflow:hidden">
+        <iframe id="mic-video" src="https://player.vimeo.com/video/1189581587?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1&muted=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:180%;height:180%;border:none" title="MEMS Microphones"></iframe>
+        <button onclick="toggleMute(this)" style="position:absolute;bottom:1rem;right:1rem;z-index:10;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.2);color:#fff;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.4rem .8rem;cursor:pointer">🔇 Unmute</button>
       </div>
             
     </div>
