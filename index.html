@@ -191,18 +191,46 @@ footer a{text-decoration:none}
 .rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}.rd4{transition-delay:.4s}
 
 @media(max-width:960px){
-  nav{padding:0 1.5rem;display:flex;justify-content:space-between}  .hero{grid-template-columns:1fr}.hero-left{padding:5rem 2rem 3rem}.hero-right{display:none}
-  .trust-strip{padding:1.5rem 2rem;gap:1.5rem}
-  .what-inner{grid-template-columns:1fr;padding:0 2rem;gap:3rem}
-  .how-inner,.audience-inner,.curriculum-inner,.testimonials-inner{padding:0 1.5rem}
-  .how-steps,.audience-cards{grid-template-columns:1fr}
-  .curriculum-layout{grid-template-columns:1fr}
-  .testimonials-grid{grid-template-columns:1fr}
+  /* NAV */
+  nav{padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
+  .hamburger{display:flex!important}
+  .nav-links{display:none!important}
+  .nav-cta{display:none!important}
+
+  /* HERO */
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:5rem 1.5rem 3rem}
+  .hero-right{display:none}
+
+  /* FORK */
+  .fork-inner{padding:0 1.5rem}
+  .fork-cards{grid-template-columns:1fr}
+  .fork-or{display:none}
+  .fork-card{padding:2rem 1.5rem}
+
+  /* HOW IT WORKS */
+  .how-inner{padding:0 1.5rem}
+  .how-steps{grid-template-columns:1fr}
+  .how-step[style*="grid-column"]{grid-column:1!important;grid-template-columns:1fr!important;gap:2rem!important}
+
+  /* MISSION */
   .mission-inner{grid-template-columns:1fr}
-  .mission-left{display:none}
-  .mission-right{padding:3rem 2rem}
-  footer{grid-template-columns:1fr;padding:2rem 1.5rem}
-  .footer-bottom{padding:1.25rem 1.5rem;flex-direction:column;gap:.75rem;text-align:center}
+  .mission-left{display:block;min-height:240px}
+  .mission-right{padding:2.5rem 1.5rem}
+
+  /* TESTIMONIALS */
+  .testimonials-inner{padding:0 1.5rem}
+  .testimonials-track{grid-template-columns:1fr}
+
+  /* NEWSLETTER */
+  .newsletter-form{flex-direction:column}
+  .newsletter-input{width:100%}
+  .newsletter-btn{width:100%}
+
+  /* FOOTER */
+  footer{flex-direction:column;padding:2rem 1.5rem;text-align:center}
+  .footer-nav{flex-wrap:wrap;justify-content:center;gap:1rem}
+  .footer-bottom{padding:1rem 1.5rem;text-align:center}
 }
 
 /* MOBILE NAV */
