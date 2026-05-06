@@ -134,6 +134,24 @@ footer a{color:inherit;text-decoration:none} footer a:hover{color:var(--text-2)}
 .reveal.vis{opacity:1;transform:none}
 .rd1{transition-delay:.1s} .rd2{transition-delay:.2s} .rd3{transition-delay:.3s} .rd4{transition-delay:.4s}
 
+/* MOBILE NAV */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.5rem;background:none;border:none;z-index:200;justify-self:end}
+.hamburger span{display:block;width:24px;height:2px;background:var(--text-2);transition:all .3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:#0a0a0a;z-index:99;padding:2rem;overflow-y:auto;flex-direction:column;gap:0}
+.mobile-menu.open{display:flex}
+.mobile-section-label{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-3);padding:.75rem 0;border-bottom:1px solid var(--border);margin-top:1.5rem}
+.mobile-menu a{font-family:var(--font-mono);font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2);text-decoration:none;padding:1rem 0;border-bottom:1px solid var(--border);transition:color .2s;font-weight:500}
+.mobile-menu a:hover{color:var(--gold)}
+.mobile-menu .mobile-cta{background:var(--gold);color:var(--bg);text-align:center;padding:1rem;margin-top:2rem;font-weight:500}
+
+@media(max-width:960px){
+  nav{padding:0 1.5rem} .nav-links{display:none}
+
+
+  
 @media(max-width:960px){
   nav{padding:0 1.5rem} .nav-links{display:none}
   .hero{padding:6rem 2rem 4rem}
@@ -194,7 +212,12 @@ footer a{color:inherit;text-decoration:none} footer a:hover{color:var(--text-2)}
         <a href="nb3-foundation.html#support">Partner with us</a>
       </div>
     </li>
-    
+
+</ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>    
 
 <div class="mobile-menu" id="mobileMenu">
   <span class="mobile-section-label">Learn</span>
