@@ -537,11 +537,16 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
 <section class="newsletter-section">
   <div class="newsletter-inner">
     <h2>Be the first to know.<br><em>Join our newsletter.</em></h2>
-    <div class="newsletter-form">
-      <input class="newsletter-input" type="text" placeholder="Full name">
-      <input class="newsletter-input" type="email" placeholder="Email address">
-      <button class="newsletter-btn">Subscribe</button>
-    </div>
+    
+    <form action="https://eu-submit.jotform.com/submit/241096255305352" method="POST" target="_blank">
+      <input type="hidden" name="formID" value="241096255305352">
+      <div class="newsletter-form">
+        <input class="newsletter-input" type="text" name="q4_name[first]" placeholder="First name">
+        <input class="newsletter-input" type="email" name="q5_email" placeholder="Email address">
+        <button type="submit" class="newsletter-btn">Subscribe</button>
+      </div>
+    </form>
+    
   </div>
 </section>
 
