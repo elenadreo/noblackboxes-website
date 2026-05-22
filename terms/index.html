@@ -1,1 +1,295 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms & Conditions — No Black Boxes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#0a0a0a; --bg-2:#111111; --bg-card:#0f0f0f;
+  --border:rgba(247,243,237,0.10); --border-2:rgba(247,243,237,0.18);
+  --gold:#c8a04a; --gold-dim:rgba(200,160,74,0.13); --gold-line:rgba(200,160,74,0.40);
+  --text:#f7f3ed; --text-2:rgba(247,243,237,0.78); --text-3:rgba(247,243,237,0.50);
+  --font-serif:'Playfair Display',Georgia,serif;
+  --font-mono:'DM Mono',monospace;
+  --font-sans:'Inter',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:16px;line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(247,243,237,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(247,243,237,0.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 4rem;height:64px;background:rgba(10,10,10,0.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;text-decoration:none}
+.nav-links{display:flex;list-style:none;height:64px;justify-content:center}
+.nav-item{position:relative;display:flex;align-items:center}
+.nav-top{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text);padding:0 1.1rem;height:64px;display:flex;align-items:center;gap:.4rem;cursor:pointer;background:none;border:none;white-space:nowrap}
+.nav-top:focus{outline:none}
+.nav-top::after{content:'▾';font-size:.5rem;opacity:.4;transition:transform .2s}
+.nav-item:hover .nav-top::after{transform:rotate(180deg)}
+.nav-dropdown{position:absolute;top:64px;left:0;background:rgba(10,10,10,0.99);border:1px solid var(--border);border-top:2px solid var(--gold);min-width:210px;opacity:0;visibility:hidden;transform:translateY(-6px);transition:all .2s;z-index:200}
+.nav-item:hover .nav-dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-dropdown a{display:block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-2);text-decoration:none;padding:.85rem 1.4rem;border-bottom:1px solid var(--border);transition:all .2s}
+.nav-dropdown a:last-child{border-bottom:none}
+.nav-dropdown a:hover{color:var(--gold);padding-left:1.65rem;background:var(--gold-dim)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.5rem;background:none;border:none;z-index:200;justify-self:end}
+.hamburger span{display:block;width:24px;height:2px;background:var(--text-2);transition:all .3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:#0a0a0a;z-index:99;padding:2rem;overflow-y:auto;flex-direction:column}
+.mobile-menu.open{display:flex}
+.mobile-section-label{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-3);padding:.75rem 0;border-bottom:1px solid var(--border);margin-top:1.5rem}
+.mobile-menu a{font-family:var(--font-mono);font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2);text-decoration:none;padding:1rem 0;border-bottom:1px solid var(--border);font-weight:500}
+.mobile-menu .mobile-cta{background:var(--gold);color:var(--bg);text-align:center;padding:1rem;margin-top:2rem}
+.hero{padding:8rem 4rem 4rem;border-bottom:1px solid var(--border);position:relative;z-index:1}
+.hero-eyebrow{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem}
+.hero-eyebrow::before{content:'';width:2rem;height:1px;background:var(--gold)}
+h1{font-family:var(--font-serif);font-size:clamp(2.5rem,4vw,4rem);font-weight:900;line-height:1.02;margin-bottom:1rem}
+.hero-meta{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;color:var(--text-3);margin-top:1rem}
+.content{max-width:780px;margin:0 auto;padding:4rem 4rem 6rem;position:relative;z-index:1}
+.toc{background:var(--bg-2);border:1px solid var(--border);padding:2rem;margin-bottom:3rem}
+.toc-title{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block}
+.toc ol{list-style:none;display:flex;flex-direction:column;gap:.35rem;counter-reset:toc}
+.toc li{counter-increment:toc;font-size:.85rem;color:var(--text-2)}
+.toc li::before{content:counter(toc) ". ";font-family:var(--font-mono);font-size:.7rem;color:var(--gold);margin-right:.25rem}
+.toc a{color:var(--text-2);text-decoration:none;border-bottom:1px solid var(--border);transition:color .2s}
+.toc a:hover{color:var(--gold)}
+.policy-section{margin-bottom:3.5rem}
+.policy-section h2{font-family:var(--font-serif);font-size:1.4rem;font-weight:700;color:var(--text);margin-bottom:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+.policy-section h3{font-family:var(--font-serif);font-size:1rem;font-weight:700;color:var(--text);margin:1.5rem 0 .5rem}
+.policy-section p{font-size:.92rem;color:var(--text-2);line-height:1.85;margin-bottom:1rem}
+.policy-section ul{margin:.5rem 0 1rem 1.25rem;display:flex;flex-direction:column;gap:.35rem}
+.policy-section ul li{font-size:.92rem;color:var(--text-2);line-height:1.7}
+.policy-section a{color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold-line)}
+.highlight-box{background:var(--bg-2);border-left:3px solid var(--gold);padding:1.25rem 1.5rem;margin:1.5rem 0}
+.highlight-box p{margin-bottom:0;font-size:.88rem}
+footer{background:var(--bg);border-top:1px solid var(--border);padding:1.5rem 4rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;position:relative;z-index:1}
+.footer-nav{display:flex;gap:2rem;list-style:none}
+.footer-nav a{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);text-decoration:none}
+.footer-social{display:flex;gap:.5rem}
+.footer-social a{width:32px;height:32px;border-radius:50%;background:var(--bg-2);display:flex;align-items:center;justify-content:center;color:var(--text-3);text-decoration:none}
+.footer-social svg{width:13px;height:13px;fill:currentColor}
+@media(max-width:960px){
+  nav{padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
+  .hamburger{display:flex!important}
+  .nav-links{display:none!important}
+  .hero{padding:7rem 1.5rem 3rem}
+  .content{padding:3rem 1.5rem 5rem}
+  footer{flex-direction:column;padding:2rem 1.5rem;text-align:center}
+  .footer-nav{flex-wrap:wrap;justify-content:center}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/noblackboxes-website/" class="nav-logo"><img src="../image/logo_NBB_No_Text_v1.svg" alt="No Black Boxes" style="height:56px"></a>
+  <ul class="nav-links">
+    <li class="nav-item"><button class="nav-top">Learn</button><div class="nav-dropdown"><a href="/noblackboxes-website/order-kit/" style="color:#6ba8c4">Order the Kit</a><a href="/noblackboxes-website/online-courses/" style="color:#c86828">Upcoming courses</a></div></li>
+    <li class="nav-item"><button class="nav-top">The Kit</button><div class="nav-dropdown"><a href="/noblackboxes-website/hardware/">The hardware</a><a href="/noblackboxes-website/curriculum/">The curriculum</a></div></li>
+    <li class="nav-item"><button class="nav-top">About</button><div class="nav-dropdown"><a href="/noblackboxes-website/our-story/">Our story</a><a href="/noblackboxes-website/our-team/">Our team</a></div></li>
+    <li class="nav-item"><button class="nav-top">Foundation</button><div class="nav-dropdown"><a href="/noblackboxes-website/nbb-foundation/">Our mission</a><a href="/noblackboxes-website/governance/">Governance</a><a href="/noblackboxes-website/partners/">Partner with us</a></div></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-section-label">Learn</span>
+  <a href="/noblackboxes-website/order-kit/" style="color:#6ba8c4">Order the Kit</a>
+  <a href="/noblackboxes-website/online-courses/" style="color:#c86828">Apply for a course</a>
+  <span class="mobile-section-label">The Kit</span>
+  <a href="/noblackboxes-website/hardware/">The hardware</a>
+  <a href="/noblackboxes-website/curriculum/">The curriculum</a>
+  <span class="mobile-section-label">About</span>
+  <a href="/noblackboxes-website/our-story/">Our story</a>
+  <a href="/noblackboxes-website/our-team/">Our team</a>
+  <span class="mobile-section-label">Foundation</span>
+  <a href="/noblackboxes-website/nbb-foundation/">Our mission</a>
+  <a href="/noblackboxes-website/governance/">Governance</a>
+  <a href="/noblackboxes-website/partners/">Partner with us</a>
+  <a href="/noblackboxes-website/order-kit/" class="mobile-cta">Order the kit</a>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Legal</div>
+  <h1>Terms &amp; Conditions</h1>
+  <p style="font-size:1rem;color:var(--text-2);max-width:600px;margin-top:.5rem">These terms govern your use of the No Black Boxes website and the purchase of our products and courses. Please read them carefully before placing an order or registering for a course.</p>
+  <div class="hero-meta">Last updated: May 2026 · No Black Boxes · info@noblackboxes.org</div>
+</div>
+
+<div class="content">
+
+  <div class="toc">
+    <span class="toc-title">Contents</span>
+    <ol>
+      <li><a href="#about-us">About us</a></li>
+      <li><a href="#kit-purchases">Kit purchases</a></li>
+      <li><a href="#returns">Returns and refunds</a></li>
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#age">Age restrictions and parental consent</a></li>
+      <li><a href="#ip">Intellectual property</a></li>
+      <li><a href="#acceptable-use">Acceptable use</a></li>
+      <li><a href="#liability">Limitation of liability</a></li>
+      <li><a href="#certification">Certification</a></li>
+      <li><a href="#safeguarding">Safeguarding</a></li>
+      <li><a href="#governing-law">Governing law</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </div>
+
+  <div class="policy-section" id="about-us">
+    <h2>1. About us</h2>
+    <p>These Terms &amp; Conditions apply to all products and services offered by No Black Boxes, operating under Voight-Kampff Limited, a company registered in England and Wales. Our registered address is 31 Oval Road, Second Floor North End Office, London, NW1 7EA, United Kingdom.</p>
+    <p>By purchasing a product or registering for a course, you agree to these terms.</p>
+  </div>
+
+  <div class="policy-section" id="kit-purchases">
+    <h2>2. Kit purchases</h2>
+    <p>The NB3 Kit is a physical hardware package sold at £670 (UK and Europe, shipping included) or £690 (rest of world, including £20 shipping). Prices are stated in British Pounds Sterling and include VAT where applicable.</p>
+    <ul>
+      <li>Payment is processed securely via Stripe. We do not store your payment card details.</li>
+      <li>Orders are fulfilled once payment is confirmed. We aim to dispatch within 5–10 working days.</li>
+      <li>Shipping times vary by destination. We are not responsible for delays caused by customs or third-party carriers.</li>
+      <li>You will receive an email confirmation when your order is placed and when it is dispatched.</li>
+    </ul>
+    <p>The NB3 Kit is intended for educational use. It contains electronic components including small parts — it is not suitable for children under 15.</p>
+  </div>
+
+  <div class="policy-section" id="returns">
+    <h2>3. Returns and refunds</h2>
+    <h3>Change of mind returns</h3>
+    <p>Under the UK Consumer Contracts Regulations 2013, you have the right to cancel your order within 14 days of receiving your kit, provided the box is unopened and the kit is in its original condition.</p>
+    <ul>
+      <li>To request a return, email <a href="mailto:info@noblackboxes.org">info@noblackboxes.org</a> within 14 days of delivery</li>
+      <li>You are responsible for the cost of return shipping</li>
+      <li>Once we receive and inspect the returned item, we will issue a full refund of the kit price within 14 days</li>
+      <li>We cannot accept returns of opened kits unless they are faulty</li>
+    </ul>
+
+    <h3>Faulty or damaged items</h3>
+    <p>If your kit arrives damaged or contains a manufacturing defect, contact us within 30 days of delivery. We will arrange a replacement or full refund at no cost to you, in accordance with the Consumer Rights Act 2015.</p>
+
+    <h3>The curriculum</h3>
+    <div class="highlight-box">
+      <p>The No Black Boxes curriculum is open source and freely available to everyone at no cost. There is no separate charge for the curriculum — the £670 purchase price covers the physical hardware kit only. There is therefore no refund applicable to the curriculum.</p>
+    </div>
+  </div>
+
+  <div class="policy-section" id="courses">
+    <h2>4. Courses</h2>
+    <p>No Black Boxes offers three course tracks: Build a Brain (ages 15–18), the No Black Boxes Intensive (ages 18+), and the Experimental Neuroscience Bootcamp (researchers and PhD students).</p>
+
+    <h3>Applications and selection</h3>
+    <p>Places on guided courses are limited and subject to an application process. Submission of an application does not guarantee a place. We select based on motivation and suitability — not prior technical experience.</p>
+
+    <h3>Course fees</h3>
+    <p>Where a course fee applies, it will be stated clearly at the time of application. Payment is required to secure your place.</p>
+
+    <h3>Cancellations by participants</h3>
+    <ul>
+      <li>Cancellations made more than 30 days before the course start date: full refund</li>
+      <li>Cancellations made 14–30 days before the course start date: 50% refund</li>
+      <li>Cancellations made fewer than 14 days before the course start date: no refund</li>
+    </ul>
+
+    <h3>Cancellations by No Black Boxes</h3>
+    <p>In the unlikely event that we must cancel a course, we will notify all registered participants as soon as possible and offer a full refund or a place on a future course.</p>
+
+    <h3>Online courses</h3>
+    <p>Online courses are delivered via live video sessions and recorded lectures. Recordings may be made available to participants for a limited period after the course. By participating, you consent to being present in a recorded session.</p>
+  </div>
+
+  <div class="policy-section" id="age">
+    <h2>5. Age restrictions and parental consent</h2>
+    <p>The NB3 Kit contains electronic components and is not suitable for children under 15.</p>
+    <p>The Build a Brain course is open to students aged 15–18. Participants under 18 must have the explicit consent of a parent or guardian to register. By completing registration on behalf of a minor, the parent or guardian confirms they consent to the young person's participation and to the processing of their personal data as described in our <a href="/noblackboxes-website/privacy-policy/">Privacy Policy</a>.</p>
+    <p>We take our duty of care to young participants seriously. Any safeguarding concerns should be reported to us immediately at <a href="mailto:info@noblackboxes.org">info@noblackboxes.org</a>.</p>
+  </div>
+
+  <div class="policy-section" id="ip">
+    <h2>6. Intellectual property</h2>
+    <p>The No Black Boxes curriculum is open source and published under an open licence. You are free to use, adapt, and share it for non-commercial educational purposes, with attribution.</p>
+    <p>The No Black Boxes name, logo, and website design are the intellectual property of Voight-Kampff Limited. You may not use them without our written permission.</p>
+    <p>By submitting a final project for certification, you retain full ownership of your work. You grant No Black Boxes a non-exclusive licence to feature your project on our website and share it with our network of partners, for the purposes of recognition and promotion.</p>
+  </div>
+
+  <div class="policy-section" id="acceptable-use">
+    <h2>7. Acceptable use</h2>
+    <p>When using our website or participating in our courses, you agree not to:</p>
+    <ul>
+      <li>Use our platform for any unlawful purpose</li>
+      <li>Harass, intimidate, or discriminate against other participants or staff</li>
+      <li>Share course materials in a way that violates their licence terms</li>
+      <li>Misrepresent your identity or qualifications in an application</li>
+      <li>Attempt to disrupt or interfere with our website or systems</li>
+    </ul>
+    <p>We reserve the right to remove any participant from a course without refund if they breach these terms.</p>
+  </div>
+
+  <div class="policy-section" id="liability">
+    <h2>8. Limitation of liability</h2>
+    <p>To the fullest extent permitted by law, No Black Boxes and Voight-Kampff Limited shall not be liable for any indirect, incidental, or consequential loss arising from your use of our products or services.</p>
+    <p>Our total liability to you for any claim arising from a purchase shall not exceed the amount you paid for the relevant product or service.</p>
+    <p>Nothing in these terms limits our liability for death or personal injury caused by our negligence, fraud, or any other liability that cannot be excluded by law.</p>
+    <p>The NB3 Kit contains electronic components. You are responsible for using them safely and in accordance with the curriculum instructions.</p>
+  </div>
+
+  <div class="policy-section" id="certification">
+    <h2>9. Certification</h2>
+    <p>A No Black Boxes certificate is awarded to participants who complete the curriculum and submit an acceptable final project. The certificate confirms completion — it is not an accredited qualification and does not carry academic credit.</p>
+    <p>We reserve the right to decline to issue a certificate where a submission does not meet the minimum standard, or where these terms have been breached.</p>
+    <p>Skill badges are awarded at our sole discretion to outstanding projects, following review by our independent committee. Badge decisions are final.</p>
+  </div>
+
+  <div class="policy-section" id="safeguarding">
+    <h2>10. Safeguarding</h2>
+    <p>No Black Boxes is committed to the safety and wellbeing of all participants, particularly young people. We expect all participants, teaching assistants, and staff to treat each other with respect.</p>
+    <p>Any concerns about the safety or welfare of a young person during a No Black Boxes course should be reported immediately to <a href="mailto:info@noblackboxes.org">info@noblackboxes.org</a>. We will respond promptly and, where necessary, involve relevant authorities.</p>
+  </div>
+
+  <div class="policy-section" id="governing-law">
+    <h2>11. Governing law</h2>
+    <p>These terms are governed by the laws of England and Wales. Any disputes arising from these terms or from your use of our products and services shall be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+  </div>
+
+  <div class="policy-section" id="contact">
+    <h2>12. Contact</h2>
+    <p>For any questions about these Terms &amp; Conditions:</p>
+    <ul>
+      <li>Email: <a href="mailto:info@noblackboxes.org">info@noblackboxes.org</a></li>
+      <li>Post: No Black Boxes, 31 Oval Road, Second Floor North End Office, London, NW1 7EA, United Kingdom</li>
+    </ul>
+    <p style="margin-top:1.5rem;font-size:.82rem;color:var(--text-3)">See also our <a href="/noblackboxes-website/privacy-policy/">Privacy Policy</a> and <a href="/noblackboxes-website/cookie-policy/">Cookie Policy</a>. These terms were last updated in May 2026.</p>
+  </div>
+
+</div>
+
+<footer>
+  <a href="/noblackboxes-website/" style="flex-shrink:0;text-decoration:none"><img src="../image/logo_NBB_No_Text_v1.svg" alt="No Black Boxes" style="height:38px"></a>
+  <ul class="footer-nav">
+    <li><a href="/noblackboxes-website/#learn">Learn</a></li>
+    <li><a href="/noblackboxes-website/hardware/">The Kit</a></li>
+    <li><a href="/noblackboxes-website/our-story/">About</a></li>
+    <li><a href="/noblackboxes-website/nbb-foundation/">Foundation</a></li>
+  </ul>
+  <div class="footer-social">
+    <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+    <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+  </div>
+</footer>
+<div style="border-top:1px solid var(--border);padding:.75rem 4rem;display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:.55rem;letter-spacing:.08em;color:var(--text-3);position:relative;z-index:1">
+  <span>© MMXXVI No Black Boxes · info@noblackboxes.org</span>
+  <div style="display:flex;gap:2rem">
+    <a href="/noblackboxes-website/privacy-policy/" style="color:var(--text-3);text-decoration:none" onmouseover="this.style.color='var(--text-2)'" onmouseout="this.style.color='var(--text-3)'">Privacy Policy</a>
+    <a href="/noblackboxes-website/cookie-policy/" style="color:var(--text-3);text-decoration:none" onmouseover="this.style.color='var(--text-2)'" onmouseout="this.style.color='var(--text-3)'">Cookie Policy</a>
+    <a href="/noblackboxes-website/terms/" style="color:var(--gold);text-decoration:none">Terms &amp; Conditions</a>
+  </div>
+</div>
+<script>
+function toggleMenu(){const btn=document.querySelector('.hamburger');const menu=document.getElementById('mobileMenu');btn.classList.toggle('open');menu.classList.toggle('open');document.body.style.overflow=menu.classList.contains('open')?'hidden':'';}
+document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{a.addEventListener('click',()=>{document.querySelector('.hamburger').classList.remove('open');document.getElementById('mobileMenu').classList.remove('open');document.body.style.overflow='';});});
+</script>
+</body>
+</html>
