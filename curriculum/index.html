@@ -564,8 +564,13 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
   </div>
 </footer>
 
-<div style="border-top:1px solid var(--border);padding:.75rem 4rem;display:flex;justify-content:center;font-family:var(--font-mono);font-size:.55rem;letter-spacing:.08em;color:var(--text-3)">
-  © MMXXVI No Black Boxes · info@noblackboxes.org
+<div style="border-top:1px solid var(--border);padding:.75rem 4rem;display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:.55rem;letter-spacing:.08em;color:var(--text-3)">
+  <span>© MMXXVI No Black Boxes · info@noblackboxes.org</span>
+  <div style="display:flex;gap:2rem">
+    <a href="/noblackboxes-website/privacy-policy/" style="color:var(--text-3);text-decoration:none" onmouseover="this.style.color='var(--text-2)'" onmouseout="this.style.color='var(--text-3)'">Privacy Policy</a>
+    <a href="/noblackboxes-website/cookie-policy/" style="color:var(--text-3);text-decoration:none" onmouseover="this.style.color='var(--text-2)'" onmouseout="this.style.color='var(--text-3)'">Cookie Policy</a>
+    <a href="/noblackboxes-website/terms/" style="color:var(--text-3);text-decoration:none" onmouseover="this.style.color='var(--text-2)'" onmouseout="this.style.color='var(--text-3)'">Terms &amp; Conditions</a>
+  </div>
 </div>
 
 <script>
