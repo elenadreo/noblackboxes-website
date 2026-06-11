@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Experimental Science Bootcamp — No Black Boxes</title>
 
-
 <!-- SEO: Primary meta tags -->
 <meta name="description" content="A five-day live online bootcamp for scientists and researchers. Build sensors, computers, networks, and AI systems from scratch. Developed at Champalimaud, Cajal, and the Sainsbury Wellcome Centre.">
 <meta name="author" content="No Black Boxes">
@@ -26,7 +25,7 @@
 <meta name="twitter:url" content="https://www.noblackboxes.org/experimental-science-bootcamp/">
 <meta name="twitter:title" content="Experimental Science Bootcamp — No Black Boxes">
 <meta name="twitter:description" content="A five-day live online bootcamp for scientists and researchers. Build sensors, computers, networks, and AI systems from scratch. Developed at Champalimaud, Cajal, and the Sainsbury Wellcome Centre.">
-<meta name="twitter:image" content="https://www.noblackboxes.org/experimental-science-bootcamp/ENB_Picture.jpg">
+<meta name="twitter:image" content="https://www.noblackboxes.org/images/esb/ENB_Picture.jpg">
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LHWV7992HH"></script>
@@ -34,10 +33,9 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-LHWV7992HH');
 </script>
-  
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -98,19 +96,21 @@ h1 em{font-style:normal;color:var(--gold)}
 .hero-meta-item::before{content:'→';color:var(--gold);font-size:.65rem}
 .hero-cta{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
 .hero-right{border-left:1px solid var(--border);background:var(--bg-2);position:relative;overflow:hidden}
-.hero-outcomes-label{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem;font-weight:500}
-.hero-outcomes-label::before{content:'';width:2rem;height:1px;background:var(--gold);flex-shrink:0}
-.hero-outcomes-list{display:flex;flex-direction:column;gap:0}
-.hero-outcome-row{display:grid;grid-template-columns:2.5rem 1fr;gap:.75rem;padding:1rem 0;border-bottom:1px solid var(--border);align-items:center}
-.hero-outcome-row:first-child{border-top:1px solid var(--border)}
-.hero-outcome-num{font-family:var(--font-mono);font-size:.62rem;color:var(--gold);opacity:.6}
-.hero-outcome-text{font-size:.88rem;color:var(--text-2);line-height:1.45}
 
-/* ORIGIN STRIP */
-.origin-strip{background:var(--bg-2);border-bottom:1px solid var(--border);padding:1.25rem 4rem;display:flex;align-items:center;gap:1.5rem;position:relative;z-index:1}
-.origin-strip-mark{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);white-space:nowrap;flex-shrink:0}
-.origin-strip-text{font-size:.85rem;color:var(--text-3);line-height:1.6}
-.origin-strip-text strong{color:var(--text-2);font-weight:500}
+/* TESTIMONIAL CAROUSEL */
+.testimonial-carousel{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2.5rem 4rem;position:relative;overflow:hidden}
+.testimonial-track{display:flex;transition:opacity .5s ease}
+.testimonial-track.fade{opacity:0}
+.testimonial-slide{width:100%;flex-shrink:0;display:flex;align-items:flex-start;gap:2rem}
+.testimonial-quote-mark{font-family:var(--font-serif);font-size:4rem;color:var(--gold);opacity:.2;line-height:.6;flex-shrink:0;margin-top:.25rem}
+.testimonial-content{}
+.testimonial-text{font-family:var(--font-serif);font-style:italic;font-size:1.05rem;color:var(--text-2);line-height:1.75;margin-bottom:.75rem}
+.testimonial-meta{display:flex;align-items:center;gap:1rem}
+.testimonial-stars{color:var(--gold);font-size:.85rem;letter-spacing:.1em}
+.testimonial-source{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.testimonial-nav{position:absolute;bottom:1.5rem;right:4rem;display:flex;gap:.5rem}
+.testimonial-dot{width:6px;height:6px;border-radius:50%;background:var(--border-2);border:none;cursor:pointer;padding:0;transition:background .3s}
+.testimonial-dot.active{background:var(--gold)}
 
 /* STICKY SECTION NAV */
 .section-nav{position:sticky;top:64px;z-index:90;background:var(--bg-2);border-bottom:3px solid var(--gold);display:flex;overflow-x:auto;scrollbar-width:none;align-items:stretch}
@@ -119,16 +119,27 @@ h1 em{font-style:normal;color:var(--gold)}
 .section-nav a:first-child{padding-left:4rem}
 .section-nav a:hover{color:var(--gold);border-bottom-color:var(--gold);background:var(--gold-dim)}
 
-/* SCROLL OFFSET for sticky nav */
+/* SCROLL OFFSET */
 section[id], div[id]{scroll-margin-top:120px}
 
-/* FOR WHO */
-.forwho-section{padding:6rem 0 6rem;border-bottom:1px solid var(--border)}
-.forwho-inner{max-width:1200px;margin:0 auto;padding:0 4rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
-.questions-block{margin-top:.5rem;display:flex;flex-direction:column;gap:0}
-.question-row{padding:1.1rem 0;border-bottom:1px solid var(--border);font-family:var(--font-serif);font-style:italic;font-size:1rem;color:var(--text-2);line-height:1.5;display:flex;align-items:center;gap:1rem}
-.question-row:first-child{border-top:1px solid var(--border)}
-.question-row::before{content:'"';font-family:var(--font-serif);font-size:1.8rem;color:var(--gold);opacity:.3;line-height:1;flex-shrink:0}
+/* WHO SECTION — merged */
+.who-section{padding:5rem 0 0;border-bottom:1px solid var(--border)}
+.who-inner{max-width:1200px;margin:0 auto;padding:0 4rem}
+.who-top{padding-bottom:3rem}
+.who-bottom{display:flex;flex-direction:column;gap:0}
+.who-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.who-card{background:var(--bg-card);padding:2.5rem 2rem;position:relative}
+.who-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);opacity:.5}
+.who-card-tag{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block;font-weight:500}
+.who-card-title{font-family:var(--font-serif);font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:.75rem;line-height:1.25}
+.who-card-body{font-size:.88rem;color:var(--text-2);line-height:1.75}
+
+/* ORIGIN STRIP */
+.origin-strip{background:var(--bg-2);border-bottom:1px solid var(--border);padding:1.25rem 4rem;display:flex;align-items:center;gap:1.5rem;position:relative;z-index:1}
+.origin-strip-mark{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);white-space:nowrap;flex-shrink:0}
+.origin-strip-text{font-size:.85rem;color:var(--text-3);line-height:1.6}
+.origin-strip-text strong{color:var(--text-2);font-weight:500}
+
 
 /* WHAT YOU GET */
 .outcomes-section{padding:6rem 0;background:var(--bg-2);border-bottom:1px solid var(--border)}
@@ -138,37 +149,41 @@ section[id], div[id]{scroll-margin-top:120px}
 .outcome-num{font-family:var(--font-mono);font-size:.6rem;color:var(--gold);flex-shrink:0;margin-top:.2rem}
 .outcome-title{font-size:.9rem;color:var(--text-2);line-height:1.55}
 
-/* PROGRAMME */
+/* PROGRAMME — two-column with image per day */
 .programme-section{padding:6rem 0;border-bottom:1px solid var(--border)}
 .programme-inner{max-width:1200px;margin:0 auto;padding:0 4rem}
-.programme-header{margin-bottom:4rem}
-.programme-intro{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:4rem;padding:2.5rem;background:var(--bg-2);border:1px solid var(--border)}
-.programme-intro-stat{text-align:center}
-.programme-intro-num{font-family:var(--font-serif);font-size:3.5rem;font-weight:900;color:var(--gold);line-height:1}
-.programme-intro-label{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-3);margin-top:.3rem}
-.day-row{display:grid;grid-template-columns:120px 1fr 1fr;gap:0;border:1px solid var(--border);margin-bottom:2px;overflow:hidden}
-.day-label{background:var(--gold-dim);border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1rem;text-align:center}
-.day-num{font-family:var(--font-serif);font-size:2.5rem;font-weight:900;color:var(--gold);line-height:1;opacity:.5}
-.day-name{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-top:.35rem;opacity:.6}
-.day-content{padding:2rem 2.5rem;background:var(--bg-card);border-right:1px solid var(--border)}
-.day-title{font-family:var(--font-serif);font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:.4rem}
-.day-science{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;color:var(--gold);margin-bottom:.6rem;display:block}
-.day-question{font-family:var(--font-serif);font-style:italic;font-size:.88rem;color:var(--text-3);margin-bottom:.75rem;line-height:1.5}
-.day-desc{font-size:.86rem;color:var(--text-2);line-height:1.75}
-.day-tasks{padding:2rem 2.5rem;background:var(--bg-2)}
-.day-tasks-label{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-3);margin-bottom:.85rem;display:block}
-.day-task-list{list-style:none;display:flex;flex-direction:column;gap:.45rem}
-.day-task-list li{font-size:.82rem;color:var(--text-2);display:flex;align-items:flex-start;gap:.5rem;line-height:1.5}
+.programme-header{margin-bottom:5rem}
+.day-block{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);margin-bottom:3px;overflow:hidden;min-height:300px}
+.day-block.flip{direction:rtl}.day-block.flip>*{direction:ltr}
+.day-info{padding:3rem;background:var(--bg-card);display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--border)}
+.day-block.flip .day-info{border-right:none;border-left:1px solid var(--border)}
+.day-header{display:flex;align-items:center;gap:1.25rem;margin-bottom:1.5rem}
+.day-num-badge{font-family:var(--font-serif);font-size:3rem;font-weight:900;color:var(--gold);opacity:.25;line-height:1;flex-shrink:0}
+.day-label-stack{display:flex;flex-direction:column;gap:.25rem}
+.day-name{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);opacity:.7}
+.day-title{font-family:var(--font-serif);font-size:1.2rem;font-weight:700;color:var(--text);line-height:1.2}
+.day-science{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;color:var(--gold);margin-bottom:.9rem;display:block;opacity:.8}
+.day-desc{font-size:.9rem;color:var(--text-2);line-height:1.8;margin-bottom:1.5rem}
+.day-task-list{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.day-task-list li{font-size:.82rem;color:var(--text-3);display:flex;align-items:flex-start;gap:.5rem;line-height:1.5}
 .day-task-list li::before{content:'→';color:var(--gold);font-family:var(--font-mono);font-size:.65rem;margin-top:.15rem;flex-shrink:0}
-.day-task-list em{color:var(--text-3);font-style:italic}
+.day-task-list em{color:var(--text-2);font-style:italic}
+.day-img{background:var(--bg-2);position:relative;overflow:hidden;min-height:300px}
+.day-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;position:absolute;inset:0}
+.day-img:hover img{transform:scale(1.03)}
+.day-img-placeholder{width:100%;height:100%;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;background:var(--bg-2)}
+.day-img-placeholder-icon{font-size:2rem;opacity:.2}
+.day-img-placeholder-label{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-3);text-align:center;line-height:2}
 
 /* FACULTY */
 .faculty-section{padding:6rem 0;background:var(--bg-2);border-bottom:1px solid var(--border)}
 .faculty-inner{max-width:1200px;margin:0 auto;padding:0 4rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
 .faculty-names{display:flex;flex-direction:column;gap:2px;margin-top:2rem}
-.faculty-name-row{background:var(--bg-card);border:1px solid var(--border);padding:1.5rem 2rem;display:grid;grid-template-columns:1fr auto;align-items:center;gap:1rem}
-.faculty-name{font-family:var(--font-serif);font-size:1.1rem;font-weight:700;color:var(--text)}
-.faculty-inst{font-size:.82rem;color:var(--text-3);font-style:italic}
+.faculty-name-row{background:var(--bg-card);border:1px solid var(--border);padding:1.25rem 1.5rem;display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:1.25rem}
+.faculty-photo{width:52px;height:52px;border-radius:50%;overflow:hidden;flex-shrink:0;border:1px solid var(--border)}
+.faculty-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(20%)}
+.faculty-name{font-family:var(--font-serif);font-size:1rem;font-weight:700;color:var(--text)}
+.faculty-inst{font-size:.8rem;color:var(--text-3);font-style:italic;margin-top:.1rem}
 .faculty-role-tag{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
 
 /* CERT */
@@ -181,6 +196,9 @@ section[id], div[id]{scroll-margin-top:120px}
 .cert-preview-name{font-family:var(--font-serif);font-size:.95rem;font-style:italic;color:var(--green);text-align:center}
 .cert-preview-line{width:8rem;height:1px;background:var(--green-line)}
 .cert-preview-track{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-3);text-align:center}
+.network-box{margin-top:2rem;padding:1.5rem;background:var(--gold-dim);border:1px solid var(--gold-line)}
+.network-box-label{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;display:block}
+.network-box-text{font-size:.88rem;color:var(--text-2);line-height:1.75}
 
 /* APPLY */
 .apply-section{padding:6rem 0;background:var(--bg-2);border-bottom:1px solid var(--border)}
@@ -196,6 +214,10 @@ section[id], div[id]{scroll-margin-top:120px}
 .apply-cta-title{font-family:var(--font-serif);font-size:1.4rem;font-weight:700;color:var(--text);margin-bottom:1rem;line-height:1.2}
 .apply-cta-title em{font-style:italic;color:var(--gold)}
 .apply-cta-body{font-size:.9rem;color:var(--text-2);line-height:1.8;margin-bottom:2rem}
+.apply-urgency{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.5rem}
+.apply-urgency-item{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.06em;color:var(--text-2);display:flex;align-items:center;gap:.5rem}
+.apply-urgency-item::before{content:'→';color:var(--gold)}
+.apply-bursary{padding:.9rem 1.25rem;background:var(--green-dim);border-left:2px solid var(--green);margin-bottom:1.5rem;font-size:.84rem;color:var(--text-2);line-height:1.7}
 .apply-note{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.06em;color:var(--text-3);margin-top:1.25rem;display:block;line-height:1.8}
 
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
@@ -223,13 +245,14 @@ section[id], div[id]{scroll-margin-top:120px}
   .hero-right{border-left:none;border-top:1px solid var(--border);height:280px}
   .origin-strip{padding:1.25rem 1.5rem;flex-direction:column;align-items:flex-start;gap:.75rem}
   .section-nav{padding:0 1.5rem}
+  .who-inner{padding:0 1.5rem}
+  .who-cards{grid-template-columns:1fr}
   .forwho-inner,.outcomes-inner,.faculty-inner,.cert-inner,.apply-inner{grid-template-columns:1fr;gap:3rem;padding:0 1.5rem}
   .programme-inner{padding:0 1.5rem}
   .outcomes-grid{grid-template-columns:1fr}
-  .programme-intro{grid-template-columns:1fr 1fr}
-  .day-row{grid-template-columns:1fr}
-  .day-label{flex-direction:row;gap:1rem;padding:1rem 1.5rem;justify-content:flex-start}
-  .day-content{border-right:none;border-bottom:1px solid var(--border)}
+  .day-block{grid-template-columns:1fr}
+  .day-block.flip{direction:ltr}
+  .day-img{min-height:220px}
 }
 </style>
 </head>
@@ -252,16 +275,6 @@ section[id], div[id]{scroll-margin-top:120px}
         <a href="/curriculum/">The curriculum</a>
       </div>
     </li>
-
-    <!-- <li class="nav-item">
-      <button class="nav-top">Get Noticed</button>
-      <div class="nav-dropdown">
-        <a href="nb3-wall_of_fame.html">Wall of Fame</a>
-        <a href="/certification/" style="color:#8ab87a!important">Certification &amp; Badges</a>
-        <a href="/partners/">Partners &amp; Pathways</a>
-      </div>
-    </li> -->
-
     <li class="nav-item">
       <button class="nav-top">About</button>
       <div class="nav-dropdown">
@@ -290,12 +303,6 @@ section[id], div[id]{scroll-margin-top:120px}
   <span class="mobile-section-label">The Kit</span>
   <a href="/hardware/">The hardware</a>
   <a href="/curriculum/">The curriculum</a>
-
-  <!-- <span class="mobile-section-label">Get Noticed</span>
-  <a href="nb3-wall_of_fame.html">Wall of Fame</a>
-  <a href="/certification/" style="color:#8ab87a!important">Certification &amp; Badges</a>
-  <a href="/partners/">Partners &amp; Pathways</a> -->
-
   <span class="mobile-section-label">About</span>
   <a href="/our-story/">Our story</a>
   <a href="/our-team/">Our team</a>
@@ -334,10 +341,26 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
     </div>
   </div>
   <div class="hero-right">
-      <img src="../images/esb/ENB_Picture.jpg" alt="Experimental Science Bootcamp" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;min-height:400px">
-    
+    <img src="../images/esb/ENB_Picture.jpg" alt="Experimental Science Bootcamp" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;min-height:400px">
   </div>
 </section>
+
+<!-- TESTIMONIAL CAROUSEL -->
+<div class="testimonial-carousel">
+  <div class="testimonial-track" id="testimonialsTrack">
+    <div class="testimonial-slide">
+      <div class="testimonial-quote-mark">"</div>
+      <div class="testimonial-content">
+        <p class="testimonial-text">The course was fantastic. In just one week, we got to build our own acquisition systems and record EMGs at home. I am really glad to have participated.</p>
+        <div class="testimonial-meta">
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-source">Neuroscience researcher · NeuroKit course</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="testimonial-nav" id="testimonialDots"></div>
+</div>
 
 <!-- STICKY SECTION NAV -->
 <div class="section-nav">
@@ -349,25 +372,36 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
   <a href="#apply">Fees &amp; apply</a>
 </div>
 
-<!-- FOR WHO -->
-<section class="forwho-section" id="who">
-  <div class="forwho-inner">
-    <div class="reveal">
+<!-- WHO IS IT FOR — merged -->
+<section class="who-section" id="who">
+  <div class="who-inner">
+    <div class="who-top reveal">
       <div class="eyebrow">Who this course is for</div>
       <h2>Scientists who depend on<br><em>technology they don't understand.</em></h2>
       <p class="lead">Modern experimental science relies on sensors, acquisition systems, computers, and increasingly on machine learning. Most researchers learn to use these tools, but not how they work. This course changes that.</p>
-      <p style="font-size:.88rem;color:var(--text-3);font-style:italic;margin-top:1.5rem">It's surprising how much you can learn in five days.</p>
     </div>
-    <div class="reveal rd1">
-      <div class="questions-block">
-        <div class="question-row">Does your research rely on tools you couldn't build or fix yourself?</div>
-        <div class="question-row">Do you wish you could design a custom sensor or acquisition system?</div>
-        <div class="question-row">Do you want to be ready for the coming era of AI in science?</div>
+    <div class="who-bottom">
+      <div class="who-cards reveal">
+        <div class="who-card">
+          <span class="who-card-tag">Researchers</span>
+          <div class="who-card-title">You rely on tools you couldn't build or fix yourself</div>
+          <p class="who-card-body">Sensors, acquisition systems, analysis pipelines — you use them daily but the black boxes slow you down when things break or when you need something custom.</p>
+        </div>
+        <div class="who-card">
+          <span class="who-card-tag">PhD students</span>
+          <div class="who-card-title">You want to design experiments that aren't yet possible</div>
+          <p class="who-card-body">Custom hardware, real-time processing, machine learning for your data — the skills your supervisor doesn't have time to teach and no course has covered properly.</p>
+        </div>
+        <div class="who-card">
+          <span class="who-card-tag">Any field</span>
+          <div class="who-card-title">You want to be ready for the era of AI in science</div>
+          <p class="who-card-body">Originally designed for neuroscience. Now open to researchers in any experimental discipline. The tools and principles taught here drive progress across all of science.</p>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
-
 <!-- PROGRAMME -->
 <section class="programme-section" id="programme">
   <div class="programme-inner">
@@ -377,15 +411,18 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
       <p class="lead">Each day you open a new set of black boxes, electronics, computers, networks, vision, AI. By the end of the week nothing is hidden. Every layer understood.</p>
     </div>
 
-    <div class="day-row reveal">
-      <div class="day-label"><div class="day-num">1</div><div class="day-name">Day One</div></div>
-      <div class="day-content">
-        <div class="day-title">Electronics — Sensors and Motors</div>
+    <!-- DAY 1 -->
+    <div class="day-block reveal">
+      <div class="day-info">
+        <div class="day-header">
+          <div class="day-num-badge">1</div>
+          <div class="day-label-stack">
+            <span class="day-name">Day One</span>
+            <div class="day-title">Electronics — Sensors and Motors</div>
+          </div>
+        </div>
         <span class="day-science">Analog electronics · Signal transduction · Actuation</span>
         <p class="day-desc">Build circuits for sensing the environment and controlling movement, the same principles behind any acquisition system. Understand how physical signals become electrical signals and how they drive physical action.</p>
-      </div>
-      <div class="day-tasks">
-        <span class="day-tasks-label">Topics &amp; tasks</span>
         <ul class="day-task-list">
           <li>Electrons, voltage, resistors, Ohm's law: <em>Build a voltage divider</em></li>
           <li>Light and other sensors: <em>Build a sensor circuit</em></li>
@@ -394,17 +431,26 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
           <li>Closed-loop behaviour: <em>Build a Braitenberg Vehicle</em></li>
         </ul>
       </div>
+      <div class="day-img">
+        <div class="day-img-placeholder">
+          <div class="day-img-placeholder-icon">⚡</div>
+          <div class="day-img-placeholder-label">Day 1 photo<br>Electronics · circuits · Braitenberg Vehicle<br><span style="color:var(--gold);font-size:.55rem">→ replace with real ESB photo</span></div>
+        </div>
+      </div>
     </div>
 
-    <div class="day-row reveal rd1">
-      <div class="day-label"><div class="day-num">2</div><div class="day-name">Day Two</div></div>
-      <div class="day-content">
-        <div class="day-title">Computers: Logic, Memory and Microcontrollers</div>
+    <!-- DAY 2 -->
+    <div class="day-block flip reveal rd1">
+      <div class="day-info">
+        <div class="day-header">
+          <div class="day-num-badge">2</div>
+          <div class="day-label-stack">
+            <span class="day-name">Day Two</span>
+            <div class="day-title">Computers: Logic, Memory and Microcontrollers</div>
+          </div>
+        </div>
         <span class="day-science">Digital logic · Microprocessors · Real-time control</span>
         <p class="day-desc">Understand how logic gates and memory registers are assembled into a programmable processor. Write code in C at the register level, no libraries, no abstraction. Learn why timing matters in experimental hardware.</p>
-      </div>
-      <div class="day-tasks">
-        <span class="day-tasks-label">Topics &amp; tasks</span>
         <ul class="day-task-list">
           <li>Logic gates and memory: <em>Build a logic circuit</em></li>
           <li>Processor architecture: <em>Setup a microcontroller with IO</em></li>
@@ -412,17 +458,26 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
           <li>State machines: <em>Design a behavioural controller</em></li>
         </ul>
       </div>
+      <div class="day-img">
+        <div class="day-img-placeholder">
+          <div class="day-img-placeholder-icon">💡</div>
+          <div class="day-img-placeholder-label">Day 2 photo<br>Microcontrollers · logic circuits · C code<br><span style="color:var(--gold);font-size:.55rem">→ replace with real ESB photo</span></div>
+        </div>
+      </div>
     </div>
 
-    <div class="day-row reveal">
-      <div class="day-label"><div class="day-num">3</div><div class="day-name">Day Three</div></div>
-      <div class="day-content">
-        <div class="day-title">Linux and Python, Operating Systems and Networks</div>
+    <!-- DAY 3 -->
+    <div class="day-block reveal">
+      <div class="day-info">
+        <div class="day-header">
+          <div class="day-num-badge">3</div>
+          <div class="day-label-stack">
+            <span class="day-name">Day Three</span>
+            <div class="day-title">Linux and Python, Operating Systems and Networks</div>
+          </div>
+        </div>
         <span class="day-science">Operating systems · Networking · Data pipelines</span>
         <p class="day-desc">Set up a Linux computer from scratch and understand how an operating system manages processes, files, and hardware. Write a communication protocol between your robot and your computer, the same architecture behind most modern experimental pipelines.</p>
-      </div>
-      <div class="day-tasks">
-        <span class="day-tasks-label">Topics &amp; tasks</span>
         <ul class="day-task-list">
           <li>Linux setup and navigation: <em>Boot and configure a Raspberry Pi</em></li>
           <li>SSH, WiFi, networking: <em>Remotely access your robot</em></li>
@@ -430,17 +485,26 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
           <li>Serial communication: <em>Build a remote-control system</em></li>
         </ul>
       </div>
+      <div class="day-img">
+        <div class="day-img-placeholder">
+          <div class="day-img-placeholder-icon">🖥</div>
+          <div class="day-img-placeholder-label">Day 3 photo<br>Raspberry Pi · Linux · Python · networking<br><span style="color:var(--gold);font-size:.55rem">→ replace with real ESB photo</span></div>
+        </div>
+      </div>
     </div>
 
-    <div class="day-row reveal rd1">
-      <div class="day-label"><div class="day-num">4</div><div class="day-name">Day Four</div></div>
-      <div class="day-content">
-        <div class="day-title">Machine Intelligence — Audio and Video Analysis</div>
+    <!-- DAY 4 -->
+    <div class="day-block flip reveal rd1">
+      <div class="day-info">
+        <div class="day-header">
+          <div class="day-num-badge">4</div>
+          <div class="day-label-stack">
+            <span class="day-name">Day Four</span>
+            <div class="day-title">Machine Intelligence — Audio and Video Analysis</div>
+          </div>
+        </div>
         <span class="day-science">Image acquisition · Signal processing · Feature extraction</span>
         <p class="day-desc">Understand how a camera converts light into a digital image and how that image can be processed to extract meaningful information. Apply background subtraction, thresholding, and image moments to detect and track objects in real time.</p>
-      </div>
-      <div class="day-tasks">
-        <span class="day-tasks-label">Topics &amp; tasks</span>
         <ul class="day-task-list">
           <li>Image representation, colour spaces: <em>Open, process and save images</em></li>
           <li>Camera streaming: <em>Attach and livestream a camera</em></li>
@@ -448,17 +512,26 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
           <li>Image moments, classical face detection: <em>Extract and track features</em></li>
         </ul>
       </div>
+      <div class="day-img">
+        <div class="day-img-placeholder">
+          <div class="day-img-placeholder-icon">📷</div>
+          <div class="day-img-placeholder-label">Day 4 photo<br>Camera · image processing · tracking<br><span style="color:var(--gold);font-size:.55rem">→ replace with real ESB photo</span></div>
+        </div>
+      </div>
     </div>
 
-    <div class="day-row reveal">
-      <div class="day-label"><div class="day-num">5</div><div class="day-name">Day Five</div></div>
-      <div class="day-content">
-        <div class="day-title">Machine Learning, Training and Deployment</div>
+    <!-- DAY 5 -->
+    <div class="day-block reveal">
+      <div class="day-info">
+        <div class="day-header">
+          <div class="day-num-badge">5</div>
+          <div class="day-label-stack">
+            <span class="day-name">Day Five</span>
+            <div class="day-title">Machine Learning, Training and Deployment</div>
+          </div>
+        </div>
         <span class="day-science">Neural networks · Training · Deployment · Inference</span>
         <p class="day-desc">Understand how a deep neural network learns from data, what training does, what a loss function measures, and how a trained model makes predictions. Train your own classifier from scratch and deploy it on your robot in real time.</p>
-      </div>
-      <div class="day-tasks">
-        <span class="day-tasks-label">Topics &amp; tasks</span>
         <ul class="day-task-list">
           <li>Neural network architecture and training: <em>Train a classifier on your own data</em></li>
           <li>Model deployment: <em>Run inference on the robot in real time</em></li>
@@ -466,7 +539,14 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
           <li>Custom classification: <em>Train a network to identify only your face</em></li>
         </ul>
       </div>
+      <div class="day-img">
+        <div class="day-img-placeholder">
+          <div class="day-img-placeholder-icon">🤖</div>
+          <div class="day-img-placeholder-label">Day 5 photo<br>Neural networks · AI deployment · face detection<br><span style="color:var(--gold);font-size:.55rem">→ replace with real ESB photo</span></div>
+        </div>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -488,12 +568,6 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
   </div>
 </section>
 
-<!-- ORIGIN STRIP -->
-<div class="origin-strip">
-  <span class="origin-strip-mark">Originally designed for neuroscience</span>
-  <p class="origin-strip-text"><p class="origin-strip-text">Developed within the neuroscience research community, at the <a href="https://fchampalimaud.org/champalimaud-research" target="_blank" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold-line)">Champalimaud Foundation</a>, the <a href="https://cajal-training.org/" target="_blank" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold-line)">Cajal Programme</a>, and the <a href="https://www.sainsburywellcome.org/" target="_blank" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold-line)">Sainsbury Wellcome Centre</a>. The tools and principles it teaches drive progress across all experimental sciences. <strong>Now open to researchers in any field.</strong></p>
-</div>
-
 <!-- FACULTY -->
 <section class="faculty-section" id="faculty">
   <div class="faculty-inner">
@@ -507,15 +581,16 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
     </div>
     <div class="reveal rd1">
       <div class="faculty-names">
-
         <div class="faculty-name-row">
+          <div class="faculty-photo"><img src="../image/People/Elena-Dreosti_WB.webp" alt="Elena Dreosti"></div>
           <div>
             <div class="faculty-name">Elena Dreosti</div>
-            <div class="faculty-inst">No Black Boxes - UCL, UK</div>
+            <div class="faculty-inst">No Black Boxes · UCL, UK</div>
           </div>
           <span class="faculty-role-tag">Director</span>
         </div>
         <div class="faculty-name-row">
+          <div class="faculty-photo"><img src="../image/People/Andreas_Kits.webp" alt="Andreas Kist"></div>
           <div>
             <div class="faculty-name">Andreas Kist</div>
             <div class="faculty-inst">Dept. for AIBE, Erlangen, DE</div>
@@ -535,9 +610,10 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
       <h2>Submit a project.<br><em>Earn your certificate.</em></h2>
       <p class="lead">Every participant who completes the course and submits a final project receives an official certificate. But the best projects go further, they are featured on our website and shared directly with our global network of research institutes, labs, and companies.</p>
       <p style="font-size:.92rem;color:var(--text-2);line-height:1.85;margin-top:1.25rem">This is not just a certificate. It is a way to be seen by the right people.</p>
-      <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap">
-        <a href="/certification/" class="btn btn-ghost">Learn about certification →</a>
-        <a href="nb3-wall_of_fame.html" class="btn btn-ghost">See the Wall of Fame →</a>
+
+      <div class="network-box">
+        <span class="network-box-label">The Network</span>
+        <p class="network-box-text">Over 2,000 researchers in 60+ countries have taken No Black Boxes courses. Completing the ESB connects you to this worldwide community of scientists who understand their tools.</p>
       </div>
     </div>
     <div class="cert-preview reveal rd1">
@@ -583,9 +659,14 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
         <span class="apply-cta-label">Applications</span>
         <div class="apply-cta-title">Interested in the<br><em>next edition?</em></div>
         <p class="apply-cta-body">Express your interest below and we will contact you when applications open for the next edition of the Experimental Science Bootcamp.</p>
+        <div class="apply-urgency">
+          <div class="apply-urgency-item">7–11 September 2026 · Live online</div>
+          <div class="apply-urgency-item">Limited places · Application required</div>
+          <div class="apply-urgency-item">Kit ships worldwide on acceptance</div>
+        </div>
+        <div class="apply-bursary">🎓 Bursaries available through the No Black Boxes Foundation for researchers who cannot afford the fee. <a href="/nbb-foundation/" style="color:var(--green);text-decoration:none;border-bottom:1px solid var(--green-line)">Learn more →</a></div>
         <a href="https://form.jotform.com/242742487022354" class="btn btn-primary" style="display:block;text-align:center;margin-bottom:1rem" target="_blank">Apply now →</a>
-        <a href="https://form.jotform.com/242742487022354" class="btn btn-ghost" style="display:block;text-align:center" target="_blank">Express interest →</a>
-        <span class="apply-note">Join our newsletter to be the first to know when applications open.</span>
+<span class="apply-note">Join our newsletter to be the first to know when applications open.</span>
       </div>
     </div>
   </div>
@@ -620,8 +701,8 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
     <a href="#" aria-label="YouTube" style="width:30px;height:30px;border-radius:50%;background:var(--bg-2);display:flex;align-items:center;justify-content:center;color:var(--text-3);text-decoration:none"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
     <a href="#" aria-label="Bluesky" style="width:30px;height:30px;border-radius:50%;background:var(--bg-2);display:flex;align-items:center;justify-content:center;color:var(--text-3);text-decoration:none"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 01-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.204-.659-.299-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg></a>
   </div>
+</footer>
 
-  
 <div style="border-top:1px solid var(--border);padding:.75rem 4rem;display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:.55rem;letter-spacing:.08em;color:var(--text-3)">
   <span>© MMXXVI No Black Boxes · info@noblackboxes.org</span>
   <div style="display:flex;gap:2rem">
@@ -636,6 +717,42 @@ const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
 }, {threshold:0.08});
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Testimonial carousel
+const testimonials = [
+  { text: 'The course was fantastic. In just one week, we got to build our own acquisition systems and record EMGs at home. I am really glad to have participated.', source: 'Neuroscience researcher · NeuroKit course', stars: '★★★★★' },
+  { text: 'A breathless challenge, surprise and inspiration.', source: 'Experimental Neuroscience Bootcamp student', stars: '★★★★★' },
+  { text: 'It\'s surprising how much you can learn in five days. The foundations it gave me changed how I approach every experiment.', source: 'PhD student · past participant', stars: '★★★★★' },
+  { text: 'After this course I understand tools I have been using for years without truly knowing what they do. That is a rare thing.', source: 'Researcher · Champalimaud Foundation', stars: '★★★★★' }
+];
+
+let current = 0;
+const track = document.getElementById('testimonialsTrack');
+const dotsContainer = document.getElementById('testimonialDots');
+
+function buildDots() {
+  testimonials.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => { goTo(i); resetTimer(); };
+    dotsContainer.appendChild(d);
+  });
+}
+
+function goTo(i) {
+  track.classList.add('fade');
+  setTimeout(() => {
+    current = i;
+    const t = testimonials[i];
+    track.innerHTML = `<div class="testimonial-slide"><div class="testimonial-quote-mark">"</div><div class="testimonial-content"><p class="testimonial-text">${t.text}</p><div class="testimonial-meta"><div class="testimonial-stars">${t.stars}</div><div class="testimonial-source">${t.source}</div></div></div></div>`;
+    document.querySelectorAll('.testimonial-dot').forEach((d, j) => d.classList.toggle('active', j === i));
+    track.classList.remove('fade');
+  }, 300);
+}
+
+buildDots();
+let timer = setInterval(() => { goTo((current + 1) % testimonials.length); }, 7000);
+function resetTimer() { clearInterval(timer); timer = setInterval(() => { goTo((current + 1) % testimonials.length); }, 7000); }
 </script>
 </body>
 </html>
