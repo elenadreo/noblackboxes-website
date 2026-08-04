@@ -421,17 +421,17 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
           <div class="day-num-badge">1</div>
           <div class="day-label-stack">
             <span class="day-name">Day One</span>
-            <div class="day-title">Electronics — Sensors and Motors</div>
+            <div class="day-title">Electronics — From Atoms to Circuits</div>
           </div>
         </div>
-        <span class="day-science">Analog electronics · Signal transduction · Actuation</span>
-        <p class="day-desc">Build circuits for sensing the environment and controlling movement, the same principles behind any acquisition system. Understand how physical signals become electrical signals and how they drive physical action.</p>
+        <span class="day-science">Atomic structure · Analog electronics · Electromagnetism · Semiconductors</span>
+        <p class="day-desc">Every measurement your lab depends on starts here: how electrons move, how a sensor turns light into voltage, how a transistor turns a signal into motion. You'll build the physical layer of your NB3 robot from first principles — no assumptions, no black boxes.</p>
         <ul class="day-task-list">
-          <li>Electrons, voltage, resistors, Ohm's law: <em>Build a voltage divider</em></li>
-          <li>Light and other sensors: <em>Build a sensor circuit</em></li>
+          <li>Atoms, voltage, current, Ohm's law: <em>Build a voltage divider</em></li>
+          <li>Sensors and transducers: <em>Build a light sensor</em></li>
           <li>Electromagnetism, DC motors: <em>Mount and spin your motors</em></li>
-          <li>Transistors, amplifiers: <em>Build a light-controlled motor</em></li>
-          <li>Closed-loop behaviour: <em>Build a Braitenberg Vehicle</em></li>
+          <li>Semiconductors, diodes, MOSFETs: <em>Illuminate an LED, gate a MOSFET</em></li>
+          <li>Sensor-driven actuation: <em>Build a light-sensitive motor</em></li>
         </ul>
       </div>
       
@@ -448,16 +448,16 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
           <div class="day-num-badge">2</div>
           <div class="day-label-stack">
             <span class="day-name">Day Two</span>
-            <div class="day-title">Computers: Logic, Memory and Microcontrollers</div>
+            <div class="day-title">Computers: Logic, Control and Behaviour</div>
           </div>
         </div>
-        <span class="day-science">Digital logic · Microprocessors · Real-time control</span>
-        <p class="day-desc">Understand how logic gates and memory registers are assembled into a programmable processor. Write code in C at the register level, no libraries, no abstraction. Learn why timing matters in experimental hardware.</p>
+        <span class="day-science">Digital logic · Microcontrollers · Real-time control · Closed-loop behaviour</span>
+        <p class="day-desc">Understand how logic gates and memory become a programmable processor, then put a microcontroller in charge of your robot's body. By the end of the day your NB3 senses its environment and reacts to it, the same servo-loop logic behind every piece of closed-loop experimental hardware.</p>
         <ul class="day-task-list">
-          <li>Logic gates and memory: <em>Build a logic circuit</em></li>
-          <li>Processor architecture: <em>Setup a microcontroller with IO</em></li>
-          <li>C programming, timers: <em>Write real-time sensor and motor code</em></li>
-          <li>State machines: <em>Design a behavioural controller</em></li>
+          <li>Logic gates, memory, computer architecture: <em>Design an XOR gate and a 2-bit adder</em></li>
+          <li>Microcontroller programming (Arduino, C): <em>Blink, buzz and read an analog sensor</em></li>
+          <li>Servo control: <em>Mount and drive your robot's motors</em></li>
+          <li>Closed-loop sensorimotor behaviour: <em>Build a Braitenberg Vehicle</em></li>
         </ul>
       </div>
       
@@ -475,16 +475,16 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
           <div class="day-num-badge">3</div>
           <div class="day-label-stack">
             <span class="day-name">Day Three</span>
-            <div class="day-title">Linux and Python, Operating Systems and Networks</div>
+            <div class="day-title">Systems — Linux, Python and Networks</div>
           </div>
         </div>
-        <span class="day-science">Operating systems · Networking · Data pipelines</span>
-        <p class="day-desc">Set up a Linux computer from scratch and understand how an operating system manages processes, files, and hardware. Write a communication protocol between your robot and your computer, the same architecture behind most modern experimental pipelines.</p>
+        <span class="day-science">Operating systems · Command line · Python · Networking · Web</span>
+        <p class="day-desc">Give your robot a real computer. Install Linux on a Raspberry Pi, learn to work entirely from the command line and Git, then write the Python code that talks to your microcontroller, and to the outside world, over a network you build and understand from the socket up..</p>
         <ul class="day-task-list">
-          <li>Linux setup and navigation: <em>Boot and configure a Raspberry Pi</em></li>
-          <li>SSH, WiFi, networking: <em>Remotely access your robot</em></li>
-          <li>Python programming: <em>Write a control and data collection script</em></li>
-          <li>Serial communication: <em>Build a remote-control system</em></li>
+          <li>Power supply, multitasking, operating systems: <em>Boot Linux on your NB3</em></li>
+          <li>Command line, Git, Python, virtual environments: <em>Set up and code on your robot</em></li>
+          <li>Network protocols, sockets:: <em>Build a remote-control link between computer and robot</em></li>
+          <li>HTML, CSS, JavaScript, HTTP servers:: <em>Host a live control interface from your NB3</em></li>
         </ul>
       </div>
 
@@ -502,16 +502,16 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
           <div class="day-num-badge">4</div>
           <div class="day-label-stack">
             <span class="day-name">Day Four</span>
-            <div class="day-title">Machine Intelligence — Audio and Video Analysis</div>
+            <div class="day-title">Audio — Hearing, Speech and Signal Processing</div>
           </div>
         </div>
-        <span class="day-science">Image acquisition · Signal processing · Feature extraction</span>
-        <p class="day-desc">Understand how a camera converts light into a digital image and how that image can be processed to extract meaningful information. Apply background subtraction, thresholding, and image moments to detect and track objects in real time.</p>
+        <span class="day-science">Microphones and speakers · Time-series data · Fourier transform · Reactive behaviour</span>
+        <p class="day-desc">Give your robot ears and a voice, then learn to make sense of what they hear. You'll stream light-sensor and microphone data live from robot to laptop, then move into the frequency domain, using the Fourier transform and spectrograms to pull a whistled note out of raw audio, the same technique behind any time-series signal analysis. By the end, your NB3 reacts to sound in real time.</p>
         <ul class="day-task-list">
-          <li>Image representation, colour spaces: <em>Open, process and save images</em></li>
-          <li>Camera streaming: <em>Attach and livestream a camera</em></li>
-          <li>Background subtraction, thresholding: <em>Build a motion detector</em></li>
-          <li>Image moments, classical face detection: <em>Extract and track features</em></li>
+          <li>Microphones, speakers, I2S: <em>Install and stream real-time sensor and audio data</em></li>
+          <li>Fourier transform, spectrograms: <em>Determine a whistling frequency from a recording</em></li>
+          <li>Real-time signal streaming: <em>Visualise live audio and frequency content</em></li>
+           <li>Reactive control: <em>Make your NB3 move, light up, or dance in response to sound</em></li>
         </ul>
       </div>
 
@@ -530,16 +530,16 @@ document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>{
           <div class="day-num-badge">5</div>
           <div class="day-label-stack">
             <span class="day-name">Day Five</span>
-            <div class="day-title">Machine Learning, Training and Deployment</div>
+            <div class="day-title">Vision — Cameras and Computer Vision</div>
           </div>
         </div>
-        <span class="day-science">Neural networks · Training · Deployment · Inference</span>
-        <p class="day-desc">Understand how a deep neural network learns from data, what training does, what a loss function measures, and how a trained model makes predictions. Train your own classifier from scratch and deploy it on your robot in real time.</p>
+        <span class="day-science">Image sensors · · Live streaming · Face detection · Reactive vision</span>
+        <p class="day-desc">Add a camera and learn how light becomes a digital image, streamed live to any browser on your network. Then bring in classical computer vision, face detection, bounding boxes, background subtraction — to close the loop: your NB3 finds a face in its camera feed and turns to track it.</p>
         <ul class="day-task-list">
-          <li>Neural network architecture and training: <em>Train a classifier on your own data</em></li>
-          <li>Model deployment: <em>Run inference on the robot in real time</em></li>
-          <li>Single Shot Detector: <em>Deploy a deep face detection network</em></li>
-          <li>Custom classification: <em>Train a network to identify only your face</em></li>
+          <li>Camera sensors, live web streaming: <em>Install and stream from your NB3's eye</em></li>
+          <li>Face detection (OpenCV)<em>Detect and localise a face in the live video feed</em></li>
+          <li>Geometric reasoning: <em>Draw and track the offset between face and image centre</em></li>
+          <li>Reactive vision: <em>Make your NB3 respond to and follow a detected face</em></li>
         </ul>
       </div>
       
